@@ -240,6 +240,8 @@ Diturunkan dari jarak baca 2,5 meter pada layar 55 inci resolusi 1080p. Skala mo
 | `VoucherQR` | Lapangan | QR 240 dp, latar putih penuh untuk keterbacaan pemindai, hitung mundur di bawah |
 | `TearTransition` | Keduanya | Gestur usap vertikal, mesh terkoyak, 700 ms, dipicu manual atau otomatis di batas rezim |
 | `SafetyLock` | Lapangan | Overlay `--sinyal-bahaya` 18% + pesan, aktif saat kecepatan > 7 km/j |
+| `LockedCard` | Lapangan | **Ditambahkan Sept 2026.** Kartu POI/koleksi terkunci memakai **siluet ikon aslinya sendiri**, diredupkan (grayscale + opacity 35%) — bukan ikon gembok generik. Rasional: mempertahankan rasa penasaran terhadap konten di baliknya, bukan sekadar menandai "tidak bisa diakses". Gembok hanya dipakai untuk kunci sistem (mis. avatar terkunci syarat pangkat), tidak untuk POI |
+| `ArchiveEntryCard` | Arsip | Kartu kepingan koleksi, identik pola dengan `BadgeStamp` tapi persegi bukan bundar. Status terkunci mengikuti aturan `LockedCard` di atas |
 
 ### Aturan gerak
 

@@ -26,6 +26,32 @@
 | B9 | S2.5, S6.1 | Ruang mati 90–150px; komposisi berat di atas | Naikkan blok teks atau turunkan badge; rapatkan ke ritme 8pt |
 | B10 | Semua | Casing Display tidak konsisten (`NAPAK TILAS 45` vs `Pasang earphone`) | Kunci satu aturan: Display selalu huruf besar |
 | B11 | S2.2 | Label `QR STANDEE` di atas gradien tanpa scrim gelap | Tambah lapisan `--inti/hitam` 62% di belakang semua teks mode kamera |
+| B17 | S4.1 | Benang merah investigasi tidak semua terhubung ke pin; satu garis lolos ke tepi kanan | Perbaiki koordinat SVG agar tiap garis benar-benar berakhir di pin |
+
+## P1 — Ditambahkan menyusul Dokumen 07 (revisi arsitektur beranda)
+
+> Butir ini dijanjikan saat Dokumen 07 ditulis (lihat referensi di sana) tapi baru resmi masuk daftar sekarang, setelah kritik visual pertama terhadap Beranda model hub.
+
+| # | Layar | Masalah | Perbaikan |
+|---|---|---|---|
+| B18 | Beranda | Mint terlalu banyak dipakai — muncul di tombol, chip status, ikon, garis, dan aksen kartu sekaligus. Ketika semuanya menyala, tidak ada yang menonjol | Kembalikan ke aturan Dokumen 03: mint hanya untuk aksi utama dan status POI aktif; sisanya perak |
+| B19 | Beranda, S10 | Emas belum dipakai untuk pencapaian. Lencana yang sudah diraih harus emas — kalau tidak, sinyal terkuat sistem hilang dan lencana terlihat sama saja dengan chip biasa | Terapkan `--sby-emas` khusus pada lencana/kepingan berstatus diraih |
+| B20 | Beranda | ~~Koleksi Lencana dan kartu briefing perlu dipisah dari beranda~~ *Digantikan B24–B25 setelah klarifikasi pengguna* | — |
+
+## P1 — Ditambahkan menyusul Dokumen 08 (Wall Siola & Feed)
+
+| # | Layar | Masalah | Perbaikan |
+|---|---|---|---|
+| B21 | Wall Siola | Ticker FPS/telemetri pengembang terlihat di rancangan awal — chrome pengembang, jangan sampai ikut rilis | Hapus seluruhnya sebelum build produksi |
+| B22 | Wall Siola | Metrik "Dampak UMKM Rp 142,5M" tampil di layar publik — itu metrik Dashboard Pemkot (D2), bukan informasi pengunjung | Pindahkan ke D2, hapus dari tampilan Wall |
+| B23 | Wall Siola | Moderasi otomatis tayang 30 detik terlalu cepat untuk layar publik gedung Pemkot | Ubah jadi jeda tayang 5 menit + tombol tahan Petugas Siola |
+
+## P1 — Ditambahkan menyusul sesi Beranda & Arsip Sepia
+
+| # | Layar | Masalah | Perbaikan |
+|---|---|---|---|
+| B24 | Beranda | Kartu briefing/arsip permanen memakan ±30% tinggi gulir beranda | **Bukan dihapus** — diubah jadi tombol ringkas "Arsip Sepia" dengan penanda belum-dibaca; isi lengkap pindah ke overlay terpisah. Lihat Dokumen 01 entitas `ArchiveEntry` |
+| B25 | Beranda | Status "TERKUNCI" memakai ikon gembok generik, kurang menarik secara visual | Ganti jadi `LockedCard` (Dokumen 03 §5): siluet ikon asli kartu itu sendiri, diredupkan — bukan gembok. Gembok disisakan khusus untuk kunci sistem, mis. avatar terkunci syarat pangkat |
 
 ## P2 — Kelengkapan konsep
 
@@ -54,3 +80,4 @@
 2. Sprint perbaikan A — seluruh P0
 3. Sprint perbaikan B — P1 + B12 (layar "lihat ke atas")
 4. Sprint perbaikan C — P2 sisanya, lalu konversi ke komponen bervarian
+5. **Beranda model hub** (sedang berjalan, terpisah dari urutan sprint di atas karena mengikuti tempo review desain asli pengguna) — B18–B25 dikerjakan begitu tata letak final beranda disepakati untuk seluruh 6 layar referensi, bukan dicicil per layar
