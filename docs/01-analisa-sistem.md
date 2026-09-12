@@ -173,6 +173,43 @@ Skenario ketiga bukan sekadar technical fallback — ia keputusan produk. Anak d
 └──────────────┘
 ```
 
+### Entitas tambahan — revisi lanjutan, sesi Beranda & Arsip Sepia
+
+Keputusan sesi ini: **avatar ilustrasi menggantikan foto profil bebas** (alasan privasi, lihat §8 di bawah), dan **Arsip Sepia** ditambahkan sebagai koleksi paralel terhadap Badge — kepingan pengetahuan tambahan per POI, terpisah dari bukti penyelesaian misi.
+
+```
+┌──────────────┐        ┌──────────────────┐     ┌──────────────────┐
+│    Avatar    │        │  ArchiveEntry    │     │ ArchiveProgress  │
+│──────────────│        │──────────────────│     │──────────────────│
+│ id           │        │ id               │     │ id               │
+│ nama         │        │ poi_id           │     │ player_id        │
+│ svg_asset    │        │ route_id         │     │ route_id         │
+│ syarat_json  │        │ judul            │     │ entries_terbuka  │
+│ urutan_galeri│        │ isi (≤180 kata)  │     │  (array ref)     │
+└──────┬───────┘        │ sumber_arsip     │     │ mulai_at         │
+       │1               │ reviewed_by      │     └──────────────────┘
+       │*               └────────┬─────────┘
+┌──────▼───────┐                 │1
+│ PlayerAvatar │                 │*
+│──────────────│          ┌──────▼───────┐
+│ player_id    │          │ArchiveUnlock │
+│ avatar_id    │          │──────────────│
+│ dipakai: bool│          │ player_id    │
+└──────────────┘          │ entry_id     │
+                          │ dibuka_at    │
+                          └──────────────┘
+```
+
+**Avatar bukan foto.** `svg_asset` menunjuk ke ilustrasi bergaya cap/stempel, bukan gambar raster hasil unggahan. Field ini sengaja tidak menerima referensi ke penyimpanan foto pengguna — jalur ke foto asli (kalau suatu saat dibutuhkan) tetap ada tapi lewat `ConsentRecord` tingkat B/C, terpisah total dari sistem avatar profil. `syarat_json` menyimpan syarat pembukaan avatar terkunci, contoh `{"rute_selesai": 1}` untuk avatar kedelapan di galeri.
+
+**Arsip Sepia terikat `route_id`, bukan global.** Alasan: koherensi cerita — kepingan satu rute bercerita tentang satu peristiwa sejarah yang utuh, mencampur lintas rute akan memecah narasi. `ArchiveProgress` unik per kombinasi `player_id` + `route_id`, sejalan dengan Badge yang juga per rute.
+
+**`ArchiveUnlock` permanen — dikonfirmasi, bukan dugaan.** Sekali kepingan terbuka, ia tetap bisa dibuka-baca kapan saja, termasuk setelah pemain pindah ke rute lain. Hitungan "X dari 5 kepingan" yang tampil di Beranda hanya menghitung entri milik rute yang sedang `AKTIF` — bukan gabungan seluruh rute yang pernah dimainkan. Ini konsisten dengan Badge, yang juga tidak pernah hilang setelah diraih.
+
+**Pemicu pembukaan kepingan:** `ArchiveEntry` terbuka otomatis saat POI terkait mencapai `COMPLETED` di state machine (§5) — event yang sama yang menerbitkan Badge. Satu aksi penyelesaian, dua hasil: bukti penyelesaian (Badge) dan pengetahuan tambahan (Arsip Sepia).
+
+**Isi kepingan bukan pengulangan naskah misi.** `ArchiveEntry.isi` wajib berisi sudut pandang atau detail yang *tidak* muncul di `Scene` tipe LORE milik POI yang sama — misalnya latar belakang tokoh sekunder, sumber yang berseberangan, atau detail arsip yang tidak masuk cerita utama karena alasan pacing. Ini beban riset tambahan bagi dewan kurator, bukan salin-tempel dari naskah misi; `reviewed_by` tetap wajib mengikuti aturan gerbang persetujuan sejarawan yang sama seperti naskah lore.
+
 **Lima tingkat pangkat:** Rekrut Baru (daftar) → Arek Lapangan (1 rute) → Penjaga Kota (3 rute atau 5 tokoh) → Saksi Sejarah (semua rute) → Cak/Ning Suroboyo (10 tokoh). Pangkat tampil di beranda dan profil, **tidak pernah di layar misi** — ia identitas, bukan mekanik permainan.
 
 **Tiga tingkat tayang:** A = kutipan teks saja, default untuk semua, tanpa syarat. B = foto tanpa wajah, butuh 18+ dan persetujuan per unggahan. C = wajah dan nama lengkap, butuh persetujuan tertulis tersimpan. Deteksi wajah otomatis menahan setiap foto berwajah; kenaikan tingkat hanya lewat tindakan moderator. Sub-profil School Mode tidak punya jalur ke `WallPublication` sama sekali.
