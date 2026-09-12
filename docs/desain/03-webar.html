@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — WebAR · Pilot Hari Pahlawan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Courier+Prime:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --hitam:#08141F; --mint:#4FE68C; --mint-redup:#2FA862;
+    --kertas:#E3D6B8; --kertas-tua:#CDBB95; --tinta:#241B12; --sepia:#7A6144;
+    --merah:#9E2B22; --bahaya:#E5533D; --redup:#7A8592;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#DCE1E6;font-family:var(--ui);padding:56px 40px}
+  h1.board{font-family:var(--disp);font-size:44px;letter-spacing:-.02em;color:var(--hitam)}
+  .boardsub{font-size:15px;color:#5A6570;margin:10px 0 20px;max-width:840px;line-height:1.65}
+  .anggaran{display:flex;gap:0;max-width:840px;margin-bottom:20px;border-radius:8px;overflow:hidden;height:38px;
+            font-family:var(--mono);font-size:11px;color:var(--putih)}
+  .anggaran div{display:flex;align-items:center;justify-content:center}
+  .fixnote{font-family:var(--mono);font-size:12px;line-height:1.9;color:#5A6570;background:#EBEFF2;
+           border-left:3px solid var(--mint-redup);padding:14px 18px;max-width:840px;margin-bottom:44px}
+  .seksi{font-family:var(--disp);font-size:28px;color:var(--hitam);margin:52px 0 20px}
+  .rak{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+  .kolom{display:flex;flex-direction:column;gap:10px;width:390px}
+  .nama{font-family:var(--mono);font-size:12px;color:#5A6570}
+  .catatan{font-size:12.5px;line-height:1.55;color:#5A6570;border-left:2px solid #B9C2CA;padding-left:10px}
+  .layar{width:390px;height:844px;overflow:hidden;position:relative;border-radius:22px;
+         box-shadow:0 8px 28px rgba(8,20,31,.18)}
+  /* chrome browser — penanda bahwa ini web, bukan aplikasi */
+  .chrome{position:absolute;top:0;left:0;right:0;height:84px;background:#1C1C1E;
+          display:flex;align-items:flex-end;padding:0 12px 10px;gap:8px;z-index:5}
+  .urlbar{flex:1;height:34px;border-radius:17px;background:#2C2C2E;display:flex;align-items:center;
+          padding:0 14px;gap:8px;font-family:var(--mono);font-size:11px;color:#8E8E93}
+  .chrome span.dot{width:22px;height:22px;border-radius:50%;background:#2C2C2E;flex:none}
+  .isi{position:absolute;top:84px;left:0;right:0;bottom:0;overflow:hidden}
+  .pad{position:absolute;inset:0 28px 34px 28px}
+  .disp-xl{font-family:var(--disp);font-size:40px;line-height:40px;letter-spacing:-.02em}
+  .disp-l{font-family:var(--disp);font-size:32px;line-height:34px;letter-spacing:-.01em}
+  .j-m{font-size:24px;line-height:30px;font-weight:700;letter-spacing:-.01em}
+  .j-s{font-size:20px;line-height:26px;font-weight:700}
+  .i-l{font-size:17px;line-height:27px}
+  .i-m{font-size:15px;line-height:23px}
+  .i-s{font-size:13px;line-height:19px;font-weight:500}
+  .m-s{font-family:var(--mono);font-size:12px;line-height:18px;letter-spacing:.02em}
+  .m-m{font-family:var(--mono);font-size:15px;line-height:24px}
+  .cta{height:56px;border-radius:12px;background:var(--mint);color:var(--hitam);
+       font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .cta.ghost{background:none;border:1.5px solid var(--perak);color:var(--perak)}
+  .tap{min-height:48px;display:flex;align-items:center;justify-content:center}
+  .scrim{background:rgba(8,20,31,.62);border-radius:6px;padding:6px 12px;display:inline-block}
+</style>
+</head>
+<body>
+
+<h1 class="board">WEBAR · PILOT HARI PAHLAWAN</h1>
+<p class="boardsub">Tujuh layar untuk pengalaman 60–90 detik tanpa instalasi. Tugasnya hanya satu: membuat orang yang sedang berdiri di trotoar merasakan cukup untuk mau mengunduh 180 MB. Setiap kilobyte yang tidak melayani tugas itu dibuang.</p>
+
+<div class="anggaran">
+  <div style="background:#14456F;flex:15">HTML+CSS 600 KB</div>
+  <div style="background:#2FA862;flex:37">SDK AR 1,5 MB</div>
+  <div style="background:#4FE68C;flex:37;color:#08141F">ASET 3D 1,5 MB</div>
+  <div style="background:#D4A22F;flex:15;color:#08141F">AUDIO 400 KB</div>
+</div>
+<div class="fixnote">
+ANGGARAN KERAS · 4 MB TOTAL<br>
+Time to Interactive ≤ 5 detik di 4G · Frame AR pertama ≤ 8 detik dari izin kamera · ≥ 24 fps di Android menengah<br><br>
+KEPUTUSAN ARSITEKTUR<br>
+SDK AR dimuat SETELAH izin diberikan, bukan sebelumnya — memindahkan 1,5 MB keluar dari jalur kritis<br>
+Chrome browser digambar di setiap layar untuk menegaskan: ini web, bukan aplikasi<br>
+Tiga jalan buntu ditangani eksplisit: izin ditolak, in-app browser, perangkat tak didukung
+</div>
+
+<!-- ═══════════ PINTU MASUK ═══════════ -->
+<div class="seksi">PINTU MASUK</div>
+<div class="rak">
+
+<div class="kolom">
+  <div class="nama">W1 · Landing — pintu SEO</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div class="chrome"><span class="dot"></span>
+      <div class="urlbar">🔒 soerabajaquest.id</div><span class="dot"></span></div>
+    <div class="isi" style="background:linear-gradient(170deg,#14456F 0%,#0E2438 50%,#08141F 100%)">
+      <div class="pad">
+        <div class="m-s" style="color:var(--mint);margin-top:34px">SURABAYA · 19 SEPT — 10 NOV 1945</div>
+        <div class="disp-xl" style="color:var(--putih);margin-top:12px">KUTHA IKI TAU<br>DADI MEDAN<br>PERANG.<br>SAIKI DADI<br>ARENAMU.</div>
+
+        <div style="display:flex;align-items:center;gap:3px;height:70px;margin-top:30px">
+          <span style="width:5px;height:14px;border-radius:3px;background:var(--mint)"></span>
+          <span style="width:5px;height:34px;border-radius:3px;background:var(--mint)"></span>
+          <span style="width:5px;height:56px;border-radius:3px;background:var(--mint)"></span>
+          <span style="width:5px;height:28px;border-radius:3px;background:var(--mint)"></span>
+          <span style="width:5px;height:66px;border-radius:3px;background:var(--mint)"></span>
+          <span style="width:5px;height:44px;border-radius:3px;background:var(--mint)"></span>
+          <span style="width:5px;height:20px;border-radius:3px;background:var(--mint)"></span>
+          <span style="width:5px;height:52px;border-radius:3px;background:rgba(199,210,218,.3)"></span>
+          <span style="width:5px;height:70px;border-radius:3px;background:rgba(199,210,218,.3)"></span>
+          <span style="width:5px;height:38px;border-radius:3px;background:rgba(199,210,218,.3)"></span>
+          <span style="width:5px;height:24px;border-radius:3px;background:rgba(199,210,218,.3)"></span>
+          <span style="width:5px;height:58px;border-radius:3px;background:rgba(199,210,218,.3)"></span>
+          <span style="width:5px;height:46px;border-radius:3px;background:rgba(199,210,218,.3)"></span>
+          <span style="width:5px;height:30px;border-radius:3px;background:rgba(199,210,218,.3)"></span>
+          <span style="width:5px;height:62px;border-radius:3px;background:rgba(199,210,218,.3)"></span>
+          <span style="width:5px;height:18px;border-radius:3px;background:rgba(199,210,218,.3)"></span>
+        </div>
+        <div class="m-s" style="color:var(--redup)">POTONGAN ORASI · 00:04 / 00:12 · ▶ NYALAKAN SUARA</div>
+
+        <div class="i-l" style="color:var(--perak);margin-top:26px">Limang titik. Telung jam. Siji kutha sing durung tau kok deleng kaya ngene.</div>
+
+        <div class="cta" style="position:absolute;bottom:74px;left:0;right:0">Coba sekarang, tanpa unduh</div>
+        <div class="tap i-s" style="color:var(--perak);position:absolute;bottom:0;left:0;right:0">Lihat rutenya dulu</div>
+      </div>
+    </div>
+  </div>
+  <div class="catatan">Audio otomatis di-mute; tombol suara dibuat menonjol karena browser mobile memblokir autoplay bersuara. Hero-nya audio, bukan foto stok — itu yang membedakan halaman ini dari situs wisata mana pun.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">W2 · Pra-izin — dijelaskan sebelum prompt browser</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div class="chrome"><span class="dot"></span>
+      <div class="urlbar">🔒 soerabajaquest.id/ar/yamato</div><span class="dot"></span></div>
+    <div class="isi" style="background:var(--biru-malam)">
+      <div class="pad">
+        <div style="display:flex;justify-content:center;margin-top:90px">
+          <div style="width:120px;height:120px;border-radius:50%;border:2px solid var(--mint);
+                      display:flex;align-items:center;justify-content:center">
+            <svg width="52" height="52" viewBox="0 0 48 48" fill="none" stroke="#4FE68C" stroke-width="2.5">
+              <rect x="4" y="13" width="40" height="30" rx="5"/>
+              <circle cx="24" cy="28" r="9"/><path d="M17 13l3-5h8l3 5"/></svg></div></div>
+
+        <div class="disp-l" style="color:var(--putih);text-align:center;margin-top:36px">KAMI PERLU<br>KAMERAMU</div>
+        <div class="i-l" style="color:var(--perak);text-align:center;margin-top:14px">Untuk menampilkan bendera itu di atas gedung yang ada di depanmu.</div>
+
+        <div style="background:rgba(20,69,111,.5);border-radius:12px;padding:16px 18px;margin-top:26px">
+          <div class="m-s" style="color:var(--mint)">YANG TIDAK KAMI LAKUKAN</div>
+          <div class="i-m" style="color:var(--putih);margin-top:6px">Tidak merekam. Tidak menyimpan. Tidak mengirim gambar ke mana pun.</div></div>
+
+        <div class="cta" style="position:absolute;bottom:74px;left:0;right:0">Buka kamera</div>
+        <div class="tap i-s" style="color:var(--perak);position:absolute;bottom:0;left:0;right:0">Lihat versi video saja</div>
+      </div>
+    </div>
+  </div>
+  <div class="catatan">Layar ini ada supaya prompt izin browser tidak muncul mendadak. Prompt yang ditolak sekali sulit dipanggil ulang di iOS — satu layar penjelas menaikkan tingkat penerimaan secara nyata.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">W3 · Memuat SDK</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div class="chrome"><span class="dot"></span>
+      <div class="urlbar">🔒 soerabajaquest.id/ar/yamato</div><span class="dot"></span></div>
+    <div class="isi" style="background:var(--biru-malam)">
+      <div class="pad">
+        <div style="position:absolute;top:230px;left:0;right:0">
+          <div class="m-s" style="color:var(--mint);text-align:center">MENYIAPKAN 19 SEPTEMBER 1945</div>
+          <div style="height:6px;border-radius:3px;background:rgba(199,210,218,.2);margin-top:20px">
+            <div style="width:64%;height:100%;border-radius:3px;background:var(--mint)"></div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:10px" class="m-s">
+            <span style="color:var(--perak)">2,4 MB / 3,8 MB</span><span style="color:var(--redup)">4G · ±3 DETIK</span></div>
+        </div>
+
+        <div class="i-l" style="color:var(--perak);text-align:center;position:absolute;top:400px;left:0;right:0">
+          Sambil menunggu: hotel di depanmu ini dulu bernama Yamato. Sebelumnya Oranje. Sekarang Majapahit.</div>
+
+        <div class="m-s" style="color:var(--redup);text-align:center;position:absolute;bottom:20px;left:0;right:0">
+          SDK AR DIMUAT SETELAH IZIN — BUKAN SEBELUMNYA</div>
+      </div>
+    </div>
+  </div>
+  <div class="catatan">Waktu tunggu diisi fakta, bukan spinner kosong. Tiga detik yang terisi terasa jauh lebih pendek daripada tiga detik yang kosong — dan pengguna sudah mulai belajar sebelum AR-nya jalan.</div>
+</div>
+
+</div>
+
+<!-- ═══════════ PENGALAMAN ═══════════ -->
+<div class="seksi">PENGALAMAN INTI · 60 DETIK</div>
+<div class="rak">
+
+<div class="kolom">
+  <div class="nama">W4 · Kamera aktif — cari target</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div class="chrome"><span class="dot"></span>
+      <div class="urlbar">🔒 soerabajaquest.id/ar/yamato</div><span class="dot"></span></div>
+    <div class="isi" style="background:linear-gradient(180deg,#37485A,#131E28)">
+      <div style="position:absolute;top:150px;left:75px;width:240px;height:240px;
+                  border:3px solid var(--mint);border-radius:6px"></div>
+      <div style="position:absolute;top:404px;left:0;right:0;text-align:center">
+        <span class="m-s scrim" style="color:var(--mint)">ARAHKAN KE STANDEE ATAU POSTER</span></div>
+
+      <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(8,20,31,.94);
+                  border-radius:20px 20px 0 0;padding:22px 28px 34px">
+        <div class="m-s" style="color:var(--mint)">CUPLIKAN · TITIK 1 DARI 5</div>
+        <div class="j-s" style="color:var(--putih);margin-top:6px">Hotel Majapahit, 19 September 1945</div>
+        <div class="i-m" style="color:var(--perak);margin-top:8px">Ora nemu standee? Arahno wae nang poster utawa layar HP kancamu.</div>
+      </div>
+    </div>
+  </div>
+  <div class="catatan">Target dibuat bisa dipindai dari layar HP orang lain — itu jalur penularan paling murah. Satu orang yang sudah main jadi standee berjalan bagi temannya.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">W5 · Interaksi — robek birunya</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div class="chrome"><span class="dot"></span>
+      <div class="urlbar">🔒 soerabajaquest.id/ar/yamato</div><span class="dot"></span></div>
+    <div class="isi" style="background:linear-gradient(180deg,#4A6885,#17242F)">
+      <div style="position:absolute;left:108px;top:60px;width:4px;height:280px;background:rgba(199,210,218,.6)"></div>
+      <div style="position:absolute;left:112px;top:70px;width:148px;height:42px;background:#AE1C28"></div>
+      <div style="position:absolute;left:112px;top:112px;width:148px;height:42px;background:var(--putih)"></div>
+      <div style="position:absolute;left:112px;top:154px;width:148px;height:42px;background:#21468B;border:2px solid var(--mint)"></div>
+      <div style="position:absolute;left:184px;top:214px;width:3px;height:100px;background:rgba(79,230,140,.8)"></div>
+      <div class="disp-xl" style="position:absolute;left:0;right:0;top:306px;text-align:center;color:var(--mint)">↓</div>
+
+      <div style="position:absolute;top:400px;left:0;right:0;text-align:center">
+        <span class="m-s scrim" style="color:var(--perak)">TIER 2 · TANPA OCCLUSION DI WEB</span></div>
+
+      <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(8,20,31,.94);
+                  border-radius:20px 20px 0 0;padding:22px 28px 34px">
+        <div class="m-s" style="color:var(--mint)">AKSI</div>
+        <div class="j-m" style="color:var(--putih);margin-top:6px">USAP DARI ATAS KE BAWAH</div>
+        <div class="i-m" style="color:var(--perak);margin-top:8px">Suwek birune.</div>
+      </div>
+    </div>
+  </div>
+  <div class="catatan">Versi web sengaja diberi label Tier 2. Tanpa occlusion dan spatial audio, ia memang lebih sederhana daripada aplikasi — dan itu justru argumen untuk mengunduh, selama kita jujur menyebutnya.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">W6 · Penutup — konversi ke instal</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div class="chrome"><span class="dot"></span>
+      <div class="urlbar">🔒 soerabajaquest.id/ar/yamato</div><span class="dot"></span></div>
+    <div class="isi" style="background:linear-gradient(170deg,#14456F,#0E2438 60%,#08141F)">
+      <div class="pad">
+        <div style="display:flex;justify-content:center;margin-top:40px">
+          <div style="width:150px;height:150px;color:var(--emas);position:relative">
+            <svg width="150" height="150" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="88" fill="none" stroke="#D4A22F" stroke-width="7"
+                      stroke-dasharray="46 5 32 4 58 6 24 5" opacity=".55"/>
+              <circle cx="100" cy="100" r="76" fill="#D4A22F" opacity=".10"/></svg>
+            <div class="m-s" style="position:absolute;inset:0;display:flex;align-items:center;
+                 justify-content:center;color:var(--emas);text-align:center">PRATINJAU<br>BADGE</div></div></div>
+
+        <div class="disp-l" style="color:var(--putih);text-align:center;margin-top:26px">IKI LAGI<br>SIJI TITIK.<br>ISIH ANA PAPAT.</div>
+        <div class="i-l" style="color:var(--perak);text-align:center;margin-top:14px">Jembatan Merah, Tugu Pahlawan, Siola, Tunjungan. Badge iki mung kesimpen nang aplikasi.</div>
+
+        <div style="background:rgba(20,69,111,.5);border-radius:12px;padding:14px 18px;margin-top:22px;
+                    display:flex;justify-content:space-between" class="m-s">
+          <span style="color:var(--perak)">SPATIAL AUDIO</span><span style="color:var(--mint)">HANYA DI APLIKASI</span></div>
+        <div style="background:rgba(20,69,111,.5);border-radius:12px;padding:14px 18px;margin-top:8px;
+                    display:flex;justify-content:space-between" class="m-s">
+          <span style="color:var(--perak)">VOUCHER UMKM</span><span style="color:var(--mint)">HANYA DI APLIKASI</span></div>
+
+        <div class="cta" style="position:absolute;bottom:74px;left:0;right:0">Unduh aplikasinya · 180 MB</div>
+        <div class="tap i-s" style="color:var(--perak);position:absolute;bottom:0;left:0;right:0">Kirim tautan ke diriku nanti</div>
+      </div>
+    </div>
+  </div>
+  <div class="catatan">"Kirim tautan ke diriku nanti" menangkap orang yang kuotanya menipis di trotoar — mereka bukan menolak, hanya sedang tidak bisa. Ini juga alat pengumpul email untuk pilot.</div>
+</div>
+
+</div>
+
+<!-- ═══════════ JALAN BUNTU ═══════════ -->
+<div class="seksi">TIGA JALAN BUNTU · WAJIB DITANGANI</div>
+<div class="rak">
+
+<div class="kolom">
+  <div class="nama">W7a · In-app browser Instagram</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div class="chrome" style="background:#000">
+      <span class="dot" style="background:#1C1C1E"></span>
+      <div class="urlbar" style="background:#1C1C1E;color:#636366">soerabajaquest.id — Instagram</div>
+      <span class="dot" style="background:#1C1C1E"></span></div>
+    <div class="isi" style="background:var(--biru-malam)">
+      <div class="pad">
+        <div style="background:rgba(212,162,47,.16);border:1px solid rgba(212,162,47,.5);border-radius:12px;
+                    padding:16px 18px;margin-top:34px">
+          <div class="m-s" style="color:var(--emas)">KAMERA DIBLOKIR OLEH INSTAGRAM</div></div>
+
+        <div class="disp-l" style="color:var(--putih);margin-top:26px">BUKA DI<br>CHROME ATAU<br>SAFARI</div>
+        <div class="i-l" style="color:var(--perak);margin-top:14px">Browser di dalam Instagram tidak mengizinkan kamera. Dua ketukan dan kamu sudah di sana.</div>
+
+        <div style="background:rgba(20,69,111,.5);border-radius:12px;padding:16px 18px;margin-top:24px">
+          <div class="m-s" style="color:var(--mint)">CARANYA</div>
+          <div class="i-m" style="color:var(--putih);margin-top:6px">Ketuk ikon ⋯ di pojok kanan atas, lalu pilih “Buka di browser”.</div></div>
+
+        <div class="cta" style="position:absolute;bottom:74px;left:0;right:0">Salin tautan</div>
+        <div class="tap i-s" style="color:var(--perak);position:absolute;bottom:0;left:0;right:0">Lihat versi video saja</div>
+      </div>
+    </div>
+  </div>
+  <div class="catatan">Mayoritas trafik pilot akan datang dari sini. Melewatkan kasus ini berarti kehilangan sebagian besar pengunjung tanpa pernah tahu sebabnya — mereka hanya melihat layar hitam lalu pergi.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">W7b · Izin kamera ditolak</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div class="chrome"><span class="dot"></span>
+      <div class="urlbar">🔒 soerabajaquest.id/ar/yamato</div><span class="dot"></span></div>
+    <div class="isi" style="background:var(--biru-malam)">
+      <div class="pad">
+        <div style="background:#0A1620;border-radius:12px;height:220px;margin-top:34px;position:relative;overflow:hidden">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,#31475C,#0F1A24)"></div>
+          <div style="position:absolute;left:0;right:0;top:88px;text-align:center">
+            <div style="width:52px;height:52px;border-radius:50%;border:2px solid var(--putih);margin:0 auto;
+                        display:flex;align-items:center;justify-content:center;color:var(--putih)">▶</div></div>
+          <div class="m-s" style="position:absolute;bottom:12px;left:14px;color:var(--perak)">REKONSTRUKSI · 20 DETIK</div>
+        </div>
+
+        <div class="disp-l" style="color:var(--putih);margin-top:24px">GAK OPO-OPO.<br>DELENG VIDEONE.</div>
+        <div class="i-l" style="color:var(--perak);margin-top:12px">Tanpa kamera pun kamu tetap bisa melihat apa yang terjadi di atap hotel itu malam.</div>
+
+        <div class="i-s" style="color:var(--redup);position:absolute;bottom:130px">Berubah pikiran? Izin kamera bisa dinyalakan lewat ikon gembok di bilah alamat.</div>
+        <div class="cta" style="position:absolute;bottom:74px;left:0;right:0">Putar video</div>
+        <div class="tap i-s" style="color:var(--perak);position:absolute;bottom:0;left:0;right:0">Unduh aplikasinya</div>
+      </div>
+    </div>
+  </div>
+  <div class="catatan">Tidak pernah buntu. Izin ditolak langsung dialihkan ke video 20 detik, bukan pesan galat. Pengguna yang menolak izin belum tentu menolak produknya.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">W7c · Perangkat tidak mendukung WebXR</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div class="chrome"><span class="dot"></span>
+      <div class="urlbar">🔒 soerabajaquest.id/ar/yamato</div><span class="dot"></span></div>
+    <div class="isi" style="background:var(--kertas)">
+      <div class="pad">
+        <div style="display:flex;justify-content:space-between;margin-top:20px" class="m-s">
+          <span style="color:var(--sepia)">BERKAS 001</span><span style="color:var(--merah)">19 · IX · 45</span></div>
+        <div style="height:1px;background:rgba(122,97,68,.4);margin:12px 0 20px"></div>
+
+        <div class="disp-l" style="color:var(--tinta)">KEMARAHAN DI<br>HOTEL YAMATO</div>
+        <div class="i-l" style="color:var(--tinta);margin-top:14px">Ploegman mengibarkan bendera Belanda di tiang lantai atas hotel tanpa izin siapa pun. Hariyono dan Koesno Wibowo naik ke atap.</div>
+
+        <div style="background:var(--kertas-tua);border:1px solid rgba(122,97,68,.5);height:150px;margin-top:20px;
+                    display:flex;align-items:center;justify-content:center" class="m-s">
+          <span style="color:var(--sepia)">[ FOTO ARSIP · MONOKROM ]</span></div>
+        <div class="m-s" style="color:var(--sepia);margin-top:8px">Sumber: ANRI, koleksi Soerabaja 1945</div>
+
+        <div class="i-m" style="color:var(--merah);position:absolute;bottom:130px">Wong loro kuwi ora nduwe rencana cadangan.</div>
+        <div class="cta" style="position:absolute;bottom:74px;left:0;right:0">Dengarkan orasinya</div>
+        <div class="tap i-s" style="color:var(--sepia);position:absolute;bottom:0;left:0;right:0">Unduh aplikasinya</div>
+      </div>
+    </div>
+  </div>
+  <div class="catatan">Perangkat tanpa WebXR langsung masuk rezim Arsip — cerita penuh plus audio, tanpa satu kata pun yang menyiratkan HP-nya kurang. Aturan yang sama dengan Tier 3 di aplikasi.</div>
+</div>
+
+</div>
+</body>
+</html>

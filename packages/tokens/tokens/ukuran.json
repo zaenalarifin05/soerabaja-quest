@@ -1,0 +1,80 @@
+{
+  "ukuran": {
+    "spasi": {
+      "1": {
+        "$type": "dimension",
+        "$value": "4px"
+      },
+      "2": {
+        "$type": "dimension",
+        "$value": "8px"
+      },
+      "3": {
+        "$type": "dimension",
+        "$value": "12px"
+      },
+      "4": {
+        "$type": "dimension",
+        "$value": "16px"
+      },
+      "6": {
+        "$type": "dimension",
+        "$value": "24px"
+      },
+      "8": {
+        "$type": "dimension",
+        "$value": "32px"
+      }
+    },
+    "radius": {
+      "tombol": {
+        "$type": "dimension",
+        "$value": "12px"
+      },
+      "kartu": {
+        "$type": "dimension",
+        "$value": "20px"
+      },
+      "chip": {
+        "$type": "dimension",
+        "$value": "8px"
+      }
+    },
+    "target": {
+      "sentuh-min": {
+        "$type": "dimension",
+        "$value": "48px",
+        "$description": "Target sentuh minimum mode kamera. Backlog B5."
+      },
+      "sentuh-dok": {
+        "$type": "dimension",
+        "$value": "44px",
+        "$description": "Mode dokumen"
+      },
+      "tombol-kasir": {
+        "$type": "dimension",
+        "$value": "72px",
+        "$description": "Merchant PWA: ditekan sambil berdiri, sering satu tangan"
+      }
+    },
+    "safe-area": {
+      "atas": {
+        "$type": "dimension",
+        "$value": "47px",
+        "$description": "iOS notch. Backlog B4."
+      },
+      "bawah": {
+        "$type": "dimension",
+        "$value": "34px",
+        "$description": "iOS home indicator"
+      }
+    },
+    "gulir": {
+      "kedalaman-maks": {
+        "$type": "dimension",
+        "$value": "2500px",
+        "$description": "3x viewport. Batas Halaman Baca per POI (Dok 07). Menggantikan batas 140 kata."
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "gerak": {
+    "durasi": {
+      "cepat": {
+        "$type": "duration",
+        "$value": "200ms"
+      },
+      "sedang": {
+        "$type": "duration",
+        "$value": "320ms",
+        "$description": "Batas atas semua animasi kecuali transisi robek"
+      },
+      "robek": {
+        "$type": "duration",
+        "$value": "700ms",
+        "$description": "SATU-SATUNYA animasi panjang. Transisi Halaman Baca -> Layar Aksi."
+      }
+    },
+    "easing": {
+      "lapangan": {
+        "$type": "cubicBezier",
+        "$value": [
+          0.2,
+          0,
+          0,
+          1
+        ]
+      },
+      "arsip": {
+        "$type": "cubicBezier",
+        "$value": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "$description": "Potong keras. Rezim Arsip berubah dalam 1 frame, seperti slide proyektor."
+      }
+    },
+    "timeout": {
+      "layar-aksi-menganggur": {
+        "$type": "duration",
+        "$value": "90000ms",
+        "$description": "Kembali ke Halaman Baca, kamera dimatikan penuh (Dok 04 B.3b)"
+      }
+    }
+  }
+}

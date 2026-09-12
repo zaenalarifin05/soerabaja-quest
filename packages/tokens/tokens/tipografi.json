@@ -1,0 +1,155 @@
+{
+  "font": {
+    "keluarga": {
+      "display": {
+        "$type": "fontFamily",
+        "$value": [
+          "Big Shoulders Display",
+          "Anton",
+          "sans-serif"
+        ]
+      },
+      "ui": {
+        "$type": "fontFamily",
+        "$value": [
+          "Plus Jakarta Sans",
+          "system-ui",
+          "sans-serif"
+        ]
+      },
+      "mono": {
+        "$type": "fontFamily",
+        "$value": [
+          "Courier Prime",
+          "monospace"
+        ],
+        "$description": "HANYA rezim Arsip: transkrip, berkas, ID, metadata"
+      }
+    },
+    "skala": {
+      "display-xl": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.keluarga.display}",
+          "fontWeight": 800,
+          "fontSize": "40px",
+          "lineHeight": "40px",
+          "letterSpacing": "-0.02em"
+        }
+      },
+      "display-l": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.keluarga.display}",
+          "fontWeight": 800,
+          "fontSize": "32px",
+          "lineHeight": "34px",
+          "letterSpacing": "-0.01em"
+        }
+      },
+      "judul-m": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.keluarga.ui}",
+          "fontWeight": 700,
+          "fontSize": "24px",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.01em"
+        }
+      },
+      "judul-s": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.keluarga.ui}",
+          "fontWeight": 700,
+          "fontSize": "20px",
+          "lineHeight": "26px",
+          "letterSpacing": "0"
+        }
+      },
+      "isi-l": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.keluarga.ui}",
+          "fontWeight": 400,
+          "fontSize": "17px",
+          "lineHeight": "27px",
+          "letterSpacing": "0"
+        }
+      },
+      "isi-m": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.keluarga.ui}",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "lineHeight": "23px",
+          "letterSpacing": "0"
+        }
+      },
+      "isi-s": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.keluarga.ui}",
+          "fontWeight": 500,
+          "fontSize": "13px",
+          "lineHeight": "19px",
+          "letterSpacing": "0"
+        }
+      },
+      "label-cta": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.keluarga.ui}",
+          "fontWeight": 600,
+          "fontSize": "16px",
+          "lineHeight": "20px",
+          "letterSpacing": "0"
+        }
+      },
+      "mono-m": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.keluarga.mono}",
+          "fontWeight": 400,
+          "fontSize": "15px",
+          "lineHeight": "24px",
+          "letterSpacing": "0"
+        }
+      },
+      "mono-s": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{font.keluarga.mono}",
+          "fontWeight": 400,
+          "fontSize": "12px",
+          "lineHeight": "18px",
+          "letterSpacing": "0.02em"
+        }
+      }
+    },
+    "wall": {
+      "$description": "Wall Siola — jarak baca 2,5 m pada layar 55 inci 1080p. Apa pun di bawah 28px TIDAK masuk Wall.",
+      "judul": {
+        "$type": "dimension",
+        "$value": "92px"
+      },
+      "kutipan": {
+        "$type": "dimension",
+        "$value": "56px"
+      },
+      "nama": {
+        "$type": "dimension",
+        "$value": "40px"
+      },
+      "metadata": {
+        "$type": "dimension",
+        "$value": "32px"
+      },
+      "minimum": {
+        "$type": "dimension",
+        "$value": "28px"
+      }
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "primitif": {
+    "inti": {
+      "biru-malam": {
+        "$type": "color",
+        "$value": "#0E2438",
+        "$description": "Biru lambang Kota Surabaya, gelap"
+      },
+      "biru": {
+        "$type": "color",
+        "$value": "#14456F",
+        "$description": "Biru lambang Kota Surabaya"
+      },
+      "perak": {
+        "$type": "color",
+        "$value": "#C7D2DA",
+        "$description": "Perak lambang"
+      },
+      "putih": {
+        "$type": "color",
+        "$value": "#F2F5F7"
+      },
+      "putih-murni": {
+        "$type": "color",
+        "$value": "#FFFFFF"
+      },
+      "emas": {
+        "$type": "color",
+        "$value": "#D4A22F",
+        "$description": "Emas lambang. Hanya untuk pencapaian."
+      },
+      "emas-tua": {
+        "$type": "color",
+        "$value": "#8A6A16",
+        "$description": "Varian emas yang lolos kontras di atas putih"
+      },
+      "hitam": {
+        "$type": "color",
+        "$value": "#08141F",
+        "$description": "Bukan #000"
+      }
+    },
+    "aksi": {
+      "mint": {
+        "$type": "color",
+        "$value": "#4FE68C"
+      },
+      "mint-redup": {
+        "$type": "color",
+        "$value": "#2FA862"
+      },
+      "mint-tua": {
+        "$type": "color",
+        "$value": "#1E8B4E",
+        "$description": "Varian mint yang lolos kontras di atas putih"
+      }
+    },
+    "arsip": {
+      "kertas": {
+        "$type": "color",
+        "$value": "#E3D6B8"
+      },
+      "kertas-tua": {
+        "$type": "color",
+        "$value": "#CDBB95"
+      },
+      "tinta": {
+        "$type": "color",
+        "$value": "#241B12"
+      },
+      "sepia": {
+        "$type": "color",
+        "$value": "#7A6144"
+      },
+      "merah": {
+        "$type": "color",
+        "$value": "#9E2B22",
+        "$description": "Merah bendera pudar"
+      }
+    },
+    "sinyal": {
+      "bahaya": {
+        "$type": "color",
+        "$value": "#E5533D"
+      },
+      "bahaya-tua": {
+        "$type": "color",
+        "$value": "#C9402B"
+      }
+    },
+    "netral": {
+      "lembut": {
+        "$type": "color",
+        "$value": "#F6F8FA"
+      },
+      "garis": {
+        "$type": "color",
+        "$value": "#DCE3E8"
+      },
+      "redup": {
+        "$type": "color",
+        "$value": "#6E7B88"
+      },
+      "redup-muda": {
+        "$type": "color",
+        "$value": "#98A4AE"
+      },
+      "redup-gelap": {
+        "$type": "color",
+        "$value": "#7A8592"
+      }
+    },
+    "alfa": {
+      "scrim-62": {
+        "$type": "color",
+        "$value": "#08141F9E",
+        "$description": "Hitam 62% — scrim teks mode kamera"
+      },
+      "scrim-82": {
+        "$type": "color",
+        "$value": "#08141FD1",
+        "$description": "Hitam 82% — scrim Mode Silau"
+      },
+      "garis-18": {
+        "$type": "color",
+        "$value": "#F2F5F72E"
+      },
+      "garis-40": {
+        "$type": "color",
+        "$value": "#F2F5F766"
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@import '@soerabaja/tokens/build/css/tema-gelap.css';
+@import '@soerabaja/tokens/build/css/tema-terang.css';
+@import '@soerabaja/tokens/build/css/tema-silau.css';
+
+@theme {
+  --color-permukaan-0: var(--semantik-permukaan-0);
+  --color-permukaan-1: var(--semantik-permukaan-1);
+  --color-permukaan-2: var(--semantik-permukaan-2);
+  --color-permukaan-arsip: var(--semantik-permukaan-arsip);
+
+  --color-teks-utama: var(--semantik-teks-utama);
+  --color-teks-sekunder: var(--semantik-teks-sekunder);
+  --color-teks-redup: var(--semantik-teks-redup);
+  --color-teks-arsip: var(--semantik-teks-arsip);
+
+  --color-aksi: var(--semantik-aksi-utama);
+  --color-aksi-teks: var(--semantik-aksi-teks);
+  --color-pencapaian: var(--semantik-pencapaian);
+  --color-bahaya: var(--semantik-bahaya);
+
+  --font-display: 'Big Shoulders Display', Anton, sans-serif;
+  --font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'Courier Prime', monospace;
+}

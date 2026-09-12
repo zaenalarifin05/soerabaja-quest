@@ -1,0 +1,16 @@
+{
+  "$catatan": "Gabungkan ke konfigurasi ESLint utama. Menangkap nilai warna mentah di JSX/TSX dan di berkas Dart lewat analyzer terpisah.",
+  "rules": {
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "Literal[value=/^#([0-9a-fA-F]{3,8})$/]",
+        "message": "Nilai heksadesimal dilarang. Pakai token semantik dari @soerabaja/tokens."
+      },
+      {
+        "selector": "Literal[value=/primitif\\./]",
+        "message": "Token primitif tidak boleh dipakai langsung di komponen. Pakai lapisan semantik."
+      }
+    ]
+  }
+}

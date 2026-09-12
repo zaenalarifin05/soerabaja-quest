@@ -1,0 +1,73 @@
+{
+  "semantik": {
+    "permukaan": {
+      "0": {
+        "$type": "color",
+        "$value": "{primitif.netral.lembut}",
+        "$description": "Latar paling dalam"
+      },
+      "1": {
+        "$type": "color",
+        "$value": "{primitif.inti.putih-murni}",
+        "$description": "Latar halaman"
+      },
+      "2": {
+        "$type": "color",
+        "$value": "{primitif.inti.putih-murni}",
+        "$description": "Latar kartu"
+      },
+      "arsip": {
+        "$type": "color",
+        "$value": "{primitif.arsip.kertas}",
+        "$description": "SAMA di semua tema. Kertas selalu kertas."
+      }
+    },
+    "teks": {
+      "utama": {
+        "$type": "color",
+        "$value": "{primitif.inti.biru-malam}"
+      },
+      "sekunder": {
+        "$type": "color",
+        "$value": "{primitif.netral.redup}"
+      },
+      "redup": {
+        "$type": "color",
+        "$value": "{primitif.netral.redup-muda}"
+      },
+      "arsip": {
+        "$type": "color",
+        "$value": "{primitif.arsip.tinta}",
+        "$description": "SAMA di semua tema"
+      }
+    },
+    "aksi": {
+      "utama": {
+        "$type": "color",
+        "$value": "{primitif.aksi.mint-tua}"
+      },
+      "teks": {
+        "$type": "color",
+        "$value": "{primitif.inti.putih-murni}",
+        "$description": "Teks di atas aksi-utama"
+      }
+    },
+    "pencapaian": {
+      "$type": "color",
+      "$value": "{primitif.inti.emas-tua}",
+      "$description": "HANYA untuk badge & pencapaian. Tidak pernah dekoratif."
+    },
+    "bahaya": {
+      "$type": "color",
+      "$value": "{primitif.sinyal.bahaya-tua}"
+    },
+    "garis": {
+      "$type": "color",
+      "$value": "{primitif.netral.garis}"
+    },
+    "scrim": {
+      "$type": "color",
+      "$value": "{primitif.alfa.scrim-62}"
+    }
+  }
+}

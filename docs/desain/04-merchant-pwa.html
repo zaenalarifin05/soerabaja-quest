@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — Merchant PWA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --hitam:#08141F; --mint:#4FE68C; --mint-redup:#1E8B4E;
+    --kertas:#E3D6B8; --sepia:#7A6144; --merah:#9E2B22;
+    --bahaya:#E5533D; --redup:#6E7B88; --garis:#D5DDE3;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#DCE1E6;font-family:var(--ui);padding:56px 40px}
+  h1.board{font-family:var(--disp);font-size:44px;letter-spacing:-.02em;color:var(--hitam)}
+  .boardsub{font-size:15px;color:#5A6570;margin:10px 0 20px;max-width:860px;line-height:1.65}
+  .fixnote{font-family:var(--mono);font-size:12px;line-height:1.9;color:#5A6570;background:#EBEFF2;
+           border-left:3px solid var(--mint-redup);padding:14px 18px;max-width:860px;margin-bottom:44px}
+  .seksi{font-family:var(--disp);font-size:28px;color:var(--hitam);margin:52px 0 20px}
+  .rak{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+  .kolom{display:flex;flex-direction:column;gap:10px;width:390px}
+  .nama{font-family:var(--mono);font-size:12px;color:#5A6570}
+  .catatan{font-size:12.5px;line-height:1.55;color:#5A6570;border-left:2px solid #B9C2CA;padding-left:10px}
+  .layar{width:390px;height:844px;overflow:hidden;position:relative;border-radius:22px;
+         box-shadow:0 8px 28px rgba(8,20,31,.18);background:var(--putih)}
+  .topbar{position:absolute;top:0;left:0;right:0;height:88px;background:var(--biru-malam);
+          padding:44px 24px 0;display:flex;justify-content:space-between;align-items:center}
+  .pad{position:absolute;inset:112px 24px 34px 24px}
+  /* skala tipe dinaikkan: kasir membaca sambil berdiri, jarak lengan */
+  .disp-l{font-family:var(--disp);font-size:34px;line-height:36px;letter-spacing:-.01em}
+  .disp-xl{font-family:var(--disp);font-size:52px;line-height:50px;letter-spacing:-.02em}
+  .j-l{font-size:28px;line-height:34px;font-weight:800;letter-spacing:-.01em}
+  .j-m{font-size:22px;line-height:28px;font-weight:700}
+  .i-l{font-size:18px;line-height:28px}
+  .i-m{font-size:16px;line-height:24px}
+  .i-s{font-size:14px;line-height:20px;font-weight:500}
+  .m-s{font-family:var(--mono);font-size:12px;line-height:18px;letter-spacing:.03em}
+  .m-m{font-family:var(--mono);font-size:16px;line-height:24px}
+  /* tombol kasir 72px, bukan 56px — ditekan sambil berdiri, sering satu tangan */
+  .tombol{height:72px;border-radius:14px;background:var(--mint-redup);color:#fff;
+          font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px}
+  .tombol.diam{background:#fff;border:2px solid var(--garis);color:var(--biru-malam)}
+  .tombol.bahaya{background:var(--bahaya)}
+  .tap{min-height:52px;display:flex;align-items:center;justify-content:center}
+  .kartu{background:#fff;border:1px solid var(--garis);border-radius:14px;padding:18px 20px}
+</style>
+</head>
+<body>
+
+<h1 class="board">MERCHANT PWA · KASIR MITRA</h1>
+<p class="boardsub">Delapan layar untuk kasir warung dan kafe di Jalan Tunjungan. Bukan produk pengalaman — ini alat kerja yang dipakai orang yang tidak pernah kita latih, sambil berdiri, dengan antrean di belakangnya.</p>
+<div class="fixnote">
+PRINSIP YANG MEMBEDAKAN PERMUKAAN INI DARI APLIKASI PEMAIN<br><br>
+TERANG, BUKAN GELAP — dipakai di kafe ber-lampu dan kadang kena matahari etalase<br>
+TIPE LEBIH BESAR — dibaca sambil berdiri, jarak lengan, bukan 30 cm<br>
+TOMBOL 72px, BUKAN 56px — ditekan tergesa, sering satu tangan sambil memegang gelas<br>
+KONFIRMASI MEMBANJIRI LAYAR — bukan toast kecil; harus terbaca dari seberang meja dalam 1 detik<br>
+OFFLINE-FIRST — penukaran diantre lokal; kasir tidak pernah menunggu server<br>
+TIDAK PERNAH MENYALAHKAN PELANGGAN — setiap galat diarahkan ke tindakan, bukan tuduhan<br>
+TANPA LOGIN HARIAN — sesi terikat perangkat; kasir shift pagi tidak perlu ingat kata sandi<br><br>
+TARGET · dari tap "Tukar sekarang" di HP pemain sampai konfirmasi di dua layar: &lt; 4 detik
+</div>
+
+<!-- ═══════════ ALUR NORMAL ═══════════ -->
+<div class="seksi">ALUR NORMAL · 6 DETIK</div>
+<div class="rak">
+
+<div class="kolom">
+  <div class="nama">M1 · Siaga — layar default sepanjang hari</div>
+  <div class="layar">
+    <div class="topbar">
+      <div>
+        <div class="m-s" style="color:var(--mint)">SOERABAJA QUEST · MITRA</div>
+        <div class="i-m" style="color:#fff;font-weight:700">Kopi Tunjungan</div></div>
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--mint)"></div>
+    </div>
+    <div class="pad">
+      <div class="m-s" style="color:var(--redup)">HARI INI · SABTU 13 NOV</div>
+      <div style="display:flex;gap:12px;margin-top:12px">
+        <div class="kartu" style="flex:1;text-align:center;padding:20px 12px">
+          <div class="disp-xl" style="color:var(--biru-malam)">14</div>
+          <div class="m-s" style="color:var(--redup)">DITUKAR</div></div>
+        <div class="kartu" style="flex:1;text-align:center;padding:20px 12px">
+          <div class="disp-xl" style="color:var(--mint-redup)">6</div>
+          <div class="m-s" style="color:var(--redup)">JAM TERAKHIR</div></div>
+      </div>
+
+      <div style="margin-top:24px" class="m-s"><span style="color:var(--redup)">PENUKARAN TERAKHIR</span></div>
+      <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+        <div class="kartu" style="padding:14px 18px;display:flex;justify-content:space-between;align-items:center">
+          <div><div class="i-m" style="color:var(--biru-malam);font-weight:600">Es kopi susu</div>
+               <div class="m-s" style="color:var(--redup)">ARE-4192</div></div>
+          <div class="m-s" style="color:var(--redup)">14:22</div></div>
+        <div class="kartu" style="padding:14px 18px;display:flex;justify-content:space-between;align-items:center">
+          <div><div class="i-m" style="color:var(--biru-malam);font-weight:600">Es kopi susu</div>
+               <div class="m-s" style="color:var(--redup)">ARE-4188</div></div>
+          <div class="m-s" style="color:var(--redup)">14:05</div></div>
+        <div class="kartu" style="padding:14px 18px;display:flex;justify-content:space-between;align-items:center">
+          <div><div class="i-m" style="color:var(--biru-malam);font-weight:600">Es kopi susu</div>
+               <div class="m-s" style="color:var(--redup)">ARE-4171</div></div>
+          <div class="m-s" style="color:var(--redup)">13:48</div></div>
+      </div>
+
+      <div class="tombol" style="position:absolute;bottom:76px;left:0;right:0">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2">
+          <rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="12" cy="12" r="4"/></svg>
+        Pindai voucher</div>
+      <div class="tap i-s" style="color:var(--redup);position:absolute;bottom:0;left:0;right:0">Masukkan kode manual</div>
+    </div>
+  </div>
+  <div class="catatan">Tombol pindai selalu di posisi yang sama, sepanjang hari, tanpa perlu navigasi. Kasir menghafal posisi jempolnya dalam dua hari dan setelah itu tidak pernah melihat layar ini lagi.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">M2 · Pemindaian</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,#2E3B47,#101922)"></div>
+    <div style="position:absolute;top:230px;left:55px;width:280px;height:280px;
+                border:4px solid var(--mint);border-radius:8px"></div>
+    <div style="position:absolute;top:530px;left:0;right:0;text-align:center">
+      <span class="m-m" style="color:var(--mint);background:rgba(8,20,31,.62);padding:8px 16px;border-radius:8px">
+        Arahkan ke QR di HP pelanggan</span></div>
+    <div class="tap i-m" style="color:var(--perak);position:absolute;bottom:34px;left:24px;right:24px;
+         border:1.5px solid rgba(199,210,218,.35);border-radius:12px">Masukkan kode manual</div>
+  </div>
+  <div class="catatan">Bingkai dibuat 280px, jauh lebih besar daripada di aplikasi pemain. Kasir memindai layar orang lain yang bergerak, sering dari sudut miring, kadang dengan pantulan lampu kafe.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">M3 · Sah — konfirmasi membanjiri layar</div>
+  <div class="layar" style="background:var(--mint-redup)">
+    <div style="position:absolute;inset:0;padding:24px;display:flex;flex-direction:column">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+        <div style="width:110px;height:110px;border-radius:50%;border:5px solid #fff;
+                    display:flex;align-items:center;justify-content:center">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"
+               stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 7"/></svg></div>
+        <div class="disp-xl" style="color:#fff;margin-top:26px">VOUCHER SAH</div>
+        <div class="j-l" style="color:#fff;margin-top:14px">Es kopi susu × 1</div>
+        <div class="i-l" style="color:rgba(255,255,255,.85);margin-top:6px">Gratis · tanpa pembayaran</div>
+        <div class="m-m" style="color:rgba(255,255,255,.7);margin-top:20px">ARE-4193 · 14:31</div>
+      </div>
+      <div class="tombol" style="background:#fff;color:var(--mint-redup)">Selesai</div>
+      <div class="tap i-m" style="color:rgba(255,255,255,.85);margin-top:4px">Batalkan penukaran ini</div>
+    </div>
+  </div>
+  <div class="catatan">Hijau memenuhi seluruh layar, bukan toast di sudut. Pelanggan di seberang meja ikut melihatnya — dan itu penting, karena momen ini adalah bukti bagi kedua pihak sekaligus. Tombol batal ada tapi tidak menonjol.</div>
+</div>
+
+</div>
+
+<!-- ═══════════ SAAT ADA MASALAH ═══════════ -->
+<div class="seksi">SAAT ADA MASALAH</div>
+<div class="rak">
+
+<div class="kolom">
+  <div class="nama">M4 · Sudah pernah ditukar</div>
+  <div class="layar" style="background:var(--bahaya)">
+    <div style="position:absolute;inset:0;padding:24px;display:flex;flex-direction:column">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+        <div style="width:110px;height:110px;border-radius:50%;border:5px solid #fff;
+                    display:flex;align-items:center;justify-content:center">
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"
+               stroke-linecap="round"><path d="M12 4v10"/><circle cx="12" cy="19" r="1.4" fill="#fff" stroke="none"/></svg></div>
+        <div class="disp-l" style="color:#fff;margin-top:26px">SUDAH DITUKAR<br>KEMARIN</div>
+        <div class="i-l" style="color:rgba(255,255,255,.9);margin-top:14px">Voucher ini dipakai di sini pada 12 Nov, 16:40.</div>
+
+        <div style="background:rgba(255,255,255,.16);border-radius:12px;padding:16px 20px;margin-top:22px">
+          <div class="i-m" style="color:#fff">Sampaikan baik-baik: pelanggan mungkin lupa. Tawarkan menu biasa, jangan tolak orangnya.</div></div>
+      </div>
+      <div class="tombol" style="background:#fff;color:var(--bahaya)">Mengerti</div>
+      <div class="tap i-m" style="color:rgba(255,255,255,.9);margin-top:4px">Pindai voucher lain</div>
+    </div>
+  </div>
+  <div class="catatan">Kalimat panduan untuk kasir ada di layar, bukan di buku manual yang tidak pernah dibaca. Ini melindungi hubungan merchant–pelanggan pada momen paling canggung, dan mencegah kasir berimprovisasi dengan nada menuduh.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">M5 · Mode offline — antrean lokal</div>
+  <div class="layar">
+    <div class="topbar" style="background:var(--emas)">
+      <div>
+        <div class="m-s" style="color:#3D2E08">TANPA SINYAL · ANTREAN LOKAL</div>
+        <div class="i-m" style="color:#3D2E08;font-weight:700">3 menunggu kirim</div></div>
+      <div style="width:10px;height:10px;border-radius:50%;background:#3D2E08"></div>
+    </div>
+    <div class="pad">
+      <div class="j-l" style="color:var(--biru-malam)">Tetap bisa melayani</div>
+      <div class="i-l" style="color:var(--redup);margin-top:8px">Penukaran disimpan di perangkat ini dan dikirim otomatis saat sinyal kembali. Pelanggan tidak perlu menunggu.</div>
+
+      <div class="kartu" style="margin-top:24px">
+        <div class="m-s" style="color:var(--redup)">KODE DARI HP PELANGGAN</div>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <div style="flex:1;height:64px;border:2px solid var(--biru-malam);border-radius:10px;
+               display:flex;align-items:center;justify-content:center" class="disp-l">
+            <span style="color:var(--biru-malam)">4</span></div>
+          <div style="flex:1;height:64px;border:2px solid var(--biru-malam);border-radius:10px;
+               display:flex;align-items:center;justify-content:center" class="disp-l">
+            <span style="color:var(--biru-malam)">K</span></div>
+          <div style="flex:1;height:64px;border:2px solid var(--biru-malam);border-radius:10px;
+               display:flex;align-items:center;justify-content:center" class="disp-l">
+            <span style="color:var(--biru-malam)">7</span></div>
+          <div style="flex:1;height:64px;border:2px solid var(--garis);border-radius:10px"></div>
+          <div style="flex:1;height:64px;border:2px solid var(--garis);border-radius:10px"></div>
+          <div style="flex:1;height:64px;border:2px solid var(--garis);border-radius:10px"></div>
+        </div>
+      </div>
+
+      <div class="i-s" style="color:var(--redup);margin-top:20px">Kode ada di layar pelanggan, di bawah tulisan “Sinyal kasir mati?”.</div>
+
+      <div class="tombol" style="position:absolute;bottom:76px;left:0;right:0">Terima penukaran</div>
+      <div class="tap i-s" style="color:var(--redup);position:absolute;bottom:0;left:0;right:0">Lihat 3 antrean tertunda</div>
+    </div>
+  </div>
+  <div class="catatan">Ini layar yang menyelamatkan hubungan dengan mitra. Kasir tidak pernah menatap spinner, dan pelanggan tidak pernah berdiri canggung. Rekonsiliasi terjadi di belakang layar, bukan di depan antrean.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">M6 · Voucher untuk merchant lain</div>
+  <div class="layar">
+    <div class="topbar">
+      <div><div class="m-s" style="color:var(--mint)">SOERABAJA QUEST · MITRA</div>
+           <div class="i-m" style="color:#fff;font-weight:700">Kopi Tunjungan</div></div>
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--mint)"></div>
+    </div>
+    <div class="pad">
+      <div style="background:rgba(212,162,47,.14);border:1.5px solid var(--emas);border-radius:14px;padding:20px">
+        <div class="m-s" style="color:#8A6A16">VOUCHER BUKAN UNTUK TOKO INI</div>
+        <div class="j-m" style="color:var(--biru-malam);margin-top:8px">Berlaku di Warung Mbois</div>
+        <div class="i-m" style="color:var(--redup);margin-top:6px">Jl. Tunjungan 78 · 140 meter dari sini</div>
+      </div>
+
+      <div class="i-l" style="color:var(--biru-malam);margin-top:24px">Tunjukkan arahnya ke pelanggan. Mereka biasanya kembali ke sini lain kali.</div>
+
+      <div class="kartu" style="margin-top:20px">
+        <div class="m-s" style="color:var(--redup)">ARAH SINGKAT</div>
+        <div class="i-m" style="color:var(--biru-malam);margin-top:6px">Keluar, belok kiri, jalan lurus 2 menit. Sebelah toko kain.</div></div>
+
+      <div class="tombol diam" style="position:absolute;bottom:76px;left:0;right:0">Pindai voucher lain</div>
+      <div class="tap i-s" style="color:var(--redup);position:absolute;bottom:0;left:0;right:0">Kembali ke beranda</div>
+    </div>
+  </div>
+  <div class="catatan">Kesalahan merchant akan sering terjadi di jalan sepanjang 700 meter dengan puluhan mitra. Menjadikannya momen membantu, bukan penolakan, adalah cara termurah membangun rasa satu ekosistem antar-UMKM.</div>
+</div>
+
+</div>
+
+<!-- ═══════════ ADMIN MERCHANT ═══════════ -->
+<div class="seksi">ADMIN MITRA</div>
+<div class="rak">
+
+<div class="kolom">
+  <div class="nama">M7 · Rekap bulanan — bukti nilai bagi mitra</div>
+  <div class="layar">
+    <div class="topbar">
+      <div><div class="m-s" style="color:var(--mint)">REKAP</div>
+           <div class="i-m" style="color:#fff;font-weight:700">November 2027</div></div>
+    </div>
+    <div class="pad">
+      <div class="kartu" style="text-align:center;padding:24px">
+        <div class="disp-xl" style="color:var(--mint-redup)">312</div>
+        <div class="i-m" style="color:var(--redup);margin-top:4px">pengunjung datang lewat quest</div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:12px">
+        <div class="kartu" style="flex:1;text-align:center;padding:18px 10px">
+          <div class="disp-l" style="color:var(--biru-malam)">312</div>
+          <div class="m-s" style="color:var(--redup)">VOUCHER</div></div>
+        <div class="kartu" style="flex:1;text-align:center;padding:18px 10px">
+          <div class="disp-l" style="color:var(--biru-malam)">41%</div>
+          <div class="m-s" style="color:var(--redup)">BELI TAMBAHAN</div></div>
+      </div>
+
+      <div style="margin-top:22px" class="m-s"><span style="color:var(--redup)">JAM TERSIBUK</span></div>
+      <div style="display:flex;align-items:flex-end;gap:6px;height:120px;margin-top:12px">
+        <div style="flex:1;height:22%;background:var(--perak);border-radius:4px 4px 0 0"></div>
+        <div style="flex:1;height:38%;background:var(--perak);border-radius:4px 4px 0 0"></div>
+        <div style="flex:1;height:64%;background:var(--perak);border-radius:4px 4px 0 0"></div>
+        <div style="flex:1;height:88%;background:var(--mint-redup);border-radius:4px 4px 0 0"></div>
+        <div style="flex:1;height:100%;background:var(--mint-redup);border-radius:4px 4px 0 0"></div>
+        <div style="flex:1;height:72%;background:var(--mint-redup);border-radius:4px 4px 0 0"></div>
+        <div style="flex:1;height:44%;background:var(--perak);border-radius:4px 4px 0 0"></div>
+        <div style="flex:1;height:28%;background:var(--perak);border-radius:4px 4px 0 0"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px" class="m-s">
+        <span style="color:var(--redup)">09.00</span><span style="color:var(--redup)">17.00</span></div>
+
+      <div class="i-s" style="color:var(--redup);position:absolute;bottom:76px">Rombongan quest paling banyak tiba pukul 15.00–17.00. Pertimbangkan menambah barista di jam itu akhir pekan.</div>
+      <div class="tombol diam" style="position:absolute;bottom:0;left:0;right:0">Unduh rekap PDF</div>
+    </div>
+  </div>
+  <div class="catatan">Layar ini yang membuat merchant bertahan di tahun kedua. Angka "41% beli tambahan" adalah argumen yang mereka butuhkan — voucher gratis bukan biaya, tapi pintu masuk. Tanpa bukti ini, mitra akan berguguran saat masa gratis berakhir.</div>
+</div>
+
+<div class="kolom">
+  <div class="nama">M8 · Latihan kasir — sekali saat pemasangan</div>
+  <div class="layar">
+    <div class="topbar">
+      <div><div class="m-s" style="color:var(--mint)">LATIHAN · TANPA DATA ASLI</div>
+           <div class="i-m" style="color:#fff;font-weight:700">Langkah 2 dari 4</div></div>
+    </div>
+    <div class="pad">
+      <div style="display:flex;gap:6px">
+        <div style="flex:1;height:5px;border-radius:3px;background:var(--mint-redup)"></div>
+        <div style="flex:1;height:5px;border-radius:3px;background:var(--mint-redup)"></div>
+        <div style="flex:1;height:5px;border-radius:3px;background:var(--garis)"></div>
+        <div style="flex:1;height:5px;border-radius:3px;background:var(--garis)"></div>
+      </div>
+
+      <div class="disp-l" style="color:var(--biru-malam);margin-top:26px">COBA PINDAI<br>VOUCHER PALSU</div>
+      <div class="i-l" style="color:var(--redup);margin-top:10px">Pindai QR di bawah ini. Tidak ada yang tercatat — ini hanya latihan.</div>
+
+      <div style="display:flex;justify-content:center;margin-top:24px">
+        <div style="width:180px;height:180px;background:#fff;border:1px solid var(--garis);
+                    border-radius:12px;display:flex;align-items:center;justify-content:center">
+          <div style="width:140px;height:140px;background:
+            repeating-linear-gradient(90deg,#08141F 0 8px,#fff 8px 16px),
+            repeating-linear-gradient(0deg,#08141F 0 8px,transparent 8px 16px);
+            background-blend-mode:multiply;opacity:.85"></div></div></div>
+
+      <div class="kartu" style="margin-top:22px">
+        <div class="m-s" style="color:var(--redup)">SETELAH INI</div>
+        <div class="i-m" style="color:var(--biru-malam);margin-top:6px">Langkah 3: voucher kedaluwarsa. Langkah 4: mode tanpa sinyal.</div></div>
+
+      <div class="tombol" style="position:absolute;bottom:76px;left:0;right:0">Buka pemindai</div>
+      <div class="tap i-s" style="color:var(--redup);position:absolute;bottom:0;left:0;right:0">Lewati latihan</div>
+    </div>
+  </div>
+  <div class="catatan">Empat langkah, sekali seumur pemasangan, dan ketiga skenario galat dilatih sebelum pelanggan pertama datang. Kasir yang pernah melihat layar merah dalam latihan tidak akan panik saat melihatnya sungguhan.</div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "anthropic.claude-code",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "redhat.vscode-yaml",
+    "42Crunch.vscode-openapi",
+    "usernamehw.errorlens"
+  ]
+}

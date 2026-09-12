@@ -1,0 +1,791 @@
+openapi: 3.1.0
+
+info:
+  title: Soerabaja Quest API
+  version: 1.0.0
+  description: |
+    Kontrak API untuk enam permukaan: aplikasi pemain, WebAR, Merchant PWA,
+    Admin CMS, Dashboard, dan Wall Siola.
+
+    ## Prinsip yang mengikat kontrak ini
+
+    1. **Tidak ada jejak koordinat yang disimpan.** `coarse_geo` dikirim hanya saat
+       verifikasi dan tidak pernah dipersistensikan. Yang disimpan hanya fakta bahwa
+       verifikasi di satu POI berhasil.
+    2. **`/missions/{id}/verify` diperlakukan seperti endpoint pembayaran.** Seluruh
+       integritas produk bertumpu padanya. Review kode wajib dua orang.
+    3. **Izin tayang publik tidak pernah disimpulkan dari mode masuk.** Ia selalu
+       berasal dari ConsentRecord per unggahan, default tingkat A.
+    4. **Wall Siola tidak pernah memutuskan sendiri apa yang layak tayang.** Gerbang
+       privasi ditegakkan di server.
+  license:
+    name: Proprietary
+    identifier: LicenseRef-Soerabaja-Quest
+  contact:
+    name: Tim Soerabaja Quest
+
+servers:
+  - url: https://api.soerabajaquest.id/v1
+    description: Produksi
+  - url: https://staging-api.soerabajaquest.id/v1
+    description: Staging
+
+tags:
+  - name: Sesi
+    description: Sesi tamu dan akun terdaftar.
+  - name: Rute
+    description: Daftar rute dan manifest offline pack.
+  - name: Misi
+    description: Verifikasi kehadiran dan penyelesaian misi per POI.
+  - name: Progres
+    description: Progres lintas perangkat, pangkat, posisi gulir.
+  - name: Voucher
+    description: Penerbitan dan penukaran voucher di merchant Tunjungan.
+  - name: UGC & Persetujuan
+    description: Guestbook dan gerbang privasi tiga tingkat.
+  - name: Wall
+    description: Wall Siola dan Soerabaja Feed.
+  - name: Sekolah
+    description: School Mode dan rekap untuk guru.
+  - name: Telemetri
+    description: Enam event produk inti.
+
+security:
+  - SesiPemain: []
+
+paths:
+
+  # ─────────────────────────── SESI ───────────────────────────
+  /session/guest:
+    post:
+      operationId: postSessionGuest
+      tags: [Sesi]
+      summary: Buat sesi tamu terikat perangkat
+      description: |
+        Guest-first. Pemain bisa menyelesaikan seluruh rute tanpa mendaftar.
+        Akun hanya dibutuhkan untuk progres lintas perangkat.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [device_id]
+              properties:
+                device_id: { type: string, maxLength: 128 }
+                platform:  { type: string, enum: [ios, android, web] }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '201':
+          description: Sesi dibuat
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Sesi' }
+        '429': { $ref: '#/components/responses/TerlaluBanyak' }
+
+  /auth/link:
+    post:
+      operationId: postAuthLink
+      tags: [Sesi]
+      summary: Naikkan sesi tamu jadi akun terdaftar, migrasikan progres
+      description: Idempoten. Memanggil ulang dengan token sama tidak menggandakan progres.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id_token]
+              properties:
+                id_token:           { type: string, description: Firebase ID token }
+                usia_dinyatakan:    { type: integer, minimum: 1, maximum: 120, description: Dipakai untuk membatasi tingkat tayang UGC. Tidak diverifikasi; default aman berlaku. }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Sesi' }
+        '409':
+          description: Akun sudah tertaut ke sesi lain
+          content: { application/json: { schema: { $ref: '#/components/schemas/Galat' } } }
+
+  # ─────────────────────────── RUTE ───────────────────────────
+  /routes:
+    get:
+      operationId: getRoutes
+      tags: [Rute]
+      summary: Daftar rute beserta status per POI untuk pemain ini
+      description: |
+        Model hub (Dokumen 07). Seluruh POI dikembalikan beserta statusnya —
+        POI terkunci tetap terlihat lengkap dengan nama dan tanggal. Tepat satu POI
+        berstatus `AKTIF`, dan itulah tujuan CTA "Lanjutkan Misi".
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  routes:
+                    type: array
+                    items: { $ref: '#/components/schemas/Rute' }
+
+  /routes/{slug}/manifest:
+    get:
+      operationId: getRoutesSlugManifest
+      tags: [Rute]
+      summary: Manifest offline pack
+      description: URL bertanda tangan dengan TTL 1 jam. Setiap berkas punya hash SHA-256 untuk verifikasi dan unduh ulang per-berkas.
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+        - name: tier
+          in: query
+          schema: { type: integer, enum: [1, 2, 3] }
+          description: Tier perangkat; menentukan varian aset yang disertakan.
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Manifest' }
+
+  # ─────────────────────────── MISI ───────────────────────────
+  /missions/{id}/verify:
+    post:
+      operationId: postMissionsIdVerify
+      tags: [Misi]
+      summary: Verifikasi kehadiran pemain di POI
+      description: |
+        **Endpoint paling kritikal di seluruh sistem.** Delapan langkah validasi:
+
+        1. Parse payload; tolak format tak dikenal
+        2. Hitung HMAC-SHA256(poi_id + version, secret_poi), bandingkan 8 karakter pertama
+        3. Cek jarak `coarse_geo` ke POI ≤ radius + toleransi 40 m
+        4. Tolak bila `mock_location` true
+        5. Cek plausibilitas: POI sebelumnya selesai ≥ 4 menit lalu
+        6. Cek kecepatan implisit ≤ 60 km/jam antar-POI
+        7. Rate limit 8 percobaan per pemain per 10 menit
+        8. Catat semua penolakan dengan alasan terstruktur
+
+        **Respons penolakan tidak pernah membocorkan ambang batas atau jarak sebenarnya.**
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [metode]
+              properties:
+                metode:        { type: string, enum: [QR, BLE, KODE] }
+                qr_payload:    { type: string, description: 'Format SBQ|<poi_id>|<version>|<hmac_8char>' }
+                kode_manual:   { type: string, minLength: 6, maxLength: 8 }
+                beacon_uuid:   { type: string, format: uuid }
+                coarse_geo:
+                  type: object
+                  description: Presisi 3 desimal. TIDAK dipersistensikan.
+                  properties:
+                    lat: { type: number }
+                    lng: { type: number }
+                mock_location: { type: boolean, default: false }
+                tier:          { type: integer, enum: [1, 2, 3] }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '200':
+          description: Terverifikasi
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mission_id:  { type: string }
+                  state:       { type: string, enum: [IN_PROGRESS] }
+                  tier_served: { type: integer }
+                  scenes:
+                    type: array
+                    items: { $ref: '#/components/schemas/Scene' }
+        '403':
+          description: |
+            Ditolak. Kode alasan sengaja kasar — klien hanya menampilkan pesan ramah
+            tanpa angka jarak.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Galat'
+                  - type: object
+                    properties:
+                      code:
+                        type: string
+                        enum: [BELUM_DI_LOKASI, KODE_TIDAK_SAH, URUTAN_SALAH, TERDETEKSI_TIDAK_WAJAR]
+        '429': { $ref: '#/components/responses/TerlaluBanyak' }
+
+  /missions/{id}/complete:
+    post:
+      operationId: postMissionsIdComplete
+      tags: [Misi]
+      summary: Tandai misi selesai, kembalikan badge
+      description: Menolak lompatan state. Misi harus berstatus IN_PROGRESS atau FALLBACK.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                durasi_ms:   { type: integer }
+                tier_served: { type: integer, enum: [1, 2, 3] }
+                pilihan:
+                  type: object
+                  description: Untuk POI dengan percabangan, mis. dua versi kematian Mallaby.
+                  properties:
+                    kunci:  { type: string, example: mallaby_versi }
+                    nilai:  { type: string, example: A }
+                    alasan: { type: string, maxLength: 280 }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  badge:          { $ref: '#/components/schemas/Badge' }
+                  route_cleared:  { type: boolean }
+                  rank_naik:      { $ref: '#/components/schemas/Rank' }
+
+  # ─────────────────────────── PROGRES ───────────────────────────
+  /players/me/progress:
+    get:
+      operationId: getPlayersMeProgress
+      tags: [Progres]
+      summary: Progres lintas perangkat
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rank:     { $ref: '#/components/schemas/Rank' }
+                  badges:
+                    type: array
+                    items: { $ref: '#/components/schemas/Badge' }
+                  progress:
+                    type: array
+                    items: { $ref: '#/components/schemas/ProgresPOI' }
+
+  /players/me/progress/{poiId}/scroll:
+    put:
+      operationId: putPlayersMeProgressPoiIdScroll
+      tags: [Progres]
+      summary: Simpan posisi gulir Halaman Baca
+      description: |
+        Dokumen 07. Disimpan lokal tiap 2 detik, disinkronkan ke server saat keluar
+        halaman. Di halaman 2.500 piksel, memulihkan posisi menentukan apakah pemain
+        melanjutkan atau menyerah.
+      parameters:
+        - name: poiId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [posisi_px]
+              properties:
+                posisi_px: { type: integer, minimum: 0, maximum: 2500 }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '204': { description: Tersimpan }
+
+  # ─────────────────────────── VOUCHER ───────────────────────────
+  /vouchers/issue:
+    post:
+      operationId: postVouchersIssue
+      tags: [Voucher]
+      summary: Terbitkan voucher saat rute tuntas
+      description: |
+        Hanya pada transisi ke ROUTE_CLEARED. Sekali per pemain per rute per 30 hari.
+        Berlaku 7 hari, bukan hanya hari itu — pemain yang kelelahan boleh kembali besok.
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [route_id]
+              properties:
+                route_id: { type: string }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '201':
+          description: Dibuat
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Voucher' }
+        '409':
+          description: Sudah pernah terbit dalam 30 hari terakhir
+
+  /vouchers/{code}/redeem:
+    post:
+      operationId: postVouchersCodeRedeem
+      tags: [Voucher]
+      summary: Validasi voucher di kasir merchant
+      description: |
+        Dipanggil oleh Merchant PWA, bukan aplikasi pemain. Lock optimistik mencegah
+        penukaran ganda. Target waktu dari tap pemain sampai konfirmasi dua layar
+        di bawah 4 detik.
+
+        Klien merchant wajib menangani mode offline: antre lokal, kirim saat sinyal
+        kembali. Kasir tidak pernah menunggu server di depan pelanggan.
+      security:
+        - SesiMerchant: []
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema: { type: string }
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offline_at: { type: string, format: date-time, description: Waktu penukaran sebenarnya bila diantre offline. }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  state:      { type: string, enum: [REDEEMED] }
+                  penawaran:  { type: string, example: Es kopi susu x 1 }
+                  kode_tampil: { type: string, example: ARE-4193 }
+        '409':
+          description: Sudah ditukar, kedaluwarsa, atau milik merchant lain
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Galat'
+                  - type: object
+                    properties:
+                      code:
+                        type: string
+                        enum: [SUDAH_DITUKAR, KEDALUWARSA, MERCHANT_LAIN]
+                      merchant_benar: { $ref: '#/components/schemas/Merchant' }
+
+  # ─────────────────────────── UGC & PERSETUJUAN ───────────────────────────
+  /consent:
+    post:
+      operationId: postConsent
+      tags: [UGC & Persetujuan]
+      summary: Catat persetujuan tayang
+      description: |
+        **Dokumen 08.** Tiga tingkat:
+
+        - **A** — kutipan teks, nama panggilan, titik, waktu. Tanpa foto orang. Default, tanpa syarat.
+        - **B** — foto tanpa wajah. Butuh usia dinyatakan 18+ dan persetujuan per unggahan.
+        - **C** — wajah dan nama lengkap. Butuh persetujuan tertulis tersimpan.
+
+        Server menolak permintaan tingkat B atau C dari sub-profil School Mode dan dari
+        akun yang menyatakan usia di bawah 18. Tingkat tidak pernah disimpulkan dari
+        mode masuk.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tingkat]
+              properties:
+                tingkat:            { type: string, enum: [A, B, C] }
+                ugc_id:             { type: string }
+                institusi_tampil:   { type: boolean, default: false, description: Harus dipilih terpisah; tidak pernah ikut otomatis di tingkat C. }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '201':
+          description: Dibuat
+          content: { application/json: { schema: { $ref: '#/components/schemas/Persetujuan' } } }
+        '403':
+          description: Tingkat tidak diizinkan untuk akun ini
+
+  /consent/{id}:
+    delete:
+      operationId: deleteConsentId
+      tags: [UGC & Persetujuan]
+      summary: Tarik persetujuan
+      description: Menghapus entri dari Wall dan Feed dalam 15 menit.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '204': { description: Ditarik }
+
+  /ugc:
+    post:
+      operationId: postUgc
+      tags: [UGC & Persetujuan]
+      summary: Kirim entri guestbook
+      description: |
+        Default state PENDING. Deteksi wajah otomatis menahan setiap foto berwajah;
+        kenaikan tingkat hanya lewat tindakan moderator. Sub-profil School Mode hanya
+        bisa menuju rekap kelas, tidak pernah publik.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [poi_id, pesan]
+              properties:
+                poi_id: { type: string }
+                pesan:  { type: string, maxLength: 140 }
+                foto:   { type: string, format: binary }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '202':
+          description: Diterima, masuk antrean moderasi
+          content: { application/json: { schema: { $ref: '#/components/schemas/EntriUGC' } } }
+
+  # ─────────────────────────── WALL ───────────────────────────
+  /wall/feed:
+    get:
+      operationId: getWallFeed
+      tags: [Wall]
+      summary: Entri siap tayang untuk Wall Siola dan Soerabaja Feed
+      description: |
+        Klien Wall hanya menampilkan apa yang dikembalikan endpoint ini; ia tidak
+        pernah memutuskan sendiri apa yang layak tayang. `tayang_after` menegakkan
+        jeda 5 menit antara lolos klasifikasi dan muncul di layar.
+
+        Bila kosong, klien menampilkan arsip minggu lalu — **tidak pernah keadaan kosong**.
+      security:
+        - KunciWall: []
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50, maximum: 200 }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items: { $ref: '#/components/schemas/EntriWall' }
+                  arsip_cadangan:
+                    type: array
+                    items: { $ref: '#/components/schemas/EntriWall' }
+
+  /wall/{id}/hold:
+    post:
+      operationId: postWallIdHold
+      tags: [Wall]
+      summary: Tahan entri sebelum tayang
+      description: Dipanggil Petugas Siola dari tablet. Berlaku seketika.
+      security:
+        - SesiPetugas: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '204': { description: Ditahan }
+
+  # ─────────────────────────── SEKOLAH ───────────────────────────
+  /squads/{id}/report:
+    get:
+      operationId: getSquadsIdReport
+      tags: [Sekolah]
+      summary: Rekap kunjungan untuk guru
+      description: |
+        Agregat tanpa PII. Siswa muncul sebagai Arek-01 sampai Arek-08; penomoran
+        hanya berlaku dalam satu kunjungan dan tidak pernah disimpan sebagai identitas.
+      security:
+        - SesiGuru: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RekapSquad' }
+
+  # ─────────────────────────── TELEMETRI ───────────────────────────
+  /events/batch:
+    post:
+      operationId: postEventsBatch
+      tags: [Telemetri]
+      summary: Kirim event produk secara batch
+      description: |
+        Enam event inti saja. Boleh gagal diam-diam — kegagalan telemetri tidak
+        boleh pernah mengganggu pengalaman pemain.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                events:
+                  type: array
+                  maxItems: 100
+                  items:
+                    type: object
+                    required: [event, ts]
+                    properties:
+                      event:
+                        type: string
+                        enum: [route_started, poi_verified, scene_completed, route_abandoned, voucher_redeemed, share_completed]
+                      ts:      { type: string, format: date-time }
+                      props:   { type: object, additionalProperties: true }
+      responses:
+        '4XX': { $ref: '#/components/responses/GalatUmum' }
+        '202': { description: Diterima }
+
+components:
+
+  securitySchemes:
+    SesiPemain:   { type: http, scheme: bearer, bearerFormat: JWT }
+    SesiMerchant: { type: http, scheme: bearer, bearerFormat: JWT }
+    SesiGuru:     { type: http, scheme: bearer, bearerFormat: JWT }
+    SesiPetugas:  { type: http, scheme: bearer, bearerFormat: JWT }
+    KunciWall:    { type: apiKey, in: header, name: X-Wall-Key, description: Terikat perangkat kiosk. }
+
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: { type: string, format: uuid }
+      description: Wajib untuk semua operasi yang mengubah state dan bisa diulang klien.
+
+  responses:
+    GalatUmum:
+      description: |
+        Permintaan gagal. Pesan selalu ramah untuk ditampilkan ke pengguna dan
+        tidak pernah memuat angka ambang batas, jarak sebenarnya, atau detail internal.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Galat' }
+    TerlaluBanyak:
+      description: Rate limit terlampaui
+      headers:
+        Retry-After: { schema: { type: integer } }
+      content: { application/json: { schema: { $ref: '#/components/schemas/Galat' } } }
+
+  schemas:
+
+    Galat:
+      type: object
+      required: [code, message]
+      properties:
+        code:       { type: string }
+        message:    { type: string, description: Pesan ramah untuk ditampilkan; tidak pernah memuat angka ambang batas atau jarak. }
+        request_id: { type: string }
+
+    Sesi:
+      type: object
+      properties:
+        access_token:  { type: string }
+        expires_in:    { type: integer }
+        player_id:     { type: string }
+        tipe:          { type: string, enum: [GUEST, REGISTERED, SQUAD_MEMBER] }
+        tingkat_maks:  { type: string, enum: [A, B, C], description: Batas atas tingkat tayang untuk akun ini. Default A. }
+
+    Rute:
+      type: object
+      properties:
+        id:          { type: string }
+        slug:        { type: string }
+        judul:       { type: string }
+        durasi_menit: { type: integer }
+        jarak_m:     { type: integer }
+        poi:
+          type: array
+          items: { $ref: '#/components/schemas/POI' }
+
+    POI:
+      type: object
+      properties:
+        id:       { type: string }
+        nama:     { type: string, example: Hotel Majapahit }
+        tanggal:  { type: string, example: 19 September 1945 }
+        urutan:   { type: integer }
+        state:
+          type: string
+          enum: [LOCKED, AKTIF, IN_PROGRESS, PAUSED, FALLBACK, COMPLETED]
+          description: POI LOCKED tetap dikembalikan lengkap dengan nama dan tanggal — kronologi dijaga lewat status, bukan dengan menyembunyikan.
+        indoor:   { type: boolean }
+        badge:    { $ref: '#/components/schemas/Badge' }
+
+    Scene:
+      type: object
+      properties:
+        id:    { type: string }
+        tipe:  { type: string, enum: [LORE, AR, QUIZ, REFLECT] }
+        kelas_layar:
+          type: string
+          enum: [HALAMAN_BACA, LAYAR_AKSI]
+          description: Dokumen 07. LAYAR_AKSI terkunci pada satu viewport, tab bar disembunyikan, timeout menganggur 90 detik.
+        aset_bundle: { type: string }
+        durasi_s:    { type: integer }
+
+    Manifest:
+      type: object
+      properties:
+        versi:       { type: string }
+        total_bytes: { type: integer }
+        berkas:
+          type: array
+          items:
+            type: object
+            properties:
+              path:   { type: string }
+              url:    { type: string, format: uri }
+              sha256: { type: string }
+              bytes:  { type: integer }
+
+    ProgresPOI:
+      type: object
+      properties:
+        poi_id:       { type: string }
+        state:        { type: string }
+        tier_served:  { type: integer }
+        selesai_at:   { type: string, format: date-time }
+        posisi_gulir: { type: integer }
+
+    Badge:
+      type: object
+      properties:
+        id:      { type: string }
+        nama:    { type: string, example: Nyali Wani }
+        diraih:  { type: boolean }
+        aset:    { type: string, format: uri }
+
+    Rank:
+      type: object
+      properties:
+        urutan: { type: integer, minimum: 1, maximum: 5 }
+        nama:
+          type: string
+          enum: [Rekrut Baru, Arek Lapangan, Penjaga Kota, Saksi Sejarah, Cak/Ning Suroboyo]
+
+    Voucher:
+      type: object
+      properties:
+        code:        { type: string }
+        merchant:    { $ref: '#/components/schemas/Merchant' }
+        penawaran:   { type: string }
+        state:       { type: string, enum: [ISSUED, REDEEMED, EXPIRED] }
+        expires_at:  { type: string, format: date-time }
+
+    Merchant:
+      type: object
+      properties:
+        id:      { type: string }
+        nama:    { type: string }
+        alamat:  { type: string }
+        jarak_m: { type: integer }
+        buka:    { type: boolean }
+
+    Persetujuan:
+      type: object
+      properties:
+        id:              { type: string }
+        tingkat:         { type: string, enum: [A, B, C] }
+        diberikan_at:    { type: string, format: date-time }
+        ditarik_at:
+          type: [string, 'null']
+          format: date-time
+
+    EntriUGC:
+      type: object
+      properties:
+        id:        { type: string }
+        state:     { type: string, enum: [PENDING, APPROVED, REJECTED, KELAS_SAJA] }
+        tingkat:   { type: string, enum: [A, B, C] }
+        wajah_terdeteksi: { type: boolean }
+
+    EntriWall:
+      type: object
+      properties:
+        id:           { type: string }
+        tingkat:      { type: string, enum: [A, B, C] }
+        pesan:        { type: string }
+        nama_tampil:
+          type: string
+          description: >-
+            Nama panggilan pada tingkat A, nama depan pada tingkat B,
+            nama lengkap pada tingkat C.
+        foto_url:
+          type: [string, 'null']
+          format: uri
+          description: Selalu null pada tingkat A.
+        poi:          { type: string }
+        tayang_after: { type: string, format: date-time }
+        state:        { type: string, enum: [QUEUED, HELD, LIVE, WITHDRAWN] }
+
+    RekapSquad:
+      type: object
+      properties:
+        squad:        { type: string, example: 8B-2 }
+        tanggal:      { type: string, format: date }
+        selesai_rasio: { type: number }
+        menit_lapangan: { type: integer }
+        siswa:
+          type: array
+          items:
+            type: object
+            properties:
+              alias:      { type: string, example: Arek-04 }
+              kuis_pra:   { type: integer }
+              kuis_pasca: { type: integer }
+              pilihan:    { type: string }
+              refleksi:   { type: boolean }

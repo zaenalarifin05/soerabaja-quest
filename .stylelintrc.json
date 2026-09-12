@@ -1,0 +1,26 @@
+{
+  "rules": {
+    "color-no-hex": [true, {
+      "message": "Nilai heksadesimal dilarang di komponen. Pakai token semantik: var(--semantik-permukaan-2), bukan #14456F. Lihat docs/03-Design-System.md bagian 2.4."
+    }],
+    "color-named": ["never", {
+      "message": "Nama warna CSS dilarang. Pakai token semantik."
+    }],
+    "declaration-property-value-disallowed-list": {
+      "/^(color|background|background-color|border|border-color|fill|stroke|box-shadow)$/": [
+        "/^rgb/", "/^hsl/",
+        "/^var\\(--primitif-/"
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "files": ["packages/tokens/**/*", "**/build/**/*", "**/*.generated.css"],
+      "rules": {
+        "color-no-hex": null,
+        "color-named": null,
+        "declaration-property-value-disallowed-list": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" },
+  "stylelint.validate": ["css", "scss", "postcss"],
+  "css.validate": false,
+  "files.eol": "\n",
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json": "packages/api-contract/openapi.yaml"
+  }
+}

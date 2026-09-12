@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — Layar Mobile Sisa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Courier+Prime:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --hitam:#08141F;
+    --mint:#4FE68C; --mint-redup:#2FA862;
+    --kertas:#E3D6B8; --kertas-tua:#CDBB95; --tinta:#241B12; --sepia:#7A6144; --merah:#9E2B22;
+    --bahaya:#E5533D; --redup:#7A8592;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#DCE1E6;font-family:var(--ui);padding:56px 40px}
+  h1.board{font-family:var(--disp);font-size:40px;letter-spacing:-.02em;color:var(--hitam);margin-bottom:8px}
+  p.boardsub{font-size:15px;color:#5A6570;margin-bottom:40px;max-width:760px;line-height:1.6}
+  .rak{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+  .kolom{display:flex;flex-direction:column;gap:12px}
+  .nama{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:#5A6570}
+  .layar{width:390px;height:844px;overflow:hidden;position:relative;border-radius:22px;
+         box-shadow:0 8px 28px rgba(8,20,31,.18)}
+  .layar.share{height:694px}
+  .safe{position:absolute;inset:47px 28px 34px 28px}          /* safe area iOS */
+  .disp-l{font-family:var(--disp);font-size:32px;line-height:34px;letter-spacing:-.01em}
+  .disp-xl{font-family:var(--disp);font-size:40px;line-height:40px;letter-spacing:-.02em}
+  .j-m{font-size:24px;line-height:30px;font-weight:700;letter-spacing:-.01em}
+  .j-s{font-size:20px;line-height:26px;font-weight:700}
+  .i-l{font-size:17px;line-height:27px}
+  .i-m{font-size:15px;line-height:23px}
+  .i-s{font-size:13px;line-height:19px;font-weight:500}
+  .m-m{font-family:var(--mono);font-size:15px;line-height:24px}
+  .m-s{font-family:var(--mono);font-size:12px;line-height:18px;letter-spacing:.02em}
+  .cta{height:56px;border-radius:12px;background:var(--mint);color:var(--hitam);
+       font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  .cta.ghost{background:none;border:1.5px solid var(--mint);color:var(--mint)}
+  .tap{min-height:48px;display:flex;align-items:center;justify-content:center}  /* target sentuh */
+</style>
+</head>
+<body>
+
+<h1 class="board">LAYAR MOBILE SISA · S10–S16</h1>
+<p class="boardsub">Dibangun dengan token yang identik dengan file Figma <code>JONGPNmzp5eSSKrrk2GvJx</code>. Semua layar di sini sudah menerapkan perbaikan backlog P0: safe area iOS (47pt atas, 34pt bawah) dan target sentuh minimum 48dp pada setiap kontrol teks.</p>
+
+<div class="rak">
+
+<!-- ══ S10 · PROFIL & KOLEKSI ══ -->
+<div class="kolom">
+  <div class="nama">S10 · Profil &amp; Koleksi Badge</div>
+  <div class="layar" style="background:var(--biru-malam)">
+    <div class="safe">
+      <div style="display:flex;gap:16px;align-items:center">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--biru);border:2px solid rgba(79,230,140,.6)"></div>
+        <div>
+          <div class="disp-l" style="color:var(--putih)">CAK ADI</div>
+          <div class="i-s" style="color:var(--redup);margin-top:2px">Arek Suroboyo · sejak Sept 2027</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:24px">
+        <div style="flex:1;background:rgba(20,69,111,.45);border-radius:12px;padding:14px;text-align:center">
+          <div class="j-m" style="color:var(--putih)">3</div><div class="m-s" style="color:var(--redup)">BADGE</div></div>
+        <div style="flex:1;background:rgba(20,69,111,.45);border-radius:12px;padding:14px;text-align:center">
+          <div class="j-m" style="color:var(--putih)">1</div><div class="m-s" style="color:var(--redup)">RUTE</div></div>
+        <div style="flex:1;background:rgba(20,69,111,.45);border-radius:12px;padding:14px;text-align:center">
+          <div class="j-m" style="color:var(--putih)">4,1</div><div class="m-s" style="color:var(--redup)">KM</div></div>
+      </div>
+
+      <div class="m-s" style="color:var(--mint);margin:26px 0 12px">KOLEKSI TOKOH · 3 DARI 10</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+        <div style="aspect-ratio:1;border-radius:14px;background:rgba(212,162,47,.14);border:2px solid var(--emas);display:flex;align-items:center;justify-content:center;text-align:center" class="m-s"><span style="color:var(--emas)">NYALI<br>WANI</span></div>
+        <div style="aspect-ratio:1;border-radius:14px;background:rgba(212,162,47,.14);border:2px solid var(--emas);display:flex;align-items:center;justify-content:center;text-align:center" class="m-s"><span style="color:var(--emas)">DETEKTIF<br>SEJARAH</span></div>
+        <div style="aspect-ratio:1;border-radius:14px;background:rgba(212,162,47,.14);border:2px solid var(--emas);display:flex;align-items:center;justify-content:center;text-align:center" class="m-s"><span style="color:var(--emas)">PAHLAWAN<br>SUROBOYO</span></div>
+        <div style="aspect-ratio:1;border-radius:14px;background:rgba(20,69,111,.35);border:1px solid rgba(199,210,218,.18);display:flex;align-items:center;justify-content:center" class="disp-l"><span style="color:var(--redup)">?</span></div>
+        <div style="aspect-ratio:1;border-radius:14px;background:rgba(20,69,111,.35);border:1px solid rgba(199,210,218,.18);display:flex;align-items:center;justify-content:center" class="disp-l"><span style="color:var(--redup)">?</span></div>
+        <div style="aspect-ratio:1;border-radius:14px;background:rgba(20,69,111,.35);border:1px solid rgba(199,210,218,.18);display:flex;align-items:center;justify-content:center" class="disp-l"><span style="color:var(--redup)">?</span></div>
+      </div>
+
+      <div class="i-m" style="color:var(--perak);position:absolute;bottom:86px;left:0;right:0">Pitung tokoh liyane isih ngenteni nang Peneleh, Ampel, karo Kota Lama.</div>
+      <div class="cta ghost" style="position:absolute;bottom:0;left:0;right:0">Lihat rute berikutnya</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S11 · RIWAYAT VOUCHER ══ -->
+<div class="kolom">
+  <div class="nama">S11 · Riwayat Voucher</div>
+  <div class="layar" style="background:var(--biru-malam)">
+    <div class="safe">
+      <div class="m-s" style="color:var(--mint)">DOMPET</div>
+      <div class="disp-l" style="color:var(--putih);margin:6px 0 26px">VOUCHERKU</div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:rgba(20,69,111,.45);border:1px solid rgba(79,230,140,.45);border-radius:12px;padding:16px 18px">
+          <div class="m-s" style="color:var(--mint)">AKTIF · SISA 6 HARI</div>
+          <div class="j-s" style="color:var(--putih);margin-top:4px">Kopi Tunjungan</div>
+          <div class="i-s" style="color:var(--perak);margin-top:2px">Es kopi susu × 1 · 200 m</div>
+        </div>
+        <div style="background:rgba(20,69,111,.45);border:1px solid rgba(122,133,146,.45);border-radius:12px;padding:16px 18px">
+          <div class="m-s" style="color:var(--redup)">TERTUKAR · 12 NOV 2027</div>
+          <div class="j-s" style="color:var(--perak);margin-top:4px">Warung Mbois</div>
+          <div class="i-s" style="color:var(--redup);margin-top:2px">Diskon 30% makan</div>
+        </div>
+        <div style="background:rgba(20,69,111,.45);border:1px solid rgba(229,83,61,.45);border-radius:12px;padding:16px 18px">
+          <div class="m-s" style="color:var(--bahaya)">KEDALUWARSA · 3 NOV 2027</div>
+          <div class="j-s" style="color:var(--perak);margin-top:4px">Toko Oen</div>
+          <div class="i-s" style="color:var(--redup);margin-top:2px">Es krim klasik</div>
+        </div>
+      </div>
+
+      <div class="i-s" style="color:var(--redup);margin-top:26px">Voucher terbit sekali per rute setiap 30 hari, berlaku 7 hari sejak rute tuntas.</div>
+      <div class="tap i-s" style="color:var(--mint);position:absolute;bottom:0;left:0;right:0">Syarat &amp; ketentuan</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S12 · LOOK UP MOMENT ══ -->
+<div class="kolom">
+  <div class="nama">S12 · Momen Lihat Ke Atas (B12)</div>
+  <div class="layar" style="background:var(--hitam);display:flex;align-items:center;justify-content:center">
+    <div class="disp-l" style="color:var(--putih);text-align:center;padding:0 44px">ANGKAT<br>KEPALAMU.<br>TIANG ITU MASIH<br>ADA DI SANA.</div>
+    <div class="m-s" style="color:#3A4550;position:absolute;bottom:44px;left:0;right:0;text-align:center">LAYAR AKTIF LAGI DALAM 3 DETIK</div>
+  </div>
+</div>
+
+<!-- ══ S13 · SCHOOL MODE ══ -->
+<div class="kolom">
+  <div class="nama">S13 · School Mode — Layar Guru</div>
+  <div class="layar" style="background:var(--biru-malam)">
+    <div class="safe">
+      <div class="m-s" style="color:var(--mint)">MODE SEKOLAH · PENDAMPING</div>
+      <div class="disp-l" style="color:var(--putih);margin:6px 0 4px">SQUAD 8B-2</div>
+      <div class="i-s" style="color:var(--redup);margin-bottom:22px">SMPN 6 Surabaya · Bu Rina · rute pendek 75 menit</div>
+
+      <div style="background:rgba(20,69,111,.45);border-radius:12px;padding:16px 18px;margin-bottom:18px">
+        <div class="m-s" style="color:var(--redup)">PROGRES SQUAD</div>
+        <div class="j-m" style="color:var(--putih);margin-top:4px">Titik 2 dari 3</div>
+        <div style="height:6px;border-radius:3px;background:rgba(199,210,218,.2);margin-top:12px">
+          <div style="width:66%;height:100%;border-radius:3px;background:var(--mint)"></div></div>
+      </div>
+
+      <div class="m-s" style="color:var(--mint);margin-bottom:10px">6 SISWA · TANPA NAMA ASLI</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+        <div style="background:rgba(20,69,111,.35);border-radius:10px;padding:12px 14px"><div class="i-s" style="color:var(--putih)">Arek-01</div><div class="m-s" style="color:var(--mint)">2/3 SELESAI</div></div>
+        <div style="background:rgba(20,69,111,.35);border-radius:10px;padding:12px 14px"><div class="i-s" style="color:var(--putih)">Arek-02</div><div class="m-s" style="color:var(--mint)">2/3 SELESAI</div></div>
+        <div style="background:rgba(20,69,111,.35);border-radius:10px;padding:12px 14px"><div class="i-s" style="color:var(--putih)">Arek-03</div><div class="m-s" style="color:var(--mint)">2/3 SELESAI</div></div>
+        <div style="background:rgba(20,69,111,.35);border-radius:10px;padding:12px 14px"><div class="i-s" style="color:var(--putih)">Arek-04</div><div class="m-s" style="color:var(--emas)">1/3 TERTINGGAL</div></div>
+        <div style="background:rgba(20,69,111,.35);border-radius:10px;padding:12px 14px"><div class="i-s" style="color:var(--putih)">Arek-05</div><div class="m-s" style="color:var(--mint)">2/3 SELESAI</div></div>
+        <div style="background:rgba(20,69,111,.35);border-radius:10px;padding:12px 14px"><div class="i-s" style="color:var(--putih)">Arek-06</div><div class="m-s" style="color:var(--mint)">2/3 SELESAI</div></div>
+      </div>
+
+      <div class="i-s" style="color:var(--redup);position:absolute;bottom:86px">Arek-04 tertinggal di Jembatan Merah. Ketuk untuk mengirim penanda kumpul.</div>
+      <div class="cta" style="position:absolute;bottom:0;left:0;right:0">Panggil semua ke titik kumpul</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S14 · KARTU SHARE 9:16 ══ -->
+<div class="kolom">
+  <div class="nama">S14 · Kartu Share 9:16 (B15)</div>
+  <div class="layar share" style="background:linear-gradient(160deg,#14456F 0%,#0E2438 55%,#08141F 100%)">
+    <div style="position:absolute;inset:40px 32px">
+      <div class="m-s" style="color:var(--mint)">SOERABAJA · URBAN BATTLEFIELD QUEST</div>
+      <div class="disp-xl" style="color:var(--putih);margin-top:10px">NAPAK TILAS 45<br>TUNTAS</div>
+
+      <div style="display:flex;gap:-10px;margin-top:30px">
+        <div style="width:66px;height:66px;border-radius:50%;border:2px solid var(--emas);background:rgba(212,162,47,.16)"></div>
+        <div style="width:66px;height:66px;border-radius:50%;border:2px solid var(--emas);background:rgba(212,162,47,.16);margin-left:-12px"></div>
+        <div style="width:66px;height:66px;border-radius:50%;border:2px solid var(--emas);background:rgba(212,162,47,.16);margin-left:-12px"></div>
+      </div>
+
+      <div style="margin-top:28px;display:flex;gap:26px">
+        <div><div class="disp-l" style="color:var(--putih)">4,1</div><div class="m-s" style="color:var(--redup)">KILOMETER</div></div>
+        <div><div class="disp-l" style="color:var(--putih)">3:18</div><div class="m-s" style="color:var(--redup)">JAM</div></div>
+        <div><div class="disp-l" style="color:var(--putih)">3</div><div class="m-s" style="color:var(--redup)">TANGGAL</div></div>
+      </div>
+
+      <div class="i-l" style="color:var(--perak);margin-top:30px;border-left:2px solid var(--merah);padding-left:14px">
+        “Bendera iku medun dhewe, tanpa préntah sopo-sopo.”</div>
+
+      <div style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-between;align-items:flex-end">
+        <div class="m-s" style="color:var(--redup)">19 SEPT · 30 OKT · 10 NOV 1945<br>SURABAYA</div>
+        <div style="width:64px;height:64px;background:var(--putih);border-radius:8px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S15 · STATE: VERIFIKASI GAGAL ══ -->
+<div class="kolom">
+  <div class="nama">S15 · State — Verifikasi Lokasi Gagal</div>
+  <div class="layar" style="background:var(--hitam)">
+    <div style="position:absolute;inset:0 0 244px 0;background:linear-gradient(180deg,#26343F 0%,#0D1721 100%)"></div>
+    <div style="position:absolute;top:190px;left:75px;width:240px;height:240px;border:3px solid var(--bahaya);border-radius:6px"></div>
+    <div class="m-s" style="position:absolute;top:444px;left:0;right:0;text-align:center;color:var(--bahaya)">QR TERBACA · LOKASI TIDAK COCOK</div>
+
+    <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(8,20,31,.94);border-radius:20px 20px 0 0;padding:24px 28px 34px">
+      <div class="m-s" style="color:var(--bahaya)">TIDAK BISA DIVERIFIKASI</div>
+      <div class="j-m" style="color:var(--putih);margin-top:6px">Kamu belum sampai di titiknya</div>
+      <div class="i-m" style="color:var(--perak);margin-top:8px">Standee-nya ada di depan Hotel Majapahit, sisi trotoar Jalan Tunjungan. Misi terbuka setelah kamu berdiri di sana.</div>
+      <div class="tap i-s" style="color:var(--mint);justify-content:flex-start;margin-top:4px">Tunjukkan arah ke standee</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ S16 · STATE: OFFLINE ══ -->
+<div class="kolom">
+  <div class="nama">S16 · State — Mode Offline</div>
+  <div class="layar" style="background:var(--biru-malam)">
+    <div style="position:absolute;top:47px;left:0;right:0;background:rgba(212,162,47,.16);border-bottom:1px solid rgba(212,162,47,.5);padding:12px 28px">
+      <div class="m-s" style="color:var(--emas)">MODE OFFLINE · PAKET RUTE TERSIMPAN</div>
+    </div>
+    <div class="safe" style="top:110px">
+      <div class="disp-l" style="color:var(--putih)">SINYAL HILANG.<br>MISI JALAN TERUS.</div>
+      <div class="i-l" style="color:var(--perak);margin-top:16px">Semua konten rute sudah ada di HP-mu. Scan QR, lore, dan AR tetap jalan normal.</div>
+
+      <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px">
+        <div style="background:rgba(20,69,111,.45);border-radius:12px;padding:16px 18px">
+          <div class="m-s" style="color:var(--mint)">TETAP BISA</div>
+          <div class="i-m" style="color:var(--putih);margin-top:4px">Scan QR · Lore · AR · Badge · Peta rute</div></div>
+        <div style="background:rgba(20,69,111,.45);border-radius:12px;padding:16px 18px">
+          <div class="m-s" style="color:var(--emas)">MENUNGGU SINYAL</div>
+          <div class="i-m" style="color:var(--perak);margin-top:4px">Guestbook · Voucher · Papan peringkat</div></div>
+      </div>
+
+      <div class="i-s" style="color:var(--redup);position:absolute;bottom:86px">2 progres tersimpan lokal. Otomatis tersinkron saat sinyal kembali.</div>
+      <div class="cta" style="position:absolute;bottom:0;left:0;right:0">Lanjut misi</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

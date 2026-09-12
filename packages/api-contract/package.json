@@ -1,0 +1,12 @@
+{
+  "name": "@soerabaja/api-contract",
+  "version": "1.0.0",
+  "main": "generated/types.ts",
+  "scripts": {
+    "generate": "openapi-typescript openapi.yaml -o generated/types.ts",
+    "lint": "redocly lint openapi.yaml"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.4.0"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "soerabaja-quest",
+  "private": true,
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "bootstrap": "pnpm install && pnpm tokens && pnpm api:types",
+    "tokens": "pnpm --filter @soerabaja/tokens build",
+    "api:lint": "redocly lint packages/api-contract/openapi.yaml",
+    "api:types": "pnpm --filter @soerabaja/api-contract generate",
+    "lint:css": "stylelint \"apps/**/*.css\" \"packages/ui/**/*.css\"",
+    "dev": "pnpm --filter @soerabaja/web dev"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^1.25.0",
+    "prettier": "^3.3.0",
+    "stylelint": "^16.10.0"
+  }
+}

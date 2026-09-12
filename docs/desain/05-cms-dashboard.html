@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — Admin CMS & Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --emas-tua:#8A6A16; --hitam:#08141F;
+    --mint:#4FE68C; --mint-tua:#1E8B4E;
+    --kertas:#E3D6B8; --sepia:#7A6144; --merah:#9E2B22;
+    --bahaya:#E5533D; --redup:#6E7B88; --garis:#DCE3E8; --lembut:#F6F8FA;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#C9D1D8;font-family:var(--ui);padding:56px 40px}
+  h1.board{font-family:var(--disp);font-size:44px;letter-spacing:-.02em;color:var(--hitam)}
+  .boardsub{font-size:15px;color:#4A5560;margin:10px 0 20px;max-width:900px;line-height:1.65}
+  .fixnote{font-family:var(--mono);font-size:12px;line-height:1.9;color:#4A5560;background:#E4EAEF;
+           border-left:3px solid var(--mint-tua);padding:14px 18px;max-width:900px;margin-bottom:40px}
+  .seksi{font-family:var(--disp);font-size:28px;color:var(--hitam);margin:48px 0 8px}
+  .nama{font-family:var(--mono);font-size:12px;color:#4A5560;margin-bottom:10px}
+  .catatan{font-size:13px;line-height:1.6;color:#3E4A55;border-left:2px solid #98A4AE;
+           padding-left:12px;max-width:900px;margin:14px 0 40px}
+  .layar{width:1280px;height:820px;position:relative;overflow:hidden;border-radius:12px;
+         background:#fff;box-shadow:0 8px 28px rgba(8,20,31,.2)}
+  /* kerangka aplikasi desktop */
+  .sidebar{position:absolute;left:0;top:0;bottom:0;width:236px;background:var(--biru-malam);padding:22px 18px}
+  .navitem{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:9px;
+           font-size:14px;font-weight:500;color:var(--perak);margin-bottom:3px}
+  .navitem.on{background:rgba(79,230,140,.14);color:var(--mint);font-weight:700}
+  .badge{font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:20px;background:var(--emas);color:#3D2E08}
+  .utama{position:absolute;left:236px;right:0;top:0;bottom:0;background:var(--lembut);overflow:hidden}
+  .kop{height:70px;border-bottom:1px solid var(--garis);background:#fff;padding:0 30px;
+       display:flex;align-items:center;justify-content:space-between}
+  .isi{padding:26px 30px}
+  .m-s{font-family:var(--mono);font-size:11px;letter-spacing:.05em;line-height:16px}
+  .m-m{font-family:var(--mono);font-size:13px;line-height:20px}
+  .j-l{font-size:26px;line-height:32px;font-weight:800;letter-spacing:-.01em}
+  .j-m{font-size:19px;line-height:26px;font-weight:700}
+  .j-s{font-size:15px;line-height:22px;font-weight:700}
+  .i-m{font-size:14px;line-height:22px}
+  .i-s{font-size:12.5px;line-height:19px}
+  .kartu{background:#fff;border:1px solid var(--garis);border-radius:11px}
+  .btn{height:42px;padding:0 20px;border-radius:9px;font-size:14px;font-weight:600;
+       display:inline-flex;align-items:center;gap:8px;justify-content:center}
+  .btn.pri{background:var(--mint-tua);color:#fff}
+  .btn.sek{background:#fff;border:1.5px solid var(--garis);color:var(--biru-malam)}
+  .btn.kunci{background:#E9EDF0;color:#9AA6B1;border:1.5px dashed #C2CCD5}
+  .btn.tolak{background:#fff;border:1.5px solid var(--bahaya);color:var(--bahaya)}
+  .pil{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:20px;
+       font-family:var(--mono);font-size:11px;letter-spacing:.04em}
+  .tabel{width:100%;border-collapse:collapse;font-size:13.5px}
+  .tabel th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.05em;
+            color:var(--redup);font-weight:400;padding:10px 14px;border-bottom:1px solid var(--garis)}
+  .tabel td{padding:13px 14px;border-bottom:1px solid var(--garis);color:var(--biru-malam)}
+</style>
+</head>
+<body>
+
+<h1 class="board">ADMIN CMS &amp; DASHBOARD</h1>
+<p class="boardsub">Dua permukaan internal pada 1280 piksel. Tidak dipakai di lapangan, tapi CMS memegang satu mekanisme yang bukan kosmetik: gerbang persetujuan sejarawan yang mencegah naskah tayang tanpa reviewer dan tanpa sumber.</p>
+<div class="fixnote">
+KENDALA BERUBAH DARI PERMUKAAN LAPANGAN<br><br>
+LAYAR LEBAR, MOUSE, PENGGUNA TERLATIH, SESI PANJANG — kepadatan informasi naik, ukuran tombol turun<br>
+TIDAK ADA MODE GELAP — kurator bekerja di kantor, siang hari, berjam-jam<br>
+COURIER PRIME UNTUK ID DAN METADATA — tetap dipakai, perannya konsisten dengan aplikasi pemain<br><br>
+ATURAN YANG DIPAKSAKAN OLEH SISTEM, BUKAN OLEH DISIPLIN ORANG<br>
+Naskah sejarah tidak bisa tayang tanpa field sumber terisi<br>
+Naskah sejarah tidak bisa tayang tanpa reviewer sejarawan menyetujui<br>
+UGC dari akun di bawah 13 tahun masuk jalur terpisah dan tidak pernah tayang publik<br>
+Aset per POI diblokir di 12 MB — anggaran terlihat saat mengunggah, bukan saat rilis
+</div>
+
+<!-- ═══════════ CMS ═══════════ -->
+<div class="seksi">ADMIN CMS · KURATOR &amp; MODERATOR</div>
+
+<div class="nama">C1 · Beranda — antrean kerja, bukan ringkasan angka</div>
+<div class="layar">
+  <div class="sidebar">
+    <div class="m-s" style="color:var(--mint);margin-bottom:22px">SOERABAJA QUEST · CMS</div>
+    <div class="navitem on">Antrean kerja <span class="badge">9</span></div>
+    <div class="navitem">Naskah &amp; lore</div>
+    <div class="navitem">Titik &amp; geofence</div>
+    <div class="navitem">Aset AR</div>
+    <div class="navitem">Moderasi UGC <span class="badge">24</span></div>
+    <div class="navitem">Mitra &amp; voucher</div>
+    <div class="navitem">Analitik</div>
+    <div style="position:absolute;bottom:22px;left:18px;right:18px">
+      <div style="border-top:1px solid rgba(199,210,218,.2);padding-top:16px">
+        <div class="i-s" style="color:#fff;font-weight:600">Dwi Prasetyo</div>
+        <div class="m-s" style="color:var(--redup)">CONTENT LEAD</div></div></div>
+  </div>
+  <div class="utama">
+    <div class="kop">
+      <div class="j-m" style="color:var(--biru-malam)">Antrean kerja</div>
+      <div style="display:flex;gap:10px"><div class="btn sek">Filter</div><div class="btn pri">Naskah baru</div></div>
+    </div>
+    <div class="isi">
+      <div style="display:flex;gap:16px;margin-bottom:24px">
+        <div class="kartu" style="flex:1;padding:18px 20px;border-left:4px solid var(--bahaya)">
+          <div class="m-s" style="color:var(--bahaya)">TERBLOKIR TAYANG</div>
+          <div class="j-l" style="color:var(--biru-malam);margin-top:4px">3</div>
+          <div class="i-s" style="color:var(--redup)">Naskah tanpa sumber atau tanpa reviewer</div></div>
+        <div class="kartu" style="flex:1;padding:18px 20px;border-left:4px solid var(--emas)">
+          <div class="m-s" style="color:var(--emas-tua)">MENUNGGU SEJARAWAN</div>
+          <div class="j-l" style="color:var(--biru-malam);margin-top:4px">6</div>
+          <div class="i-s" style="color:var(--redup)">Rata-rata tunggu 4 hari</div></div>
+        <div class="kartu" style="flex:1;padding:18px 20px;border-left:4px solid var(--biru)">
+          <div class="m-s" style="color:var(--biru)">UGC MENUNGGU MODERASI</div>
+          <div class="j-l" style="color:var(--biru-malam);margin-top:4px">24</div>
+          <div class="i-s" style="color:var(--redup)">3 di antaranya jalur anak</div></div>
+        <div class="kartu" style="flex:1;padding:18px 20px;border-left:4px solid var(--mint-tua)">
+          <div class="m-s" style="color:var(--mint-tua)">TAYANG BULAN INI</div>
+          <div class="j-l" style="color:var(--biru-malam);margin-top:4px">18</div>
+          <div class="i-s" style="color:var(--redup)">Semua tervalidasi</div></div>
+      </div>
+
+      <div class="kartu">
+        <table class="tabel">
+          <tr><th style="width:34%">NASKAH</th><th>TITIK</th><th>SUMBER</th><th>REVIEWER</th><th>STATUS</th><th></th></tr>
+          <tr><td><b>Kemarahan di Hotel Yamato</b><div class="m-s" style="color:var(--redup)">LORE-001-P1</div></td>
+              <td>Hotel Majapahit</td>
+              <td><span class="pil" style="background:#E6F6EC;color:var(--mint-tua)">ANRI · LENGKAP</span></td>
+              <td>Dr. Retno W.</td>
+              <td><span class="pil" style="background:#E6F6EC;color:var(--mint-tua)">TAYANG</span></td>
+              <td style="text-align:right"><span class="i-s" style="color:var(--redup)">Lihat</span></td></tr>
+          <tr><td><b>Enam minggu di antara dua peristiwa</b><div class="m-s" style="color:var(--redup)">AUDIO-003</div></td>
+              <td>Interstitial 1→2</td>
+              <td><span class="pil" style="background:#FDECEA;color:var(--bahaya)">KOSONG</span></td>
+              <td><span class="i-s" style="color:var(--redup)">—</span></td>
+              <td><span class="pil" style="background:#FDECEA;color:var(--bahaya)">TERBLOKIR</span></td>
+              <td style="text-align:right"><span class="i-s" style="color:var(--biru)">Lengkapi</span></td></tr>
+          <tr><td><b>Dua versi kematian Mallaby</b><div class="m-s" style="color:var(--redup)">LORE-002-A</div></td>
+              <td>Jembatan Merah</td>
+              <td><span class="pil" style="background:#E6F6EC;color:var(--mint-tua)">NIMH + ANRI</span></td>
+              <td>Prof. Bambang S.</td>
+              <td><span class="pil" style="background:#FDF4E3;color:var(--emas-tua)">MENUNGGU · 6 HARI</span></td>
+              <td style="text-align:right"><span class="i-s" style="color:var(--biru)">Ingatkan</span></td></tr>
+          <tr><td><b>Ultimatum Mansergh</b><div class="m-s" style="color:var(--redup)">LORE-003-P2</div></td>
+              <td>Tugu Pahlawan</td>
+              <td><span class="pil" style="background:#FDF4E3;color:var(--emas-tua)">1 DARI 2 TERISI</span></td>
+              <td>Dr. Retno W.</td>
+              <td><span class="pil" style="background:#FDF4E3;color:var(--emas-tua)">REVISI DIMINTA</span></td>
+              <td style="text-align:right"><span class="i-s" style="color:var(--biru)">Buka</span></td></tr>
+          <tr><td><b>Orasi 10 November — naskah rekonstruksi</b><div class="m-s" style="color:var(--redup)">AUDIO-006</div></td>
+              <td>Tugu Pahlawan</td>
+              <td><span class="pil" style="background:#FDECEA;color:var(--bahaya)">LISENSI BELUM ADA</span></td>
+              <td><span class="i-s" style="color:var(--redup)">—</span></td>
+              <td><span class="pil" style="background:#FDECEA;color:var(--bahaya)">TERBLOKIR</span></td>
+              <td style="text-align:right"><span class="i-s" style="color:var(--biru)">Lihat izin</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="catatan">Beranda berupa antrean kerja, bukan dasbor angka. Kurator membuka layar ini untuk tahu apa yang harus dikerjakan hari ini — bukan untuk mengagumi grafik. Kolom sumber dan reviewer sengaja diletakkan di baris utama, bukan disembunyikan di halaman detail, supaya kekosongan terlihat tanpa perlu diklik.</div>
+
+<div class="nama">C2 · Editor naskah — sumber melekat pada paragraf yang didukungnya</div>
+<div class="layar">
+  <div class="sidebar">
+    <div class="m-s" style="color:var(--mint);margin-bottom:22px">SOERABAJA QUEST · CMS</div>
+    <div class="navitem">Antrean kerja <span class="badge">9</span></div>
+    <div class="navitem on">Naskah &amp; lore</div>
+    <div class="navitem">Titik &amp; geofence</div>
+    <div class="navitem">Aset AR</div>
+    <div class="navitem">Moderasi UGC <span class="badge">24</span></div>
+    <div class="navitem">Mitra &amp; voucher</div>
+    <div class="navitem">Analitik</div>
+  </div>
+  <div class="utama">
+    <div class="kop">
+      <div>
+        <div class="j-m" style="color:var(--biru-malam)">Kemarahan di Hotel Yamato</div>
+        <div class="m-s" style="color:var(--redup)">LORE-001-P1 · HOTEL MAJAPAHIT · 19 SEPT 1945</div></div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="btn sek">Pratinjau di HP</div>
+        <div class="btn kunci">🔒 Tayang</div></div>
+    </div>
+    <div class="isi" style="display:flex;gap:24px">
+      <div style="flex:1.6">
+        <div class="kartu" style="padding:26px 30px">
+          <div class="m-s" style="color:var(--redup);margin-bottom:14px">LAYAR 1 DARI 3 · 68 / 140 KATA</div>
+          <div style="font-size:17px;line-height:27px;color:var(--biru-malam)">
+            W.V.C. Ploegman mengibarkan bendera Belanda di tiang lantai atas hotel tanpa izin siapa pun.
+            <span style="background:#E6F6EC;border-bottom:2px solid var(--mint-tua);padding:1px 2px">Residen Soedirman datang bernegosiasi. Perundingan buntu dan berakhir ricuh.</span>
+          </div>
+          <div style="margin-top:10px;padding:12px 16px;background:#F0F8F3;border-left:3px solid var(--mint-tua);border-radius:0 8px 8px 0">
+            <div class="m-s" style="color:var(--mint-tua)">SUMBER TERLAMPIR PADA KALIMAT INI</div>
+            <div class="i-s" style="color:var(--biru-malam);margin-top:3px">ANRI, Arsip Kementerian Penerangan, berkas 1945/SBY/112 · hlm. 4–6</div></div>
+
+          <div style="font-size:17px;line-height:27px;color:var(--biru-malam);margin-top:20px">
+            <span style="background:#FDECEA;border-bottom:2px solid var(--bahaya);padding:1px 2px">Hariyono dan Koesno Wibowo naik ke atap pada pukul 21.00.</span>
+          </div>
+          <div style="margin-top:10px;padding:12px 16px;background:#FDF1EF;border-left:3px solid var(--bahaya);border-radius:0 8px 8px 0">
+            <div class="m-s" style="color:var(--bahaya)">SUMBER BELUM DILAMPIRKAN</div>
+            <div class="i-s" style="color:var(--biru-malam);margin-top:3px">Klaim waktu spesifik memerlukan sumber. Naskah tidak dapat tayang sampai ini terisi.</div>
+            <div class="btn sek" style="height:34px;font-size:13px;margin-top:10px">Lampirkan sumber</div></div>
+        </div>
+
+        <div class="kartu" style="padding:20px 24px;margin-top:16px">
+          <div class="m-s" style="color:var(--redup)">VARIAN TIER — WAJIB TIGA-TIGANYA</div>
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <div style="flex:1;padding:12px 14px;background:#E6F6EC;border-radius:8px">
+              <div class="m-s" style="color:var(--mint-tua)">TIER 1 · AR PENUH</div>
+              <div class="i-s" style="color:var(--biru-malam)">Lengkap</div></div>
+            <div style="flex:1;padding:12px 14px;background:#E6F6EC;border-radius:8px">
+              <div class="m-s" style="color:var(--mint-tua)">TIER 2 · VIDEO 360</div>
+              <div class="i-s" style="color:var(--biru-malam)">Lengkap</div></div>
+            <div style="flex:1;padding:12px 14px;background:#FDF4E3;border-radius:8px">
+              <div class="m-s" style="color:var(--emas-tua)">TIER 3 · AUDIO + FOTO</div>
+              <div class="i-s" style="color:var(--biru-malam)">Audio belum diunggah</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:330px">
+        <div class="kartu" style="padding:20px 22px;border:2px solid var(--bahaya)">
+          <div class="m-s" style="color:var(--bahaya)">TIDAK DAPAT DITAYANGKAN</div>
+          <div class="j-s" style="color:var(--biru-malam);margin-top:8px">2 syarat belum terpenuhi</div>
+          <div style="margin-top:14px;display:flex;flex-direction:column;gap:11px">
+            <div style="display:flex;gap:10px"><span style="color:var(--bahaya)">✕</span>
+              <span class="i-s" style="color:var(--biru-malam)">Satu kalimat belum punya sumber</span></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--bahaya)">✕</span>
+              <span class="i-s" style="color:var(--biru-malam)">Tier 3 belum lengkap</span></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--mint-tua)">✓</span>
+              <span class="i-s" style="color:var(--redup)">Reviewer sejarawan menyetujui</span></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--mint-tua)">✓</span>
+              <span class="i-s" style="color:var(--redup)">Terjemahan Inggris tersedia</span></div>
+            <div style="display:flex;gap:10px"><span style="color:var(--mint-tua)">✓</span>
+              <span class="i-s" style="color:var(--redup)">Batas 140 kata per layar</span></div>
+          </div>
+        </div>
+
+        <div class="kartu" style="padding:20px 22px;margin-top:16px">
+          <div class="m-s" style="color:var(--redup)">RIWAYAT REVIEW</div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:14px">
+            <div><div class="i-s" style="color:var(--biru-malam);font-weight:600">Dr. Retno W. · disetujui</div>
+                 <div class="m-s" style="color:var(--redup)">14 JAN 2027 · 09:42</div>
+                 <div class="i-s" style="color:var(--redup);margin-top:3px">“Framing peristiwa sudah tepat. Hindari menambah penilaian moral di layar penutup.”</div></div>
+            <div><div class="i-s" style="color:var(--biru-malam);font-weight:600">Dr. Retno W. · revisi diminta</div>
+                 <div class="m-s" style="color:var(--redup)">09 JAN 2027 · 16:10</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="catatan">Sumber melekat pada kalimat yang didukungnya, bukan di tab terpisah. Klaim waktu spesifik — “pukul 21.00” — memicu syarat sumber secara otomatis, dan tombol Tayang terkunci dengan alasan yang bisa dibaca, bukan sekadar redup. Ini memindahkan disiplin akurasi dari niat baik orang ke mekanisme sistem, sesuai janji di Dokumen 03.</div>
+
+<div class="nama">C3 · Moderasi UGC — jalur anak dipisah, bukan disaring belakangan</div>
+<div class="layar">
+  <div class="sidebar">
+    <div class="m-s" style="color:var(--mint);margin-bottom:22px">SOERABAJA QUEST · CMS</div>
+    <div class="navitem">Antrean kerja <span class="badge">9</span></div>
+    <div class="navitem">Naskah &amp; lore</div>
+    <div class="navitem">Titik &amp; geofence</div>
+    <div class="navitem">Aset AR</div>
+    <div class="navitem on">Moderasi UGC <span class="badge">24</span></div>
+    <div class="navitem">Mitra &amp; voucher</div>
+    <div class="navitem">Analitik</div>
+  </div>
+  <div class="utama">
+    <div class="kop">
+      <div class="j-m" style="color:var(--biru-malam)">Moderasi guestbook</div>
+      <div style="display:flex;gap:10px"><div class="btn sek">Aturan moderasi</div><div class="btn pri">Loloskan terpilih (0)</div></div>
+    </div>
+    <div class="isi">
+      <div style="display:flex;gap:10px;margin-bottom:20px">
+        <div class="pil" style="background:var(--biru-malam);color:#fff">DEWASA · 21</div>
+        <div class="pil" style="background:#FDF4E3;color:var(--emas-tua);border:1.5px solid var(--emas)">JALUR ANAK · 3</div>
+        <div class="pil" style="background:#fff;color:var(--redup);border:1px solid var(--garis)">DITOLAK · 8</div>
+      </div>
+
+      <div style="background:#FDF4E3;border:1.5px solid var(--emas);border-radius:11px;padding:16px 20px;margin-bottom:20px">
+        <div class="m-s" style="color:var(--emas-tua)">JALUR ANAK · AKUN DI BAWAH 13 TAHUN</div>
+        <div class="i-m" style="color:var(--biru-malam);margin-top:5px">Entri dari sub-profil School Mode tidak pernah tayang di dinding publik. Hanya bisa diloloskan ke rekap kelas yang dilihat guru. Foto yang memuat wajah otomatis ditolak.</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div class="kartu" style="padding:18px 20px">
+          <div style="height:130px;background:linear-gradient(150deg,#14456F,#0E2438);border-radius:8px"></div>
+          <div class="i-m" style="color:var(--biru-malam);margin-top:12px">“Ternyata kotaku ada ceritanya sekeren ini. Mau balik lagi bulan depan.”</div>
+          <div class="m-s" style="color:var(--redup);margin-top:8px">ARE-4192 · SIOLA · 13 NOV 14:22</div>
+          <div style="display:flex;gap:8px;margin-top:14px">
+            <div class="btn pri" style="height:36px;font-size:13px;flex:1">Loloskan</div>
+            <div class="btn tolak" style="height:36px;font-size:13px">Tolak</div></div>
+        </div>
+
+        <div class="kartu" style="padding:18px 20px;border:2px solid var(--emas)">
+          <div style="height:130px;background:#F0EDE4;border-radius:8px;display:flex;align-items:center;justify-content:center">
+            <span class="m-s" style="color:var(--emas-tua)">FOTO DITAHAN OTOMATIS</span></div>
+          <div class="i-m" style="color:var(--biru-malam);margin-top:12px">“Aku suka bagian yang bendera dirobek.”</div>
+          <div class="m-s" style="color:var(--emas-tua);margin-top:8px">AREK-04 · SMPN 6 · JALUR ANAK</div>
+          <div class="i-s" style="color:var(--redup);margin-top:4px">Wajah terdeteksi. Hanya bisa masuk rekap kelas.</div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <div class="btn sek" style="height:36px;font-size:13px;flex:1">Ke rekap kelas</div>
+            <div class="btn tolak" style="height:36px;font-size:13px">Tolak</div></div>
+        </div>
+
+        <div class="kartu" style="padding:18px 20px">
+          <div style="height:130px;background:linear-gradient(150deg,#1F5C8B,#0E2438);border-radius:8px"></div>
+          <div class="i-m" style="color:var(--biru-malam);margin-top:12px">“Bapakku cerita kakekku ikut di Jembatan Merah. Baru hari ini aku ngerti maksudnya.”</div>
+          <div class="m-s" style="color:var(--redup);margin-top:8px">ARE-4188 · SIOLA · 13 NOV 14:05</div>
+          <div style="display:flex;gap:8px;margin-top:14px">
+            <div class="btn pri" style="height:36px;font-size:13px;flex:1">Loloskan</div>
+            <div class="btn tolak" style="height:36px;font-size:13px">Tolak</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="catatan">Jalur anak bukan filter yang dijalankan belakangan — ia lajur terpisah dengan tindakan yang berbeda. Entri dari sub-profil School Mode tidak punya tombol “Loloskan ke publik” sama sekali; satu-satunya tujuan yang tersedia adalah rekap kelas. Menghapus tombolnya lebih aman daripada mengandalkan moderator ingat aturannya.</div>
+
+<div class="nama">C4 · Aset AR — anggaran 12 MB terlihat saat mengunggah</div>
+<div class="layar">
+  <div class="sidebar">
+    <div class="m-s" style="color:var(--mint);margin-bottom:22px">SOERABAJA QUEST · CMS</div>
+    <div class="navitem">Antrean kerja <span class="badge">9</span></div>
+    <div class="navitem">Naskah &amp; lore</div>
+    <div class="navitem">Titik &amp; geofence</div>
+    <div class="navitem on">Aset AR</div>
+    <div class="navitem">Moderasi UGC <span class="badge">24</span></div>
+    <div class="navitem">Mitra &amp; voucher</div>
+    <div class="navitem">Analitik</div>
+  </div>
+  <div class="utama">
+    <div class="kop">
+      <div><div class="j-m" style="color:var(--biru-malam)">Aset — Hotel Majapahit</div>
+           <div class="m-s" style="color:var(--redup)">POI-001 · ANGGARAN 12 MB SETELAH KOMPRESI</div></div>
+      <div class="btn pri">Unggah aset</div>
+    </div>
+    <div class="isi">
+      <div class="kartu" style="padding:22px 26px;margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <div class="j-s" style="color:var(--biru-malam)">Terpakai 9,4 MB dari 12 MB</div>
+          <div class="m-m" style="color:var(--mint-tua)">SISA 2,6 MB</div></div>
+        <div style="height:12px;border-radius:6px;background:#E9EDF0;margin-top:12px;display:flex;overflow:hidden">
+          <div style="width:32%;background:var(--biru)"></div>
+          <div style="width:26%;background:var(--mint-tua)"></div>
+          <div style="width:20%;background:var(--emas)"></div>
+        </div>
+        <div style="display:flex;gap:22px;margin-top:12px" class="m-s">
+          <span style="color:var(--biru)">■ MESH 3,8 MB</span>
+          <span style="color:var(--mint-tua)">■ TEKSTUR 3,1 MB</span>
+          <span style="color:var(--emas-tua)">■ AUDIO 2,5 MB</span>
+          <span style="color:var(--redup)">□ SISA 2,6 MB</span></div>
+      </div>
+
+      <div class="kartu">
+        <table class="tabel">
+          <tr><th style="width:30%">ASET</th><th>TIER</th><th>FORMAT</th><th>TRIS</th><th>UKURAN</th><th>STATUS</th></tr>
+          <tr><td><b>bendera_belanda.glb</b><div class="m-s" style="color:var(--redup)">MESH CLOTH · SIMULASI ROBEK</div></td>
+              <td>1</td><td>glTF + Draco</td><td>3.840 / 4.000</td><td>1,9 MB</td>
+              <td><span class="pil" style="background:#E6F6EC;color:var(--mint-tua)">LOLOS</span></td></tr>
+          <tr><td><b>tiang_bendera.glb</b></td><td>1</td><td>glTF + Draco</td><td>620</td><td>0,3 MB</td>
+              <td><span class="pil" style="background:#E6F6EC;color:var(--mint-tua)">LOLOS</span></td></tr>
+          <tr><td><b>fasad_hotel_occl.glb</b><div class="m-s" style="color:var(--redup)">MESH OCCLUSION</div></td>
+              <td>1</td><td>glTF + Draco</td><td>1.480</td><td>1,6 MB</td>
+              <td><span class="pil" style="background:#E6F6EC;color:var(--mint-tua)">LOLOS</span></td></tr>
+          <tr><td><b>rekonstruksi_360.mp4</b></td><td>2</td><td>H.265</td><td>—</td><td>3,1 MB</td>
+              <td><span class="pil" style="background:#FDF4E3;color:var(--emas-tua)">CEK KUALITAS</span></td></tr>
+          <tr><td><b>ambience_kerumunan.opus</b></td><td>1–3</td><td>Opus 48k</td><td>—</td><td>2,5 MB</td>
+              <td><span class="pil" style="background:#E6F6EC;color:var(--mint-tua)">LOLOS</span></td></tr>
+          <tr style="background:#FDF1EF"><td><b>bendera_hires.glb</b><div class="m-s" style="color:var(--bahaya)">DITOLAK OTOMATIS</div></td>
+              <td>1</td><td>glTF tanpa Draco</td><td style="color:var(--bahaya)">18.200 / 4.000</td><td style="color:var(--bahaya)">7,4 MB</td>
+              <td><span class="pil" style="background:#FDECEA;color:var(--bahaya)">MELEBIHI BATAS</span></td></tr>
+        </table>
+      </div>
+      <div class="i-s" style="color:var(--redup);margin-top:14px">Aset yang melebihi batas tris atau ukuran ditolak saat unggah, bukan saat rilis. Artist melihat biayanya di detik ia mengunggah.</div>
+    </div>
+  </div>
+</div>
+<div class="catatan">Anggaran 12 MB per POI adalah angka yang, kalau hanya ditulis di dokumen, akan dilanggar diam-diam sampai ketahuan di bulan kesembilan. Menaruhnya sebagai gerbang unggah membuat pelanggaran mustahil, dan memberi 3D artist umpan balik pada detik yang tepat.</div>
+
+<!-- ═══════════ DASHBOARD ═══════════ -->
+<div class="seksi">DASHBOARD · GURU &amp; PEMKOT</div>
+
+<div class="nama">D1 · Dashboard guru — setelah kunjungan kelas</div>
+<div class="layar">
+  <div class="sidebar" style="background:#123A5E">
+    <div class="m-s" style="color:var(--mint);margin-bottom:22px">SOERABAJA QUEST · SEKOLAH</div>
+    <div class="navitem on">Kunjungan</div>
+    <div class="navitem">Squad saya</div>
+    <div class="navitem">Modul pembelajaran</div>
+    <div class="navitem">Jadwalkan</div>
+    <div style="position:absolute;bottom:22px;left:18px;right:18px">
+      <div style="border-top:1px solid rgba(199,210,218,.2);padding-top:16px">
+        <div class="i-s" style="color:#fff;font-weight:600">Rina Kusuma</div>
+        <div class="m-s" style="color:var(--perak)">SMPN 6 SURABAYA · IPS</div></div></div>
+  </div>
+  <div class="utama">
+    <div class="kop">
+      <div><div class="j-m" style="color:var(--biru-malam)">Squad 8B-2 · 13 November 2027</div>
+           <div class="m-s" style="color:var(--redup)">RUTE PENDEK 75 MENIT · 6 SISWA · SELESAI 100%</div></div>
+      <div style="display:flex;gap:10px"><div class="btn sek">Unduh rekap</div><div class="btn pri">Jadwalkan lagi</div></div>
+    </div>
+    <div class="isi" style="display:flex;gap:24px">
+      <div style="flex:1">
+        <div style="display:flex;gap:16px">
+          <div class="kartu" style="flex:1;padding:20px;text-align:center">
+            <div class="j-l" style="color:var(--mint-tua)">+31</div>
+            <div class="i-s" style="color:var(--redup);margin-top:2px">poin kuis, pra → pasca</div></div>
+          <div class="kartu" style="flex:1;padding:20px;text-align:center">
+            <div class="j-l" style="color:var(--biru-malam)">6/6</div>
+            <div class="i-s" style="color:var(--redup);margin-top:2px">siswa menuntaskan rute</div></div>
+          <div class="kartu" style="flex:1;padding:20px;text-align:center">
+            <div class="j-l" style="color:var(--biru-malam)">72</div>
+            <div class="i-s" style="color:var(--redup);margin-top:2px">menit di lapangan</div></div>
+        </div>
+
+        <div class="kartu" style="margin-top:16px">
+          <table class="tabel">
+            <tr><th>SISWA</th><th>KUIS PRA</th><th>KUIS PASCA</th><th>PILIHAN DI JEMBATAN MERAH</th><th>REFLEKSI</th></tr>
+            <tr><td>Arek-01</td><td>42</td><td style="color:var(--mint-tua)"><b>78</b></td><td>Versi A</td><td>Terkirim</td></tr>
+            <tr><td>Arek-02</td><td>55</td><td style="color:var(--mint-tua)"><b>85</b></td><td>Versi B</td><td>Terkirim</td></tr>
+            <tr><td>Arek-03</td><td>38</td><td style="color:var(--mint-tua)"><b>71</b></td><td>Versi A</td><td>Terkirim</td></tr>
+            <tr><td>Arek-04</td><td>61</td><td style="color:var(--mint-tua)"><b>82</b></td><td>Versi B</td><td>—</td></tr>
+            <tr><td>Arek-05</td><td>47</td><td style="color:var(--mint-tua)"><b>79</b></td><td>Versi A</td><td>Terkirim</td></tr>
+            <tr><td>Arek-06</td><td>52</td><td style="color:var(--mint-tua)"><b>88</b></td><td>Versi A</td><td>Terkirim</td></tr>
+          </table>
+        </div>
+        <div class="i-s" style="color:var(--redup);margin-top:12px">Identitas siswa tidak pernah disimpan. Penomoran Arek-01 sampai Arek-06 hanya berlaku dalam kunjungan ini.</div>
+      </div>
+
+      <div style="width:320px">
+        <div class="kartu" style="padding:20px 22px">
+          <div class="m-s" style="color:var(--redup)">BAHAN DISKUSI DI KELAS</div>
+          <div class="i-m" style="color:var(--biru-malam);margin-top:10px">Empat siswa memilih Versi A, dua memilih Versi B. Perbedaan ini bahan diskusi yang bagus.</div>
+          <div class="i-m" style="color:var(--biru-malam);margin-top:12px">Pertanyaan pemantik: <i>apa yang membuat satu sumber lebih bisa dipercaya daripada sumber lain?</i></div>
+          <div class="btn sek" style="margin-top:16px;width:100%">Buka modul P5</div>
+        </div>
+
+        <div class="kartu" style="padding:20px 22px;margin-top:16px">
+          <div class="m-s" style="color:var(--redup)">PERLU PERHATIAN</div>
+          <div class="i-m" style="color:var(--biru-malam);margin-top:8px">Arek-04 belum mengirim refleksi. Sempat tertinggal 12 menit di Jembatan Merah.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="catatan">Nilai kuis pra dan pasca ada berdampingan karena itulah satu-satunya angka yang membuat guru bisa membenarkan kunjungan ini ke kepala sekolah. Kolom “Pilihan di Jembatan Merah” bukan penilaian benar-salah — ia bahan diskusi, dan sistem menuliskannya sebagai pertanyaan pemantik supaya guru tidak perlu merumuskan sendiri.</div>
+
+<div class="nama">D2 · Dashboard Pemkot — dampak, bukan lalu lintas aplikasi</div>
+<div class="layar">
+  <div class="sidebar" style="background:#0B1F33">
+    <div class="m-s" style="color:var(--mint);margin-bottom:22px">SOERABAJA QUEST · KOTA</div>
+    <div class="navitem on">Dampak</div>
+    <div class="navitem">Kawasan</div>
+    <div class="navitem">Mitra UMKM</div>
+    <div class="navitem">Sekolah</div>
+    <div class="navitem">Unduh laporan</div>
+  </div>
+  <div class="utama">
+    <div class="kop">
+      <div><div class="j-m" style="color:var(--biru-malam)">Dampak · November 2027</div>
+           <div class="m-s" style="color:var(--redup)">DISBUDPORAPAR · DATA AGREGAT, TANPA IDENTITAS PEMAIN</div></div>
+      <div class="btn pri">Unduh laporan bulanan</div>
+    </div>
+    <div class="isi">
+      <div style="display:flex;gap:16px;margin-bottom:20px">
+        <div class="kartu" style="flex:1;padding:20px">
+          <div class="m-s" style="color:var(--redup)">RUTE TUNTAS</div>
+          <div class="j-l" style="color:var(--biru-malam);margin-top:4px">4.180</div>
+          <div class="i-s" style="color:var(--mint-tua)">metrik utama · bukan jumlah unduhan</div></div>
+        <div class="kartu" style="flex:1;padding:20px">
+          <div class="m-s" style="color:var(--redup)">DURASI TINGGAL RATA-RATA</div>
+          <div class="j-l" style="color:var(--biru-malam);margin-top:4px">+68 mnt</div>
+          <div class="i-s" style="color:var(--redup)">di kawasan Kota Lama–Tunjungan</div></div>
+        <div class="kartu" style="flex:1;padding:20px">
+          <div class="m-s" style="color:var(--redup)">TRANSAKSI UMKM TERPICU</div>
+          <div class="j-l" style="color:var(--biru-malam);margin-top:4px">3.104</div>
+          <div class="i-s" style="color:var(--redup)">di 58 mitra Tunjungan</div></div>
+        <div class="kartu" style="flex:1;padding:20px">
+          <div class="m-s" style="color:var(--redup)">SISWA IKUT SERTA</div>
+          <div class="j-l" style="color:var(--biru-malam);margin-top:4px">1.246</div>
+          <div class="i-s" style="color:var(--redup)">dari 41 sekolah</div></div>
+      </div>
+
+      <div style="display:flex;gap:16px">
+        <div class="kartu" style="flex:1.4;padding:22px 26px">
+          <div class="m-s" style="color:var(--redup)">RUTE TUNTAS PER MINGGU</div>
+          <div style="display:flex;align-items:flex-end;gap:14px;height:200px;margin-top:20px">
+            <div style="flex:1;height:34%;background:var(--perak);border-radius:5px 5px 0 0"></div>
+            <div style="flex:1;height:46%;background:var(--perak);border-radius:5px 5px 0 0"></div>
+            <div style="flex:1;height:100%;background:var(--mint-tua);border-radius:5px 5px 0 0"></div>
+            <div style="flex:1;height:62%;background:var(--perak);border-radius:5px 5px 0 0"></div>
+            <div style="flex:1;height:54%;background:var(--perak);border-radius:5px 5px 0 0"></div>
+          </div>
+          <div style="display:flex;gap:14px;margin-top:8px" class="m-s">
+            <span style="flex:1;color:var(--redup);text-align:center">M1</span>
+            <span style="flex:1;color:var(--redup);text-align:center">M2</span>
+            <span style="flex:1;color:var(--mint-tua);text-align:center">10 NOV</span>
+            <span style="flex:1;color:var(--redup);text-align:center">M4</span>
+            <span style="flex:1;color:var(--redup);text-align:center">M5</span></div>
+          <div class="i-s" style="color:var(--redup);margin-top:14px">Puncak Hari Pahlawan menghasilkan 1.480 rute tuntas dalam tiga hari — 35% dari total bulan ini.</div>
+        </div>
+
+        <div class="kartu" style="flex:1;padding:22px 26px">
+          <div class="m-s" style="color:var(--redup)">TITIK PALING SERING DITINGGALKAN</div>
+          <div style="margin-top:16px;display:flex;flex-direction:column;gap:14px">
+            <div><div style="display:flex;justify-content:space-between" class="i-s">
+                   <span style="color:var(--biru-malam);font-weight:600">Perjalanan titik 1 → 2</span>
+                   <span style="color:var(--bahaya);font-weight:700">18%</span></div>
+                 <div style="height:7px;border-radius:4px;background:#E9EDF0;margin-top:5px">
+                   <div style="width:72%;height:100%;border-radius:4px;background:var(--bahaya)"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between" class="i-s">
+                   <span style="color:var(--biru-malam);font-weight:600">Perjalanan titik 2 → 3</span>
+                   <span style="color:var(--emas-tua);font-weight:700">7%</span></div>
+                 <div style="height:7px;border-radius:4px;background:#E9EDF0;margin-top:5px">
+                   <div style="width:28%;height:100%;border-radius:4px;background:var(--emas)"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between" class="i-s">
+                   <span style="color:var(--biru-malam);font-weight:600">Gerbang earphone</span>
+                   <span style="color:var(--emas-tua);font-weight:700">5%</span></div>
+                 <div style="height:7px;border-radius:4px;background:#E9EDF0;margin-top:5px">
+                   <div style="width:20%;height:100%;border-radius:4px;background:var(--emas)"></div></div></div>
+          </div>
+          <div style="background:#FDF1EF;border-left:3px solid var(--bahaya);border-radius:0 8px 8px 0;
+                      padding:12px 14px;margin-top:18px">
+            <div class="i-s" style="color:var(--biru-malam)">Rata-rata baterai saat berhenti: <b>29%</b>. Powerbank di merchant kemungkinan lebih berdampak daripada mengubah konten.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="catatan">Metrik utama sengaja ditulis “rute tuntas · bukan jumlah unduhan”, langsung di kartu, supaya siapa pun yang membuka dasbor ini tahu angka mana yang layak dijadikan target. Panel titik yang ditinggalkan membawa data baterai — sesuai hipotesis di Dokumen 04 bahwa penyebab berhenti adalah daya, bukan kebosanan, dan solusinya powerbank di merchant, bukan menulis ulang naskah.</div>
+
+</body>
+</html>
