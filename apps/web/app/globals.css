@@ -20,7 +20,7 @@
   --color-pencapaian: var(--semantik-pencapaian);
   --color-bahaya: var(--semantik-bahaya);
 
-  --font-display: 'Big Shoulders Display', Anton, sans-serif;
-  --font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-mono: 'Courier Prime', monospace;
+  --font-display: var(--font-big-shoulders-display), Anton, sans-serif;
+  --font-ui: var(--font-plus-jakarta-sans), system-ui, sans-serif;
+  --font-mono: var(--font-courier-prime), monospace;
 }

@@ -1,15 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Big_Shoulders, Courier_Prime, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Dimuat via next/font/google agar self-hosted (tanpa request ke fonts.googleapis.com
+// saat runtime) dan disambungkan ke --font-display/--font-ui/--font-mono di globals.css.
+//
+// Google Fonts sudah menggabungkan keluarga "Big Shoulders Display" (dipakai di
+// mock-up docs/desain/*.html) ke dalam variable font "Big Shoulders" — next/font/google
+// tidak lagi mengekspor "Big_Shoulders_Display" secara terpisah. Bobot 800 di keluarga
+// gabungan ini setara secara visual dengan potongan "Display" lama.
+const bigShouldersDisplay = Big_Shoulders({
+  variable: "--font-big-shoulders-display",
   subsets: ["latin"],
+  weight: ["800"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const courierPrime = Courier_Prime({
+  variable: "--font-courier-prime",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -21,7 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="id" data-tema="gelap"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${bigShouldersDisplay.variable} ${plusJakartaSans.variable} ${courierPrime.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
