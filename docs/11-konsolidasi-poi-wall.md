@@ -52,37 +52,30 @@ Saya akan terapkan revisi ini ke Dokumen 04 setelah Anda konfirmasi bagian 4 di 
 
 ---
 
-## 4. Pertanyaan Terbuka — Mohon Jawab Sekali Jalan
+## 4. Pertanyaan Terbuka — SUDAH TERJAWAB
 
-### Dari Jembatan Merah (M1–M2)
+> **Status: selesai.** Dijawab oleh pengguna pada sesi yang sama. Dua di antaranya (Q9, Q10) membalik asumsi awal saya — dicatat di sini supaya jejak koreksinya tidak hilang, bukan cuma diam-diam diganti.
 
-**Q1.** Kartu "Enam Minggu di Antara Dua Peristiwa" — apakah itu layar interstitial terpisah (S3 storyboard, drama audio perjalanan) yang muncul *sebelum* sampai POI ini, atau kartu status *di dalam* halaman POI Jembatan Merah itu sendiri? Saya asumsikan yang pertama dan tidak menampilkannya di M1.
+| # | Topik | Jawaban final | Status penerapan |
+|---|---|---|---|
+| Q1 | Kartu "Enam Minggu" | **Di dalam halaman POI Jembatan Merah**, bukan interstitial terpisah | ✅ Diterapkan ke M1 |
+| Q2 | Stepper 4-tahap | Dikonfirmasi benar, dipertahankan di seluruh POI aksi | ✅ Tidak ada perubahan diperlukan |
+| Q3 | Bentuk menara Tugu Pahlawan | Mengikuti bentuk beralur asli monumen dengan **10 rusuk, melambangkan 10 November** — dikonfirmasi final oleh pengguna | ✅ Diterapkan dan **dikonfirmasi final**. Render diperbaiki dari 7 garis (draft awal, salah hitung) jadi tepat 10 |
+| Q4 | Judul & sifat hologram | "Aktivasi Hologram 3D & Orasi Tomo" dikonfirmasi. Direalisasikan sebagai **overlay AR**, bukan proyeksi volumetrik penuh — pilihan teknis yang lebih murah dieksekusi | ✅ Diterapkan, copy diperjelas di T1 |
+| Q5 | Kartu telegram pengganti | Dikonfirmasi sesuai | ✅ Tidak ada perubahan diperlukan |
+| Q6 | Statistik Siola | Kombinasi waktu/jarak/lencana dikonfirmasi benar | ✅ Tidak ada perubahan diperlukan |
+| Q7 | Tiga kartu arsip Siola | **Tiga fitur independen**, bukan satu sistem terpadu — masing-masing punya alur dan CTA sendiri | ✅ Diterapkan ke S1: setiap kartu kini punya tombol aksi terpisah (Pindai Benda / Buka Galeri Geser / Lihat di Ruang Pamer) |
+| Q8 | Sistem "poin" | **Sama dengan sistem voucher** di Dokumen 01 — bukan ekonomi poin terpisah | ✅ Diterapkan: U1 diganti dari "1.500 Poin" jadi "3 Voucher Siap", selaras terminologi `Voucher` yang sudah ada |
+| Q9 | Jumlah tokoh terkumpul | **3 dari 10**, bukan 5 dari 10 seperti draft awal saya | ✅ Diterapkan ke U3: progress bar dan grid disesuaikan jadi 3/10 |
+| Q10 | Tagline Wall Siola | **"Dua Zaman, Satu Layar"** — dugaan awal saya benar; bacaan "Satu Lagu" dari resolusi rendah yang keliru | ✅ Diterapkan ke seluruh mock-up Wall Siola |
 
-**Q2.** Stepper 4-tahap (STANDEE → INVESTIGASI → KESIMPULAN → BADGE) saya tambahkan untuk konsistensi lintas-POI. Apakah referensi asli Anda memang punya elemen ini, atau saya menambah sesuatu yang tidak diminta?
+### Catatan tentang Q8 — dampak ke domain model
 
-### Dari Tugu Pahlawan (T1–T3)
+Karena "poin" ternyata bukan konsep baru, **tidak perlu entitas tambahan** di Dokumen 01. Ini kabar baik — domain model tetap sesederhana sebelumnya. Yang perlu disesuaikan hanya salah label di UI (sudah diperbaiki), bukan struktur data.
 
-**Q3.** Bentuk render menara tugu — saya buat lonjong bercahaya abstrak karena resolusi referensi terlalu rendah untuk menangkap detail 12 lengkung Tugu Pahlawan asli. Perlu direvisi mengikuti bentuk asli, atau abstraksi ini justru sesuai maksud "hologram/energi digital"?
+### Catatan tentang Q3 — kenapa item ini sempat ditahan, dan kenapa sekarang final
 
-**Q4.** Kartu hijau kedua saya baca sebagai "Aktivasi Hologram 3D & Orasi Tomo" — konfirmasi ejaan/bunyi judul yang benar.
-
-**Q5.** Kartu hijau ketiga tidak terbaca sama sekali di resolusi yang saya terima; saya ganti dengan kartu transkrip radio bergaya telegram (konsisten pola Yamato/Mallaby). Kirim ulang crop kalau maksud aslinya berbeda.
-
-### Dari Siola (S1)
-
-**Q6.** Statistik "3 jam 5 menit · 4,1 km · 3/3 lencana" — murni angka contoh dari saya. Apakah field ini benar tiga itu (waktu, jarak, lencana), atau ada kombinasi lain yang dimaksud referensi asli?
-
-**Q7.** Tiga kartu hijau (Arsip Nyata, Foto Dulu-Sekarang, Berita Berdampingan) saya baca sebagai satu rangkaian "jembatan arsip fisik ke digital". Benar sebagai satu sistem, atau tiga fitur independen dengan alur masing-masing?
-
-### Dari Tunjungan (U1–U3)
-
-**Q8.** Angka "1.500 poin" dan daftar 3 merchant murni ilustratif dari saya. Berapa jumlah merchant aktual yang direncanakan tampil di sini, dan apakah sistem poin ini terpisah dari sistem voucher yang sudah ada di Dokumen 01, atau nama lain untuk hal yang sama?
-
-**Q9.** "5 dari 10 Tokoh Surabaya" — mengonfirmasi apakah rencana lama (7 tokoh dari storyboard S9, direvisi jadi 10 di rencana V1.5) yang dipakai referensi ini, atau angka berbeda.
-
-### Dari Wall Siola
-
-**Q10.** Tagline "Dua Zaman, Satu Lagu" — saya baca ini dari referensi resolusi penuh, berbeda dari dugaan awal "Satu Layar" saat resolusi masih buram. Mohon konfirmasi final yang benar.
+Dokumen 11 sempat menahan item ini meski jawaban awal pengguna sudah "12 lengkung", karena Tugu Pahlawan adalah monumen nasional sungguhan, bukan elemen fiksi yang bisa direka bebas — dan produk ini bertumpu pada akurasi sejarah sebagai nilai jualnya. Setelah dicek ulang, pengguna mengonfirmasi angka yang benar: **10 rusuk**, melambangkan 10 November. Render sudah diperbaiki dari 7 garis (kesalahan hitung di draft pertama) jadi tepat 10. Item ini sekarang final, tidak ada lagi yang menunggu.
 
 ---
 
@@ -96,10 +89,15 @@ Untuk pertanyaan yang tidak dijawab dalam waktu dekat, saya akan **melanjutkan d
 
 ---
 
-## 6. Setelah Konfirmasi — Urutan Berikutnya
+## 6. Status Sekarang & Langkah Berikutnya
 
-1. Perbaiki B26 (`SafetyNotice` di Tunjungan)
-2. Revisi Dokumen 04 dengan konsekuensi izin mikrofon
-3. Formalkan `SafetyNotice` sebagai komponen resmi di Dokumen 03 (saat ini baru disebut di catatan HTML, belum masuk tabel komponen inti)
-4. Sesuaikan enam HTML sesuai jawaban Q1–Q10
-5. Baru masuk ke Claude Code untuk menyalin ke `page.tsx` — dengan urutan yang saya sarankan: Beranda dulu (fondasi navigasi), baru kelima POI menyusul satu-satu
+Seluruh sepuluh pertanyaan sudah terjawab dan diterapkan. **Tidak ada lagi item tertunda** — termasuk Q3 (jumlah rusuk Tugu Pahlawan) yang sempat ditahan menunggu konfirmasi, sekarang final di angka 10.
+
+Riwayat penyelesaian:
+1. Perbaiki B26 (`SafetyNotice` di Tunjungan) — selesai.
+2. Revisi Dokumen 04 dengan konsekuensi izin mikrofon — selesai.
+3. Formalkan `SafetyNotice` sebagai komponen resmi di Dokumen 03 — selesai.
+4. Enam HTML disesuaikan sesuai jawaban Q1–Q10 — selesai.
+5. Render menara Tugu Pahlawan dikoreksi dari 7 jadi 10 rusuk — selesai.
+
+**Berikutnya:** masuk ke Claude Code untuk menyalin ke `page.tsx` — urutan yang disarankan: Beranda dulu (fondasi navigasi model hub), baru kelima POI menyusul satu-satu, mengikuti pola commit-branch-PR yang sudah terbukti jalan sejak sesi S1 Briefing.

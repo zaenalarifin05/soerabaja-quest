@@ -43,15 +43,11 @@
 <div class="board-h">POI 5 · TUNJUNGAN — PENUTUP RUTE</div>
 <p class="board-sub">Titik terakhir. Di sinilah rute berubah jadi transaksi UMKM sungguhan — inti loop ekonomi yang jadi tesis utama seluruh proyek. Tiga layar: ringkasan &amp; merchant, QR aktif di kasir, dan penutup rute dengan koleksi tokoh.</p>
 <div class="fixnote">
-KETERBATASAN RESOLUSI — DUGAAN, BUKAN KEPASTIAN<br>
-Kartu hijau atas dibaca sebagai ringkasan poin/reward terkumpul — angka "1.500 poin" contoh, bukan final<br>
-Daftar merchant referensi tampak 3-4 entri dengan foto; dibuat 3 sebagai representasi — jumlah asli
-dikelola dari CMS (Dok 03 §C, Mitra &amp; Voucher)<br>
-"5 dari 10 Tokoh" — konsisten storyboard S9 asli (7 tokoh awal, direvisi jadi 10 di rencana V1.5)<br><br>
-PERBAIKAN BACKLOG DITERAPKAN DI SINI<br>
-B1 · QR sungguhan (finder pattern 3 sudut), bukan kotak-kotak acak<br>
-B2 · Dipecah 2 state: SEBELUM tap (QR redup, alamat merchant terlihat) dan SESUDAH tap (QR hidup, hitung mundur)<br>
-B3 · Kode bypass darurat disembunyikan di balik tautan, tidak tampil permanen
+DIKONFIRMASI — DOKUMEN 11 (Q8, Q9)<br>
+Sistem "poin" dikonfirmasi SAMA DENGAN sistem voucher di Dokumen 01 — bukan ekonomi terpisah. Kartu atas
+diganti dari "1.500 Poin" jadi "3 Voucher Siap", selaras terminologi Voucher yang sudah ada. Tidak perlu
+entitas domain baru<br>
+"5 dari 10 Tokoh" DIKOREKSI jadi 3 DARI 10 — jumlah tokoh awal draft salah, sekarang final di U3
 </div>
 
 <div class="rak">
@@ -68,9 +64,9 @@ B3 · Kode bypass darurat disembunyikan di balik tautan, tidak tampil permanen
 
   <div style="margin:0 24px 16px;background:linear-gradient(160deg,rgba(212,162,47,.18),rgba(20,69,111,.4));
               border:1px solid rgba(212,162,47,.4);border-radius:16px;padding:18px 20px;text-align:center">
-    <div class="m-s" style="color:var(--emas)">RUTE TUNTAS · POIN TERKUMPUL</div>
-    <div class="disp-xl" style="color:var(--putih);margin-top:6px">1.500 POIN</div>
-    <div class="i-s" style="color:var(--perak);margin-top:4px">Dari 5 misi, 3 lencana, 1 kesimpulan arsip</div>
+    <div class="m-s" style="color:var(--emas)">RUTE TUNTAS · VOUCHER TERBIT</div>
+    <div class="disp-xl" style="color:var(--putih);margin-top:6px">3 VOUCHER SIAP</div>
+    <div class="i-s" style="color:var(--perak);margin-top:4px">Dari 5 misi, 3 lencana, 1 kesimpulan arsip. Berlaku 7 hari.</div>
   </div>
 
   <div style="margin:0 24px 16px;background:rgba(20,69,111,.45);border-radius:16px;padding:18px 20px;text-align:center">
@@ -130,7 +126,7 @@ B3 · Kode bypass darurat disembunyikan di balik tautan, tidak tampil permanen
   </div>
 
 </div>
-<div class="catatan">Angka poin dan daftar merchant murni ilustratif. Sumber kebenarannya tabel <code>Merchant</code> dan <code>Voucher</code> di Dokumen 01 — daftar tampil sesuai jarak dan status buka real-time. <code>SafetyNotice</code> ditambahkan (B26) — sempat terlewat di draft pertama, padahal Tunjungan sama ramainya dengan POI lain.</div>
+<div class="catatan">Daftar merchant murni ilustratif. Sumber kebenarannya tabel <code>Merchant</code> dan <code>Voucher</code> di Dokumen 01 — daftar tampil sesuai jarak dan status buka real-time. <code>SafetyNotice</code> ditambahkan (B26) — sempat terlewat di draft pertama, padahal Tunjungan sama ramainya dengan POI lain.</div>
 </div>
 
 <div>
@@ -186,16 +182,16 @@ B3 · Kode bypass darurat disembunyikan di balik tautan, tidak tampil permanen
   <div style="margin:24px 24px 16px;background:rgba(8,20,31,.4);border-radius:16px;padding:18px 20px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
       <span class="m-s" style="color:var(--redup)">KOLEKSI TOKOH SURABAYA</span>
-      <span class="j-s" style="color:var(--emas)">5/10</span>
+      <span class="j-s" style="color:var(--emas)">3/10</span>
     </div>
     <div style="height:6px;border-radius:3px;background:rgba(199,210,218,.15)">
-      <div style="width:50%;height:100%;border-radius:3px;background:var(--emas)"></div></div>
+      <div style="width:30%;height:100%;border-radius:3px;background:var(--emas)"></div></div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px">
       <div style="aspect-ratio:1;border-radius:8px;background:rgba(212,162,47,.16);border:1.5px solid var(--emas)"></div>
       <div style="aspect-ratio:1;border-radius:8px;background:rgba(212,162,47,.16);border:1.5px solid var(--emas)"></div>
       <div style="aspect-ratio:1;border-radius:8px;background:rgba(212,162,47,.16);border:1.5px solid var(--emas)"></div>
-      <div style="aspect-ratio:1;border-radius:8px;background:rgba(212,162,47,.16);border:1.5px solid var(--emas)"></div>
-      <div style="aspect-ratio:1;border-radius:8px;background:rgba(212,162,47,.16);border:1.5px solid var(--emas)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(199,210,218,.08);border:1px dashed rgba(199,210,218,.25)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(199,210,218,.08);border:1px dashed rgba(199,210,218,.25)"></div>
       <div style="aspect-ratio:1;border-radius:8px;background:rgba(199,210,218,.08);border:1px dashed rgba(199,210,218,.25)"></div>
       <div style="aspect-ratio:1;border-radius:8px;background:rgba(199,210,218,.08);border:1px dashed rgba(199,210,218,.25)"></div>
       <div style="aspect-ratio:1;border-radius:8px;background:rgba(199,210,218,.08);border:1px dashed rgba(199,210,218,.25)"></div>
