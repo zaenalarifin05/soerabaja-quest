@@ -184,6 +184,13 @@ export default function Home() {
                       : 'flex h-10 w-10 flex-none items-center justify-center rounded-[10px] bg-teks-redup/15 text-teks-redup'
                   }
                 >
+                  {/* B25 belum dikerjakan: ikon gembok masih emoji placeholder, bukan SVG
+                      custom. text-teks-redup di atas TIDAK mengubah warnanya — emoji 🔒
+                      dirender lewat font emoji berwarna bawaan OS (mis. Segoe UI Emoji di
+                      Windows) yang mengabaikan `color` CSS di sebagian besar browser/OS.
+                      Sengaja dibiarkan oranye/kuning bawaan sampai B25 mengganti dengan
+                      SVG siluet ikon POI yang diredupkan (Dokumen 03 §5, LockedCard) —
+                      jangan dipaksa lewat filter/hack CSS. */}
                   {aktif ? titik.nomor : '🔒'}
                 </div>
                 <div className="flex-1">
