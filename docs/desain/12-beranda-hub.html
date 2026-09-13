@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — Beranda (Model Hub)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --hitam:#08141F; --mint:#4FE68C; --mint-redup:#2FA862;
+    --sepia:#7A6144; --merah:#9E2B22; --bahaya:#E5533D; --redup:#7A8592;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#DCE1E6;font-family:var(--ui);padding:56px 40px}
+  .board-h{font-family:var(--disp);font-size:38px;letter-spacing:-.02em;color:var(--hitam)}
+  .board-sub{font-size:14px;color:#5A6570;margin:8px 0 28px;max-width:760px;line-height:1.6}
+  .fixnote{font-family:var(--mono);font-size:12px;line-height:1.9;color:#5A6570;background:#EBEFF2;
+           border-left:3px solid var(--mint-redup);padding:14px 18px;max-width:760px;margin-bottom:40px}
+  .layar{width:390px;height:844px;overflow-y:auto;overflow-x:hidden;position:relative;border-radius:22px;
+         box-shadow:0 8px 28px rgba(8,20,31,.18);background:var(--biru-malam);
+         scrollbar-width:thin}
+  .disp-l{font-family:var(--disp);font-size:26px;line-height:28px;letter-spacing:-.01em}
+  .j-m{font-size:19px;line-height:25px;font-weight:700}
+  .j-s{font-size:16px;line-height:21px;font-weight:700}
+  .i-m{font-size:14px;line-height:21px}
+  .i-s{font-size:12.5px;line-height:18px;font-weight:500}
+  .m-s{font-family:var(--mono);font-size:11px;line-height:16px;letter-spacing:.03em}
+  .cta{height:58px;border-radius:14px;background:var(--mint);color:var(--hitam);
+       font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px}
+  .tap{min-height:44px;display:flex;align-items:center}
+</style>
+</head>
+<body>
+
+<div class="board-h">BERANDA — MODEL HUB</div>
+<p class="board-sub">Dibangun dari analisis Gambar 1 referensi Anda. Lima POI terlihat sekaligus, satu status AKTIF, CTA sticky menunjuk ke sana.</p>
+<div class="fixnote">
+DIBANDING REFERENSI ASLI — perbaikan backlog diterapkan<br>
+B18 · Mint dikurangi — hanya untuk CTA utama & status AKTIF, bukan di semua chip/ikon/garis<br>
+B19 · Emas dipakai untuk lencana yang SUDAH DIRAIH — sinyal pencapaian yang sebelumnya hilang<br>
+B20 · Koleksi Lencana jadi pratinjau 3 slot + "Lihat semua" — bukan galeri penuh yang memakan gulir<br>
+TAMBAHAN · Kartu briefing/checklist dipindah ke alur pertama kali, tidak permanen di beranda<br>
+TAMBAHAN · CTA "Lanjutkan Misi" dibuat STICKY — tetap terjangkau meski digulir ke bawah (Dok 07)
+</div>
+
+<div class="layar" id="scrollarea">
+
+  <!-- ══ HEADER ══ -->
+  <div style="padding:44px 24px 20px;display:flex;justify-content:space-between;align-items:flex-start">
+    <div>
+      <div class="m-s" style="color:var(--mint)">SOERABAJA 1945</div>
+      <div class="disp-l" style="color:var(--putih);margin-top:2px">NAPAK TILAS<br>KOTA PAHLAWAN</div>
+    </div>
+    <div style="width:44px;height:44px;border-radius:50%;background:var(--biru);
+                border:2px solid rgba(199,210,218,.35);flex:none"></div>
+  </div>
+
+  <!-- ══ KARTU IDENTITAS / PANGKAT ══ -->
+  <div style="margin:0 24px 16px;background:rgba(20,69,111,.45);border-radius:16px;padding:16px 18px;
+              display:flex;align-items:center;gap:14px">
+    <div style="width:52px;height:52px;border-radius:50%;background:var(--biru);flex:none;
+                border:2px solid var(--perak)"></div>
+    <div style="flex:1">
+      <div class="j-s" style="color:var(--putih)">Cak Adi</div>
+      <div class="m-s" style="color:var(--perak);margin-top:2px">PANGKAT: REKRUT BARU</div>
+    </div>
+    <div style="text-align:right">
+      <div class="j-s" style="color:var(--mint)">0/5</div>
+      <div class="m-s" style="color:var(--redup)">TITIK</div>
+    </div>
+  </div>
+
+  <!-- ══ RADAR RUTE — MENUJU TITIK AKTIF ══ -->
+  <div style="margin:0 24px 24px;background:linear-gradient(160deg,rgba(79,230,140,.14),rgba(20,69,111,.35));
+              border:1px solid rgba(79,230,140,.35);border-radius:16px;padding:18px 20px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="m-s" style="color:var(--mint)">RADAR RUTE · MENUJU TITIK 1</span>
+      <span class="m-s" style="color:var(--redup)">180 M</span>
+    </div>
+    <div class="j-m" style="color:var(--putih);margin-top:8px">Hotel Majapahit</div>
+    <div class="i-s" style="color:var(--perak);margin-top:4px">Cari standee logam di sisi trotoar Tunjungan.</div>
+    <div class="cta" style="margin-top:14px">
+      <span>▶</span> LANJUTKAN MISI
+    </div>
+  </div>
+
+  <!-- ══ 5 TITIK EKSPEDISI HEROIK — MODEL HUB ══ -->
+  <div style="padding:0 24px">
+    <div class="m-s" style="color:var(--redup);margin-bottom:12px">5 TITIK EKSPEDISI HEROIK</div>
+
+    <!-- Titik 1 — AKTIF -->
+    <div style="background:rgba(79,230,140,.10);border:1.5px solid var(--mint);border-radius:14px;
+                padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:center">
+      <div style="width:40px;height:40px;border-radius:10px;background:var(--mint);flex:none;
+                  display:flex;align-items:center;justify-content:center;color:var(--hitam);font-weight:700">1</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--putih)">Hotel Majapahit</div>
+        <div class="i-s" style="color:var(--redup)">19 Sept 1945 · Insiden Bendera</div>
+      </div>
+      <div class="m-s" style="color:var(--mint)">AKTIF</div>
+    </div>
+
+    <!-- Titik 2 — terkunci -->
+    <div style="background:rgba(20,69,111,.35);border-radius:14px;padding:14px 16px;margin-bottom:10px;
+                display:flex;gap:12px;align-items:center;opacity:.75">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(199,210,218,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center;color:var(--redup)">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--perak)">Jembatan Merah</div>
+        <div class="i-s" style="color:var(--redup)">30 Okt 1945 · Misteri Mallaby</div>
+      </div>
+      <div class="m-s" style="color:var(--redup)">TERKUNCI</div>
+    </div>
+
+    <!-- Titik 3 — terkunci -->
+    <div style="background:rgba(20,69,111,.35);border-radius:14px;padding:14px 16px;margin-bottom:10px;
+                display:flex;gap:12px;align-items:center;opacity:.75">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(199,210,218,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center;color:var(--redup)">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--perak)">Tugu Pahlawan</div>
+        <div class="i-s" style="color:var(--redup)">10 Nov 1945 · Orasi Bung Tomo</div>
+      </div>
+      <div class="m-s" style="color:var(--redup)">TERKUNCI</div>
+    </div>
+
+    <!-- Titik 4 — terkunci -->
+    <div style="background:rgba(20,69,111,.35);border-radius:14px;padding:14px 16px;margin-bottom:10px;
+                display:flex;gap:12px;align-items:center;opacity:.75">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(199,210,218,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center;color:var(--redup)">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--perak)">Museum Siola</div>
+        <div class="i-s" style="color:var(--redup)">Ruang Refleksi</div>
+      </div>
+      <div class="m-s" style="color:var(--redup)">TERKUNCI</div>
+    </div>
+
+    <!-- Titik 5 — terkunci -->
+    <div style="background:rgba(20,69,111,.35);border-radius:14px;padding:14px 16px;margin-bottom:20px;
+                display:flex;gap:12px;align-items:center;opacity:.75">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(199,210,218,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center;color:var(--redup)">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--perak)">Koridor Tunjungan</div>
+        <div class="i-s" style="color:var(--redup)">Voucher Kuliner</div>
+      </div>
+      <div class="m-s" style="color:var(--redup)">TERKUNCI</div>
+    </div>
+  </div>
+
+  <!-- ══ KOLEKSI LENCANA — PRATINJAU 3 SLOT (B20) ══ -->
+  <div style="padding:4px 24px 32px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span class="m-s" style="color:var(--redup)">KOLEKSI LENCANA SEJARAH</span>
+      <span class="i-s" style="color:var(--mint)">Lihat semua →</span>
+    </div>
+    <div style="display:flex;gap:10px">
+      <div style="flex:1;aspect-ratio:1;border-radius:12px;background:rgba(199,210,218,.10);
+                  border:1px dashed rgba(199,210,218,.25);display:flex;align-items:center;
+                  justify-content:center;color:var(--redup)" class="m-s">?</div>
+      <div style="flex:1;aspect-ratio:1;border-radius:12px;background:rgba(199,210,218,.10);
+                  border:1px dashed rgba(199,210,218,.25);display:flex;align-items:center;
+                  justify-content:center;color:var(--redup)" class="m-s">?</div>
+      <div style="flex:1;aspect-ratio:1;border-radius:12px;background:rgba(199,210,218,.10);
+                  border:1px dashed rgba(199,210,218,.25);display:flex;align-items:center;
+                  justify-content:center;color:var(--redup)" class="m-s">?</div>
+    </div>
+    <div class="i-s" style="color:var(--redup);margin-top:10px">0 dari 10 tokoh ditemukan. Selesaikan titik pertama untuk memulai.</div>
+  </div>
+
+</div>
+
+</body>
+</html>

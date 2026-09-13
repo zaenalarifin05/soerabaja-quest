@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — POI Jembatan Merah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --hitam:#08141F; --mint:#4FE68C; --mint-redup:#2FA862;
+    --kertas:#E3D6B8; --kertas-tua:#CDBB95; --tinta:#241B12; --sepia:#7A6144;
+    --merah:#9E2B22; --bahaya:#E5533D; --redup:#7A8592;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#DCE1E6;font-family:var(--ui);padding:56px 40px}
+  .board-h{font-family:var(--disp);font-size:36px;letter-spacing:-.02em;color:var(--hitam)}
+  .board-sub{font-size:14px;color:#5A6570;margin:8px 0 18px;max-width:820px;line-height:1.6}
+  .fixnote{font-family:var(--mono);font-size:12px;line-height:1.9;color:#5A6570;background:#EBEFF2;
+           border-left:3px solid var(--mint-redup);padding:14px 18px;max-width:820px;margin-bottom:40px}
+  .rak{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+  .nama{font-family:var(--mono);font-size:12px;color:#5A6570;margin-bottom:8px}
+  .catatan{font-size:12.5px;line-height:1.55;color:#5A6570;border-left:2px solid #B9C2CA;
+           padding-left:10px;max-width:390px;margin-top:10px}
+  .layar{width:390px;height:844px;overflow-y:auto;overflow-x:hidden;position:relative;border-radius:22px;
+         box-shadow:0 8px 28px rgba(8,20,31,.18);scrollbar-width:thin}
+  .disp-l{font-family:var(--disp);font-size:24px;line-height:26px;letter-spacing:-.01em}
+  .j-m{font-size:18px;line-height:24px;font-weight:700}
+  .j-s{font-size:15px;line-height:20px;font-weight:700}
+  .i-m{font-size:13.5px;line-height:20px}
+  .i-s{font-size:12px;line-height:17px;font-weight:500}
+  .m-s{font-family:var(--mono);font-size:10.5px;line-height:15px;letter-spacing:.03em}
+  .cta{height:54px;border-radius:14px;background:var(--mint);color:var(--hitam);
+       font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;
+       text-align:center;padding:0 12px}
+</style>
+</head>
+<body>
+
+<div class="board-h">POI 2 · JEMBATAN MERAH — MISTERI MALLABY</div>
+<p class="board-sub">Dibangun dari referensi Anda. Mode investigasi dengan dua versi sejarah yang bisa dipilih pemain — konsisten dengan mekanik "dua versi, tanpa jawaban benar" yang sudah dirancang di Dokumen 02 &amp; 04.</p>
+<div class="fixnote">
+ASUMSI YANG SAYA AMBIL — TOLONG KOREKSI KALAU MELESET<br>
+Stepper 4 tahap ditambahkan untuk konsistensi lintas-POI (STANDEE → INVESTIGASI → KESIMPULAN → BADGE),
+mengikuti pola Yamato — referensi Anda mungkin tidak eksplisit menampilkan ini<br>
+Foto ledakan/mobil terbakar dibuat sebagai render stilasi, BUKAN reproduksi foto asli — sama seperti Yamato<br>
+Dua kartu bukti (granat vs mortir nyasar) dibuat SALING EKSKLUSIF — pilih satu menonaktifkan yang lain,
+sesuai "satu pilihan, tanpa jawaban benar". Tombol kunci baru aktif setelah satu dipilih<br><br>
+PERTANYAAN TERBUKA<br>
+Kartu "Enam Minggu di Antara Dua Peristiwa" — apakah itu tampil LOCKED di halaman POI ini,
+atau sebenarnya layar interstitial terpisah (S3 storyboard) sebelum sampai ke titik ini?
+Saya asumsikan yang kedua dan tidak menampilkannya di sini — koreksi kalau salah
+</div>
+
+<div class="rak">
+
+<div>
+<div class="nama">M1 · Halaman POI — sebelum investigasi</div>
+<div class="layar" style="background:var(--biru-malam)">
+
+  <div style="padding:44px 24px 16px;display:flex;justify-content:space-between;align-items:flex-start">
+    <div>
+      <div class="m-s" style="color:var(--mint)">SOERABAJA 1945 · TITIK 2</div>
+      <div class="disp-l" style="color:var(--putih);margin-top:4px">JEMBATAN MERAH</div>
+      <div class="i-s" style="color:var(--perak);margin-top:2px">Kawasan Kota Lama</div>
+    </div>
+    <div style="text-align:right;flex:none">
+      <div style="background:var(--merah);border-radius:8px;padding:4px 8px;margin-bottom:4px" class="m-s">
+        <span style="color:var(--kertas)">30 OKT '45</span></div>
+      <div class="m-s" style="color:var(--redup)">60 M</div>
+    </div>
+  </div>
+
+  <div style="margin:0 24px 12px;height:170px;border-radius:16px;overflow:hidden;position:relative;background:#1C2B38">
+    <svg width="100%" height="100%" viewBox="0 0 342 170" preserveAspectRatio="xMidYMid slice">
+      <rect width="342" height="170" fill="#22303C"/>
+      <rect x="0" y="120" width="342" height="50" fill="#16222C"/>
+      <g stroke="#7A2B22" stroke-width="5" fill="none">
+        <path d="M20 120 L60 55 L120 55 L100 120"/>
+        <path d="M242 120 L262 55 L322 55 L302 120"/>
+        <line x1="60" y1="55" x2="60" y2="120"/><line x1="120" y1="55" x2="120" y2="120"/>
+        <line x1="262" y1="55" x2="262" y2="120"/><line x1="322" y1="55" x2="322" y2="120"/>
+      </g>
+      <rect x="20" y="118" width="302" height="6" fill="#3A2A22"/>
+      <rect x="150" y="98" width="46" height="20" rx="3" fill="#1A1410"/>
+      <circle cx="160" cy="120" r="6" fill="#0D0A08"/><circle cx="186" cy="120" r="6" fill="#0D0A08"/>
+      <path d="M158 98 Q166 70 176 92 Q182 66 192 96 Q196 78 200 98 Z" fill="#D4681E" opacity=".9"/>
+      <path d="M162 98 Q168 82 176 96 Q180 76 188 98 Z" fill="#F2A93C" opacity=".9"/>
+      <ellipse cx="176" cy="60" rx="30" ry="16" fill="#3A3A3A" opacity=".35"/>
+      <ellipse cx="185" cy="40" rx="24" ry="14" fill="#3A3A3A" opacity=".28"/>
+    </svg>
+    <div style="position:absolute;bottom:8px;left:12px;background:rgba(8,20,31,.62);border-radius:6px;padding:4px 8px" class="m-s">
+      <span style="color:var(--emas)">RENDER STILASI · 30 OKT 1945</span></div>
+  </div>
+
+  <div style="margin:0 24px 20px;background:rgba(212,162,47,.10);border:1px solid rgba(212,162,47,.35);
+              border-radius:12px;padding:12px 16px">
+    <div class="m-s" style="color:var(--emas)">MISTERI BELUM TERPECAHKAN</div>
+    <div class="i-s" style="color:var(--perak);margin-top:2px">Siapa pelempar granat itu? Kau yang memutuskan.</div>
+  </div>
+
+  <div style="padding:20px 24px 20px">
+    <div class="cta"><span>▶</span> MULAI INVESTIGASI AR 3D &amp; TELAAH</div>
+  </div>
+
+  <div style="padding:0 24px 20px">
+    <div class="m-s" style="color:var(--redup);margin-bottom:10px">TAHAPAN YANG DIHADAPI (1 DARI 4)</div>
+    <div style="display:flex;align-items:center">
+      <div style="width:30px;height:30px;border-radius:50%;background:var(--mint);color:var(--hitam);
+                  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:none">1</div>
+      <div style="flex:1;height:2px;background:var(--mint)"></div>
+      <div style="width:30px;height:30px;border-radius:50%;background:rgba(199,210,218,.2);color:var(--redup);
+                  display:flex;align-items:center;justify-content:center;font-size:12px;flex:none">2</div>
+      <div style="flex:1;height:2px;background:rgba(199,210,218,.2)"></div>
+      <div style="width:30px;height:30px;border-radius:50%;background:rgba(199,210,218,.2);color:var(--redup);
+                  display:flex;align-items:center;justify-content:center;font-size:12px;flex:none">3</div>
+      <div style="flex:1;height:2px;background:rgba(199,210,218,.2)"></div>
+      <div style="width:30px;height:30px;border-radius:50%;background:rgba(199,210,218,.2);color:var(--redup);
+                  display:flex;align-items:center;justify-content:center;font-size:12px;flex:none">4</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:6px" class="m-s">
+      <span style="color:var(--mint)">STANDEE</span><span style="color:var(--redup)">INVESTIGASI</span>
+      <span style="color:var(--redup)">KESIMPULAN</span><span style="color:var(--redup)">BADGE</span></div>
+  </div>
+
+  <div style="margin:0 24px 20px;background:var(--kertas);border-radius:14px;padding:16px 18px;
+              box-shadow:0 4px 14px rgba(36,27,18,.2)">
+    <div style="display:flex;justify-content:space-between" class="m-s">
+      <span style="color:var(--sepia)">BERKAS PENYELIDIKAN</span><span style="color:var(--merah)">NO. 002/SBY/45</span></div>
+    <div style="height:1px;background:rgba(122,97,68,.35);margin:8px 0"></div>
+    <div class="i-s" style="color:var(--tinta);line-height:1.6">30 Oktober 1945. Gencatan senjata gagal di Jembatan Merah. Mobil Brigjen A.W.S. Mallaby hancur kena ledakan. Siapa pelemparnya — masih misteri hingga kini.</div>
+  </div>
+
+  <div style="padding:0 24px 12px">
+    <div class="m-s" style="color:var(--redup);margin-bottom:10px">PILIH BUKTI &amp; KESIMPULANMU</div>
+
+    <label style="display:block;background:rgba(20,69,111,.4);border:2px solid var(--mint);border-radius:12px;
+                  padding:12px 14px;margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--mint);
+                    display:flex;align-items:center;justify-content:center;flex:none">
+          <div style="width:9px;height:9px;border-radius:50%;background:var(--mint)"></div></div>
+        <div class="j-s" style="color:var(--putih)">Lemparan Granat oleh Arek Suroboyo</div>
+      </div>
+      <div class="i-s" style="color:var(--perak);margin-top:6px;margin-left:28px">Berdasar kesaksian lisan pejuang. Tak ada dokumen tertulis sezaman.</div>
+    </label>
+
+    <label style="display:block;background:rgba(20,69,111,.2);border:1px solid rgba(199,210,218,.2);
+                  border-radius:12px;padding:12px 14px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:18px;height:18px;border-radius:50%;border:2px solid var(--redup);flex:none"></div>
+        <div class="j-s" style="color:var(--perak)">Tembakan Mortir Nyasar Pasukan Sendiri</div>
+      </div>
+      <div class="i-s" style="color:var(--redup);margin-top:6px;margin-left:28px">Berdasar laporan internal Inggris. Sumbernya pihak berkepentingan.</div>
+    </label>
+  </div>
+
+  <div style="padding:0 24px 20px">
+    <div class="cta">🔒 KUNCI KESIMPULAN ARSIP &amp; DAPATKAN LENCANA</div>
+  </div>
+
+  <div style="margin:0 24px 20px;background:rgba(212,162,47,.10);border:1px solid rgba(212,162,47,.3);
+              border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+    <div style="font-size:22px">🎖️</div>
+    <div style="flex:1">
+      <div class="j-s" style="color:var(--emas)">Lencana: Detektif Sejarah</div>
+      <div class="i-s" style="color:var(--perak)">Kunci satu kesimpulan untuk meraihnya (2/3)</div>
+    </div>
+  </div>
+
+  <div style="margin:0 24px 32px;background:rgba(229,83,61,.14);border:1px solid rgba(229,83,61,.5);
+              border-radius:12px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start">
+    <span style="font-size:18px;flex:none">⚠️</span>
+    <div>
+      <div class="j-s" style="color:var(--bahaya)">Perhatian Keselamatan</div>
+      <div class="i-s" style="color:var(--putih);margin-top:2px">Jembatan ini masih dilewati kendaraan. Tetap di jalur pejalan kaki, jangan bersandar ke pagar pembatas saat memotret.</div>
+    </div>
+  </div>
+
+</div>
+<div class="catatan">Tombol "Kunci Kesimpulan" nonaktif (abu-abu) sampai satu opsi dipilih. Setelah dikunci, pilihan tidak bisa diubah.</div>
+</div>
+
+<div>
+<div class="nama">M2 · AR Investigasi 3D (Layar Aksi, kamera terkunci)</div>
+<div class="layar" style="background:var(--hitam)">
+
+  <div style="position:absolute;inset:0 0 260px 0;overflow:hidden">
+    <svg width="100%" height="100%" viewBox="0 0 390 584" preserveAspectRatio="xMidYMid slice">
+      <rect width="390" height="584" fill="#1C2B38"/>
+      <rect x="0" y="440" width="390" height="144" fill="#16222C"/>
+      <g stroke="#7A2B22" stroke-width="7" fill="none">
+        <line x1="40" y1="440" x2="40" y2="120"/><line x1="350" y1="440" x2="350" y2="120"/>
+        <path d="M40 200 L120 120 L270 120 L350 200"/>
+      </g>
+      <g stroke="#4FE68C" stroke-width="1.5" fill="none" opacity=".85">
+        <rect x="150" y="330" width="90" height="46" rx="6"/>
+        <line x1="150" y1="352" x2="240" y2="352"/>
+        <circle cx="170" cy="380" r="12"/><circle cx="220" cy="380" r="12"/>
+      </g>
+      <circle cx="195" cy="353" r="70" fill="none" stroke="#4FE68C" stroke-width="1" opacity=".25"/>
+    </svg>
+  </div>
+
+  <div style="position:absolute;top:100px;left:24px;right:24px;text-align:center">
+    <span class="m-s" style="background:rgba(8,20,31,.62);padding:6px 14px;border-radius:20px;color:var(--mint)">
+      MODEL 3D DIREKONSTRUKSI · KETUK UNTUK TELAAH</span></div>
+
+  <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(8,20,31,.94);
+              border-radius:20px 20px 0 0;padding:22px 24px 34px">
+    <div class="m-s" style="color:var(--mint)">TAHAP 2 DARI 4 · MODE INVESTIGASI</div>
+    <div class="j-m" style="color:var(--putih);margin-top:6px">TELAAH BUKTI DI TKP</div>
+    <div class="i-s" style="color:var(--perak);margin-top:6px">Arahkan kamera ke titik ledakan. Ketuk model 3D untuk melihat sudut lain sebelum menentukan kesimpulanmu.</div>
+  </div>
+</div>
+<div class="catatan">Model 3D wireframe mint konsisten dengan bahasa visual "rekonstruksi digital" dari storyboard S4.1.</div>
+</div>
+
+</div>
+
+</body>
+</html>

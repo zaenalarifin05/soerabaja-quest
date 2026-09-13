@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — POI Museum Siola</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --hitam:#08141F; --mint:#4FE68C; --mint-redup:#2FA862;
+    --kertas:#E3D6B8; --kertas-tua:#CDBB95; --tinta:#241B12; --sepia:#7A6144;
+    --merah:#9E2B22; --bahaya:#E5533D; --redup:#7A8592;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#DCE1E6;font-family:var(--ui);padding:56px 40px}
+  .board-h{font-family:var(--disp);font-size:36px;letter-spacing:-.02em;color:var(--hitam)}
+  .board-sub{font-size:14px;color:#5A6570;margin:8px 0 18px;max-width:820px;line-height:1.6}
+  .fixnote{font-family:var(--mono);font-size:12px;line-height:1.9;color:#5A6570;background:#EBEFF2;
+           border-left:3px solid var(--mint-redup);padding:14px 18px;max-width:820px;margin-bottom:40px}
+  .rak{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+  .nama{font-family:var(--mono);font-size:12px;color:#5A6570;margin-bottom:8px}
+  .catatan{font-size:12.5px;line-height:1.55;color:#5A6570;border-left:2px solid #B9C2CA;
+           padding-left:10px;max-width:390px;margin-top:10px}
+  .layar{width:390px;height:844px;overflow-y:auto;overflow-x:hidden;position:relative;border-radius:22px;
+         box-shadow:0 8px 28px rgba(8,20,31,.18);scrollbar-width:thin}
+  .disp-l{font-family:var(--disp);font-size:24px;line-height:26px;letter-spacing:-.01em}
+  .j-m{font-size:18px;line-height:24px;font-weight:700}
+  .j-s{font-size:15px;line-height:20px;font-weight:700}
+  .i-m{font-size:13.5px;line-height:20px}
+  .i-s{font-size:12px;line-height:17px;font-weight:500}
+  .m-s{font-family:var(--mono);font-size:10.5px;line-height:15px;letter-spacing:.03em}
+  .cta{height:54px;border-radius:14px;background:var(--mint);color:var(--hitam);
+       font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;
+       text-align:center;padding:0 12px}
+</style>
+</head>
+<body>
+
+<div class="board-h">POI 4 · MUSEUM SIOLA — FASE REHAT &amp; REFLEKSI</div>
+<p class="board-sub">Beda dari tiga POI sebelumnya — di sini tidak ada AR aksi baru. Siola adalah jeda naratif: rekap perjalanan, arsip fisik, dan tempat suara pemain sendiri masuk ke dinding guestbook sebelum lanjut ke Tunjungan.</p>
+<div class="fixnote">
+KETERBATASAN RESOLUSI — DUGAAN, BUKAN KEPASTIAN<br>
+Tiga kartu hijau tengah (arsip nyata, foto lama-sekarang, berita berdampingan) dibaca sebagai RANGKAIAN
+"jembatan arsip fisik ke digital" — pemain memindai benda asli di museum, aplikasi menghubungkannya ke
+momen yang baru dialami di jalan. Ini sama persis dengan storyboard S7 asli ("Arsip Mendalam")<br>
+Statistik "3j 5m · 4,1km · 3/3" diasumsikan: waktu tempuh, jarak, dan badge terkumpul — koreksi kalau beda<br>
+Kartu kertas "Menulis Ulang Kesan-Kesan Arek" dibaca sebagai input guestbook, dibuat dengan batas 140 karakter
+sesuai Dok 03, dan CATATAN MODERASI eksplisit — konsisten Dok 08 (jeda tayang, bukan langsung publik)<br><br>
+BEDA DARI EMPAT POI LAIN<br>
+Tidak ada render "gedung" dramatis — Siola sengaja tenang, ber-AC, latar lebih terang<br>
+Tidak ada SafetyNotice trafik — di dalam gedung, risiko keselamatannya beda karakter
+</div>
+
+<div class="rak">
+
+<div>
+<div class="nama">S1 · Halaman Siola — rehat, rekap, arsip</div>
+<div class="layar" style="background:var(--biru-malam)">
+
+  <div style="padding:44px 24px 16px;display:flex;justify-content:space-between;align-items:flex-start">
+    <div>
+      <div class="m-s" style="color:var(--mint)">SOERABAJA 1945 · TITIK 4</div>
+      <div class="disp-l" style="color:var(--putih);margin-top:4px">MUSEUM SIOLA</div>
+      <div class="i-s" style="color:var(--perak);margin-top:2px">Jl. Tunjungan No. 1</div>
+    </div>
+    <div style="text-align:right;flex:none">
+      <div style="background:var(--biru);border-radius:8px;padding:4px 8px;margin-bottom:4px" class="m-s">
+        <span style="color:var(--putih)">BER-AC</span></div>
+      <div class="m-s" style="color:var(--redup)">10 M</div>
+    </div>
+  </div>
+
+  <div style="margin:0 24px 16px;background:var(--kertas);border-radius:16px;padding:20px 22px;
+              box-shadow:0 4px 14px rgba(36,27,18,.2)">
+    <div class="disp-l" style="color:var(--tinta)">DUDUK DULU,<br>REHAT SEJENAK</div>
+    <div class="i-s" style="color:var(--sepia);margin-top:8px;line-height:1.6">Kamu baru berjalan 4 kilometer melewati tiga tanggal. Sebelum lanjut, mari rangkai kepingannya di sini.</div>
+  </div>
+
+  <div style="margin:0 24px 20px;display:flex;gap:10px">
+    <div style="flex:1;background:rgba(20,69,111,.45);border-radius:12px;padding:14px;text-align:center">
+      <div class="j-m" style="color:var(--putih)">3j 5m</div>
+      <div class="m-s" style="color:var(--redup)">WAKTU TEMPUH</div></div>
+    <div style="flex:1;background:rgba(20,69,111,.45);border-radius:12px;padding:14px;text-align:center">
+      <div class="j-m" style="color:var(--putih)">4,1 km</div>
+      <div class="m-s" style="color:var(--redup)">JARAK</div></div>
+    <div style="flex:1;background:rgba(20,69,111,.45);border-radius:12px;padding:14px;text-align:center">
+      <div class="j-m" style="color:var(--emas)">3/3</div>
+      <div class="m-s" style="color:var(--redup)">LENCANA</div></div>
+  </div>
+
+  <div style="padding:0 24px 12px">
+    <div class="m-s" style="color:var(--redup);margin-bottom:10px">ARSIP FISIK · PINDAI DI DALAM MUSEUM</div>
+
+    <div style="background:rgba(79,230,140,.10);border:1px solid rgba(79,230,140,.3);border-radius:12px;
+                padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px">
+      <span style="font-size:20px">🖼️</span>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--putih)">Arsip Nyata Museum Ini</div>
+        <div class="i-s" style="color:var(--perak)">Pindai benda asli untuk membuka ceritanya</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(79,230,140,.10);border:1px solid rgba(79,230,140,.3);border-radius:12px;
+                padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px">
+      <span style="font-size:20px">🕰️</span>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--putih)">Foto Dulu &amp; Sekarang</div>
+        <div class="i-s" style="color:var(--perak)">Bandingkan wajah kota 1945 dan hari ini</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(79,230,140,.10);border:1px solid rgba(79,230,140,.3);border-radius:12px;
+                padding:14px 16px;margin-bottom:20px;display:flex;align-items:center;gap:12px">
+      <span style="font-size:20px">📰</span>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--putih)">Berita Nyata, Berdampingan</div>
+        <div class="i-s" style="color:var(--perak)">Koran asli 1945 di sebelah rekonstruksimu</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin:0 24px 12px;background:var(--kertas);border-radius:14px;padding:16px 18px">
+    <div class="m-s" style="color:var(--sepia)">TULISKAN KESANMU, AREK</div>
+    <div style="height:1px;background:rgba(122,97,68,.35);margin:8px 0"></div>
+    <div class="i-s" style="color:rgba(122,97,68,.7);font-style:italic">Ketik di sini… (maks 140 karakter)</div>
+    <div style="height:1px;background:rgba(122,97,68,.2);margin:14px 0 8px"></div>
+    <div class="i-s" style="color:var(--sepia)">📸 Sertakan foto AR-mu (opsional)</div>
+  </div>
+
+  <div style="margin:0 24px 20px;background:rgba(212,162,47,.10);border:1px solid rgba(212,162,47,.3);
+              border-radius:10px;padding:10px 14px;display:flex;gap:8px;align-items:flex-start">
+    <span style="font-size:14px;flex:none">ℹ️</span>
+    <div class="i-s" style="color:var(--perak)">Ceritamu ditinjau dulu sebelum tayang di dinding digital lobi. Tidak instan — demi menjaga kualitas Wall Siola untuk semua pengunjung.</div>
+  </div>
+
+  <div style="padding:0 24px 20px">
+    <div class="cta" style="background:rgba(199,210,218,.15);color:var(--redup)">✍️ KIRIM KE DINDING SIOLA</div>
+  </div>
+
+  <div style="margin:0 24px 32px;background:linear-gradient(160deg,rgba(79,230,140,.16),rgba(20,69,111,.4));
+              border:1px solid rgba(79,230,140,.4);border-radius:16px;padding:18px 20px">
+    <div class="m-s" style="color:var(--mint)">LANGKAH TERAKHIR</div>
+    <div class="j-m" style="color:var(--putih);margin-top:6px">Menuju Koridor Tunjungan</div>
+    <div class="i-s" style="color:var(--perak);margin-top:4px">200 meter lagi. Voucher UMKM menunggu.</div>
+    <div class="cta" style="margin-top:14px"><span>▶</span> SELESAI KUNJUNGAN &amp; LANJUTKAN</div>
+  </div>
+
+</div>
+<div class="catatan">Tombol kirim guestbook nonaktif sampai ada teks diketik — mencegah entri kosong terkirim tak sengaja. CTA ke Tunjungan tetap aktif independen, tidak menunggu guestbook terisi.</div>
+</div>
+
+</div>
+
+</body>
+</html>

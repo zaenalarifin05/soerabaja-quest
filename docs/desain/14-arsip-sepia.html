@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — Beranda v2 + Overlay Arsip Sepia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --hitam:#08141F; --mint:#4FE68C; --mint-redup:#2FA862;
+    --kertas:#E3D6B8; --kertas-tua:#CDBB95; --tinta:#241B12; --sepia:#7A6144;
+    --merah:#9E2B22; --bahaya:#E5533D; --redup:#7A8592;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#DCE1E6;font-family:var(--ui);padding:56px 40px}
+  .board-h{font-family:var(--disp);font-size:38px;letter-spacing:-.02em;color:var(--hitam)}
+  .board-sub{font-size:14px;color:#5A6570;margin:8px 0 20px;max-width:820px;line-height:1.6}
+  .fixnote{font-family:var(--mono);font-size:12px;line-height:1.9;color:#5A6570;background:#EBEFF2;
+           border-left:3px solid var(--mint-redup);padding:14px 18px;max-width:820px;margin-bottom:44px}
+  .rak{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+  .nama{font-family:var(--mono);font-size:12px;color:#5A6570;margin-bottom:8px}
+  .catatan{font-size:12.5px;line-height:1.55;color:#5A6570;border-left:2px solid #B9C2CA;
+           padding-left:10px;max-width:390px;margin-top:10px}
+  .layar{width:390px;height:844px;overflow-y:auto;overflow-x:hidden;position:relative;border-radius:22px;
+         box-shadow:0 8px 28px rgba(8,20,31,.18);scrollbar-width:thin}
+  .disp-l{font-family:var(--disp);font-size:26px;line-height:28px;letter-spacing:-.01em}
+  .j-m{font-size:19px;line-height:25px;font-weight:700}
+  .j-s{font-size:16px;line-height:21px;font-weight:700}
+  .i-m{font-size:14px;line-height:21px}
+  .i-s{font-size:12.5px;line-height:18px;font-weight:500}
+  .m-s{font-family:var(--mono);font-size:11px;line-height:16px;letter-spacing:.03em}
+  .cta{height:56px;border-radius:14px;background:var(--mint);color:var(--hitam);
+       font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px}
+</style>
+</head>
+<body>
+
+<div class="board-h">BERANDA v2 — ARSIP SEPIA JADI KOLEKSI, BUKAN KARTU PERMANEN</div>
+<p class="board-sub">Revisi dari draft pertama. Arsip Sepia sekarang paralel dengan Koleksi Lencana — satu entri terbuka per titik yang diselesaikan. Tombolnya ringkas di beranda, isinya di overlay terpisah.</p>
+<div class="fixnote">
+BELUM DIKONFIRMASI — DUGAAN SAYA, TOLONG VALIDASI<br>
+Dua ikon di kanan atas header saya asumsikan notifikasi + pengaturan — kirim crop kalau beda<br>
+Warna badge "TERKUNCI" saya buat abu redup; kalau referensi Anda pakai warna hangat (oranye/kuning)
+untuk "segera dibuka" alih-alih "tak bisa diakses", beri tahu — maknanya beda dan perlu direvisi<br><br>
+PERUBAHAN UTAMA DARI DRAFT PERTAMA<br>
+Kartu arsip permanen DIHAPUS dari alir gulir utama — beranda jadi ~30% lebih pendek<br>
+Diganti tombol "Arsip Sepia" dengan penanda jumlah belum dibaca<br>
+Arsip sekarang per-POI: satu entri terbuka setiap titik diselesaikan, sejajar dengan lencana<br>
+Overlay arsip 100% rezim visual Arsip (kertas, Courier Prime) — Halaman Baca murni, sesuai Dok 07
+</div>
+
+<div class="rak">
+
+<!-- ══════════ BERANDA v2 ══════════ -->
+<div>
+<div class="nama">B1 · Beranda — versi ringkas</div>
+<div class="layar" style="background:var(--biru-malam)">
+
+  <!-- Header -->
+  <div style="padding:44px 24px 20px;display:flex;justify-content:space-between;align-items:flex-start">
+    <div>
+      <div class="m-s" style="color:var(--mint)">SOERABAJA 1945</div>
+      <div class="disp-l" style="color:var(--putih);margin-top:2px">NAPAK TILAS<br>KOTA PAHLAWAN</div>
+    </div>
+    <div style="display:flex;gap:10px;flex:none">
+      <div style="width:36px;height:36px;border-radius:10px;background:rgba(199,210,218,.12);
+                  display:flex;align-items:center;justify-content:center;color:var(--perak);font-size:15px">🔔</div>
+      <div style="width:36px;height:36px;border-radius:10px;background:rgba(199,210,218,.12);
+                  display:flex;align-items:center;justify-content:center;color:var(--perak);font-size:15px">⚙</div>
+    </div>
+  </div>
+
+  <!-- Kartu identitas -->
+  <div style="margin:0 24px 16px;background:rgba(20,69,111,.45);border-radius:16px;padding:16px 18px;
+              display:flex;align-items:center;gap:14px">
+    <div style="width:52px;height:52px;border-radius:50%;flex:none;border:2px solid var(--perak);overflow:hidden">
+      <svg width="100%" height="100%" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#14456F"/>
+        <circle cx="32" cy="24" r="10" fill="#F2F5F7"/>
+        <path d="M14 54c2-12 10-18 18-18s16 6 18 18" fill="#F2F5F7"/></svg>
+    </div>
+    <div style="flex:1">
+      <div class="j-s" style="color:var(--putih)">Cak Adi</div>
+      <div class="m-s" style="color:var(--perak);margin-top:2px">PANGKAT: REKRUT BARU</div>
+    </div>
+    <div style="text-align:right">
+      <div class="j-s" style="color:var(--mint)">0/5</div>
+      <div class="m-s" style="color:var(--redup)">TITIK</div>
+    </div>
+  </div>
+
+  <!-- Radar Rute -->
+  <div style="margin:0 24px 16px;background:linear-gradient(160deg,rgba(79,230,140,.14),rgba(20,69,111,.35));
+              border:1px solid rgba(79,230,140,.35);border-radius:16px;padding:18px 20px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="m-s" style="color:var(--mint)">RADAR RUTE · MENUJU TITIK 1</span>
+      <span class="m-s" style="color:var(--redup)">180 M</span>
+    </div>
+    <div class="j-m" style="color:var(--putih);margin-top:8px">Hotel Majapahit</div>
+    <div class="i-s" style="color:var(--perak);margin-top:4px">Cari standee logam di sisi trotoar Tunjungan.</div>
+    <div class="cta" style="margin-top:14px"><span>▶</span> LANJUTKAN MISI</div>
+  </div>
+
+  <!-- ══ TOMBOL ARSIP SEPIA — pengganti kartu permanen ══ -->
+  <div id="btn-arsip" style="margin:0 24px 24px;background:var(--kertas);border-radius:14px;
+              padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;
+              border:1px solid rgba(122,97,68,.3)">
+    <div style="width:38px;height:38px;border-radius:9px;background:var(--kertas-tua);flex:none;
+                display:flex;align-items:center;justify-content:center;font-size:17px">📜</div>
+    <div style="flex:1">
+      <div class="j-s" style="color:var(--tinta)">Arsip Sepia</div>
+      <div class="m-s" style="color:var(--sepia)">KEPINGAN SEJARAH · PELENGKAP PUZZLE</div>
+    </div>
+    <div style="background:var(--merah);color:var(--kertas);border-radius:20px;padding:3px 9px" class="m-s">0 BARU</div>
+    <span style="color:var(--sepia)">›</span>
+  </div>
+
+  <!-- 5 Titik -->
+  <div style="padding:0 24px">
+    <div class="m-s" style="color:var(--redup);margin-bottom:12px">5 TITIK EKSPEDISI HEROIK</div>
+
+    <div style="background:rgba(79,230,140,.10);border:1.5px solid var(--mint);border-radius:14px;
+                padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:center">
+      <div style="width:40px;height:40px;border-radius:10px;background:var(--mint);flex:none;
+                  display:flex;align-items:center;justify-content:center;color:var(--hitam);font-weight:700">1</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--putih)">Hotel Majapahit</div>
+        <div class="i-s" style="color:var(--redup)">19 Sept 1945 · Insiden Bendera</div>
+      </div>
+      <div class="m-s" style="color:var(--mint)">AKTIF</div>
+    </div>
+
+    <div style="background:rgba(20,69,111,.35);border-radius:14px;padding:14px 16px;margin-bottom:10px;
+                display:flex;gap:12px;align-items:center;opacity:.75">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(199,210,218,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center;color:var(--redup)">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--perak)">Jembatan Merah</div>
+        <div class="i-s" style="color:var(--redup)">30 Okt 1945 · Misteri Mallaby</div>
+      </div>
+      <div class="m-s" style="color:var(--redup)">TERKUNCI</div>
+    </div>
+
+    <div style="background:rgba(20,69,111,.35);border-radius:14px;padding:14px 16px;margin-bottom:10px;
+                display:flex;gap:12px;align-items:center;opacity:.75">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(199,210,218,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center;color:var(--redup)">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--perak)">Tugu Pahlawan</div>
+        <div class="i-s" style="color:var(--redup)">10 Nov 1945 · Orasi Bung Tomo</div>
+      </div>
+      <div class="m-s" style="color:var(--redup)">TERKUNCI</div>
+    </div>
+
+    <div style="background:rgba(20,69,111,.35);border-radius:14px;padding:14px 16px;margin-bottom:10px;
+                display:flex;gap:12px;align-items:center;opacity:.75">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(199,210,218,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center;color:var(--redup)">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--perak)">Museum Siola</div>
+        <div class="i-s" style="color:var(--redup)">Ruang Refleksi</div>
+      </div>
+      <div class="m-s" style="color:var(--redup)">TERKUNCI</div>
+    </div>
+
+    <div style="background:rgba(20,69,111,.35);border-radius:14px;padding:14px 16px;margin-bottom:20px;
+                display:flex;gap:12px;align-items:center;opacity:.75">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(199,210,218,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center;color:var(--redup)">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--perak)">Koridor Tunjungan</div>
+        <div class="i-s" style="color:var(--redup)">Voucher Kuliner</div>
+      </div>
+      <div class="m-s" style="color:var(--redup)">TERKUNCI</div>
+    </div>
+  </div>
+
+  <!-- Koleksi Lencana -->
+  <div style="padding:4px 24px 32px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span class="m-s" style="color:var(--redup)">KOLEKSI LENCANA SEJARAH</span>
+      <span class="i-s" style="color:var(--mint)">Lihat semua →</span>
+    </div>
+    <div style="display:flex;gap:10px">
+      <div style="flex:1;aspect-ratio:1;border-radius:12px;background:rgba(199,210,218,.10);
+                  border:1px dashed rgba(199,210,218,.25);display:flex;align-items:center;
+                  justify-content:center;color:var(--redup)" class="m-s">?</div>
+      <div style="flex:1;aspect-ratio:1;border-radius:12px;background:rgba(199,210,218,.10);
+                  border:1px dashed rgba(199,210,218,.25);display:flex;align-items:center;
+                  justify-content:center;color:var(--redup)" class="m-s">?</div>
+      <div style="flex:1;aspect-ratio:1;border-radius:12px;background:rgba(199,210,218,.10);
+                  border:1px dashed rgba(199,210,218,.25);display:flex;align-items:center;
+                  justify-content:center;color:var(--redup)" class="m-s">?</div>
+    </div>
+  </div>
+
+</div>
+<div class="catatan">Tinggi total halaman turun dari ~5,5 layar jadi ~4 layar setelah kartu arsip permanen diubah jadi tombol. Badge "TERKUNCI" masih dugaan warna — konfirmasi diperlukan.</div>
+</div>
+
+<!-- ══════════ OVERLAY ARSIP SEPIA ══════════ -->
+<div>
+<div class="nama">B2 · Overlay Arsip Sepia — daftar kepingan</div>
+<div class="layar" style="background:var(--kertas)">
+
+  <div style="padding:44px 24px 8px;display:flex;justify-content:space-between;align-items:center">
+    <span style="color:var(--sepia);font-size:20px">←</span>
+    <span class="m-s" style="color:var(--sepia)">ARSIP SEPIA</span>
+    <span style="width:20px"></span>
+  </div>
+
+  <div style="padding:16px 24px 8px">
+    <div class="disp-l" style="color:var(--tinta)">KEPINGAN<br>SEJARAH</div>
+    <div class="i-s" style="color:var(--sepia);margin-top:8px">Setiap titik yang kau selesaikan membuka satu kepingan. Kumpulkan semua untuk memahami utuh perjuangan Surabaya.</div>
+  </div>
+
+  <div style="padding:20px 24px">
+    <div style="height:6px;border-radius:3px;background:var(--kertas-tua);margin-bottom:8px">
+      <div style="width:0%;height:100%;border-radius:3px;background:var(--merah)"></div></div>
+    <div class="m-s" style="color:var(--sepia)">0 DARI 5 KEPINGAN TERKUMPUL</div>
+  </div>
+
+  <div style="padding:0 24px;display:flex;flex-direction:column;gap:10px">
+
+    <!-- Kepingan 1 — terkunci, POI belum selesai -->
+    <div style="background:var(--kertas-tua);opacity:.55;border-radius:12px;padding:14px 16px;
+                display:flex;gap:12px;align-items:center">
+      <div style="width:36px;height:36px;border-radius:8px;background:rgba(36,27,18,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--tinta)">Kepingan 1 · Yamato</div>
+        <div class="i-s" style="color:var(--sepia)">Selesaikan Titik 1 untuk membuka</div>
+      </div>
+    </div>
+
+    <div style="background:var(--kertas-tua);opacity:.55;border-radius:12px;padding:14px 16px;
+                display:flex;gap:12px;align-items:center">
+      <div style="width:36px;height:36px;border-radius:8px;background:rgba(36,27,18,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--tinta)">Kepingan 2 · Jembatan Merah</div>
+        <div class="i-s" style="color:var(--sepia)">Selesaikan Titik 2 untuk membuka</div>
+      </div>
+    </div>
+
+    <div style="background:var(--kertas-tua);opacity:.55;border-radius:12px;padding:14px 16px;
+                display:flex;gap:12px;align-items:center">
+      <div style="width:36px;height:36px;border-radius:8px;background:rgba(36,27,18,.15);flex:none;
+                  display:flex;align-items:center;justify-content:center">🔒</div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--tinta)">Kepingan 3 · Tugu Pahlawan</div>
+        <div class="i-s" style="color:var(--sepia)">Selesaikan Titik 3 untuk membuka</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin:24px 24px 0;padding:16px 18px;background:rgba(158,43,34,.08);
+              border-left:3px solid var(--merah);border-radius:0 10px 10px 0">
+    <div class="i-s" style="color:var(--tinta)">Kepingan bukan sekadar hiasan. Kelima kepingan yang lengkap akan membuka satu cerita utuh di Museum Siola — bagian dari sejarah yang tak selalu diceritakan buku pelajaran.</div>
+  </div>
+
+</div>
+<div class="catatan">Kondisi awal: semua terkunci karena belum ada titik yang diselesaikan. Progres bar dan hitungan "X dari 5" memberi alasan untuk terus main, sejalan dengan Koleksi Lencana yang sudah ada.</div>
+</div>
+
+<!-- ══════════ OVERLAY DETAIL SATU KEPINGAN (SETELAH TERBUKA) ══════════ -->
+<div>
+<div class="nama">B3 · Detail Kepingan — setelah Titik 1 selesai</div>
+<div class="layar" style="background:var(--kertas)">
+
+  <div style="padding:44px 24px 8px;display:flex;justify-content:space-between;align-items:center">
+    <span style="color:var(--sepia);font-size:20px">←</span>
+    <span class="m-s" style="color:var(--sepia)">KEPINGAN 1 DARI 5</span>
+    <span style="color:var(--sepia)">↗</span>
+  </div>
+
+  <div style="padding:20px 24px 0">
+    <div style="display:flex;justify-content:space-between" class="m-s">
+      <span style="color:var(--sepia)">BERKAS TERSEMBUNYI</span><span style="color:var(--merah)">19 · IX · 45</span></div>
+    <div style="height:1px;background:rgba(122,97,68,.4);margin:12px 0 20px"></div>
+
+    <div class="disp-l" style="color:var(--tinta)">SIAPA PLOEGMAN<br>SEBENARNYA?</div>
+    <div class="i-m" style="color:var(--tinta);margin-top:14px;line-height:1.7">Yang tidak diceritakan di misi utama: W.V.C. Ploegman bukan sekadar perwira biasa. Ia mantan tawanan Jepang yang baru dibebaskan tiga minggu sebelum insiden bendera — trauma perang yang mungkin menjelaskan keputusannya yang gegabah hari itu.</div>
+
+    <div style="background:var(--kertas-tua);border:1px solid rgba(122,97,68,.5);height:130px;margin-top:20px;
+                display:flex;align-items:center;justify-content:center" class="m-s">
+      <span style="color:var(--sepia)">[ FOTO ARSIP TAMBAHAN ]</span></div>
+    <div class="m-s" style="color:var(--sepia);margin-top:8px">Sumber: NIMH Belanda, arsip tawanan perang 1945</div>
+  </div>
+
+  <div style="margin:24px 24px 0;padding:14px 16px;background:rgba(212,162,47,.14);
+              border:1px solid var(--emas);border-radius:12px;display:flex;align-items:center;gap:10px">
+    <span style="font-size:18px">🧩</span>
+    <span class="i-s" style="color:var(--tinta)">Kepingan tersimpan. 4 lagi menunggu di titik berikutnya.</span>
+  </div>
+
+</div>
+<div class="catatan">Isi kepingan sengaja bersudut pandang berbeda dari misi utama — bukan mengulang, tapi melengkapi. Ini yang membuat "puzzle" terasa benar: informasi baru, bukan rangkuman ulang.</div>
+</div>
+
+</div>
+
+</body>
+</html>

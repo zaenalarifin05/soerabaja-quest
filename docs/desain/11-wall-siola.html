@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — Wall Siola: TV Kiosk vs Web Feed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --hitam:#08141F; --mint:#4FE68C; --mint-redup:#2FA862;
+    --kertas:#E3D6B8; --sepia:#7A6144; --merah:#9E2B22; --redup:#7A8592;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#DCE1E6;font-family:var(--ui);padding:56px 40px}
+  .board-h{font-family:var(--disp);font-size:36px;letter-spacing:-.02em;color:var(--hitam)}
+  .board-sub{font-size:14px;color:#5A6570;margin:8px 0 18px;max-width:900px;line-height:1.6}
+  .fixnote{font-family:var(--mono);font-size:12px;line-height:1.9;color:#5A6570;background:#EBEFF2;
+           border-left:3px solid var(--mint-redup);padding:14px 18px;max-width:900px;margin-bottom:40px}
+  .seksi{font-family:var(--disp);font-size:26px;color:var(--hitam);margin:44px 0 16px}
+  .nama{font-family:var(--mono);font-size:12px;color:#5A6570;margin-bottom:10px}
+  .catatan{font-size:12.5px;line-height:1.6;color:#5A6570;border-left:2px solid #B9C2CA;
+           padding-left:12px;max-width:900px;margin-top:14px}
+  .m-s{font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+</style>
+</head>
+<body>
+
+<div class="board-h">WALL SIOLA — DUA TATA LETAK, SATU SUMBER DATA</div>
+<p class="board-sub">Dibangun dari analisis penuh referensi Anda dan spesifikasi Dokumen 08. Aturan induk: apa pun yang tidak muat di atas 28px tidak masuk Wall — pindah ke Feed. Empat masalah dari referensi asli sudah diperbaiki di kedua versi ini.</p>
+<div class="fixnote">
+EMPAT PERBAIKAN DARI REFERENSI ASLI ANDA<br>
+1. Wajah, nama lengkap, institusi tampil terbuka tanpa gerbang → sekarang tingkat A default (kutipan + nama panggilan saja, TANPA foto), tingkat B/C perlu consent eksplisit + 18+<br>
+2. "Otomatis lolos kurasi 30 detik" → jeda tayang 5 menit + tombol tahan Petugas Siola<br>
+3. "Dampak UMKM Rp 142,5M" di layar publik → dipindah ke Dashboard Pemkot (D2), dihapus dari Wall<br>
+4. Ticker "FPS 60.0" chrome pengembang → dihapus total, tidak pernah ikut build produksi<br><br>
+CATATAN TAGLINE — MOHON KONFIRMASI<br>
+Terbaca "Dua Zaman, Satu Lagu" di referensi Anda — berbeda dari dugaan awal saya "Dua Zaman, Satu Layar"
+saat resolusi masih buram. Dipakai "Satu Lagu" di bawah ini; koreksi kalau salah baca lagi
+</div>
+
+<div class="seksi">VERSI TV KIOSK — LOBI SIOLA</div>
+<div class="nama">Rancangan 1080×1920 potret · jarak baca 2,5 meter · tipografi 2× skala mobile · tanpa interaksi</div>
+
+<div style="width:540px;height:960px;background:var(--biru-malam);border-radius:12px;overflow:hidden;
+            position:relative;box-shadow:0 10px 40px rgba(8,20,31,.3)">
+
+  <div style="padding:32px 36px 20px;display:flex;justify-content:space-between;align-items:center;
+              border-bottom:1px solid rgba(199,210,218,.15)">
+    <div>
+      <div class="m-s" style="color:var(--mint)">SOERABAJA 1945</div>
+      <div style="font-family:var(--disp);font-size:34px;color:var(--putih);letter-spacing:-.01em;margin-top:2px">
+        DUA ZAMAN, SATU LAGU</div>
+    </div>
+    <div style="text-align:right">
+      <div class="m-s" style="color:var(--redup)">PUKUL</div>
+      <div style="font-family:var(--disp);font-size:28px;color:var(--putih)">13:58</div>
+    </div>
+  </div>
+
+  <div style="margin:28px 36px;background:rgba(20,69,111,.4);border-radius:16px;padding:32px;
+              border:1px solid rgba(79,230,140,.25)">
+    <div style="display:flex;gap:8px;margin-bottom:18px">
+      <span style="background:rgba(79,230,140,.16);color:var(--mint);border-radius:20px;padding:4px 14px" class="m-s">TINGKAT A</span>
+      <span style="background:rgba(199,210,218,.1);color:var(--perak);border-radius:20px;padding:4px 14px" class="m-s">TITIK 4 · SIOLA</span>
+    </div>
+    <div style="font-size:32px;line-height:1.5;color:var(--putih);font-weight:500">
+      "Merinding pas nyobek birunya. Getaran haptic muncul, kayak beneran robek kain arek-arek Suroboyo tahun 1945."</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:24px">
+      <span style="font-size:22px;color:var(--mint)">— Rekrut Baru, 13:20</span>
+      <span class="m-s" style="color:var(--redup)">TERVERIFIKASI AR</span>
+    </div>
+  </div>
+
+  <div style="margin:0 36px 24px;display:flex;justify-content:space-between">
+    <div style="text-align:center;flex:1">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--mint);margin:0 auto 8px"></div>
+      <span class="m-s" style="color:var(--mint)">YAMATO</span></div>
+    <div style="text-align:center;flex:1">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--mint);margin:0 auto 8px"></div>
+      <span class="m-s" style="color:var(--mint)">MALLABY</span></div>
+    <div style="text-align:center;flex:1">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--mint);margin:0 auto 8px"></div>
+      <span class="m-s" style="color:var(--mint)">TUGU</span></div>
+    <div style="text-align:center;flex:1">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--emas);margin:0 auto 8px"></div>
+      <span class="m-s" style="color:var(--emas)">SIOLA</span></div>
+    <div style="text-align:center;flex:1">
+      <div style="width:40px;height:40px;border-radius:50%;background:rgba(199,210,218,.15);margin:0 auto 8px"></div>
+      <span class="m-s" style="color:var(--redup)">TUNJUNGAN</span></div>
+  </div>
+
+  <div style="margin:0 36px 24px;background:rgba(79,230,140,.08);border:1.5px solid var(--mint);
+              border-radius:16px;padding:24px;display:flex;gap:24px;align-items:center">
+    <div style="width:100px;height:100px;background:var(--putih);border-radius:10px;flex:none;
+                display:flex;align-items:center;justify-content:center">
+      <svg width="80" height="80" viewBox="0 0 21 21">
+        <rect width="21" height="21" fill="#F2F5F7"/>
+        <g fill="#08141F"><path d="M0 0h7v7H0zM14 0h7v7h-7zM0 14h7v7H0z"/></g>
+        <g fill="#F2F5F7"><path d="M1 1h5v5H1zM15 1h5v5h-5zM1 15h5v5H1z"/></g>
+        <g fill="#08141F"><path d="M2 2h3v3H2zM16 2h3v3h-3zM2 16h3v3H2z"/></g>
+      </svg>
+    </div>
+    <div>
+      <div style="font-size:20px;font-weight:700;color:var(--putih)">Abadikan Jejakmu</div>
+      <div style="font-size:15px;color:var(--perak);margin-top:4px">Pindai · pilih foto AR · tulis kesan. Tayang di sini dalam 5 menit.</div>
+    </div>
+  </div>
+
+  <div style="margin:0 36px;display:flex;gap:16px">
+    <div style="flex:1;background:rgba(8,20,31,.4);border-radius:12px;padding:18px;text-align:center">
+      <div style="font-family:var(--disp);font-size:30px;color:var(--putih)">2.840</div>
+      <div class="m-s" style="color:var(--redup)">FOTO TERKIRIM</div></div>
+    <div style="flex:1;background:rgba(8,20,31,.4);border-radius:12px;padding:18px;text-align:center">
+      <div style="font-family:var(--disp);font-size:30px;color:var(--putih)">412</div>
+      <div class="m-s" style="color:var(--redup)">PESAN TAYANG</div></div>
+    <div style="flex:1;background:rgba(8,20,31,.4);border-radius:12px;padding:18px;text-align:center">
+      <div style="font-family:var(--disp);font-size:30px;color:var(--emas)">1.240</div>
+      <div class="m-s" style="color:var(--redup)">PENGUNJUNG HARI INI</div></div>
+  </div>
+
+  <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 36px;text-align:center;
+              border-top:1px solid rgba(199,210,218,.1)">
+    <span class="m-s" style="color:#3A4550">MUSEUM SURABAYA · GEDUNG SIOLA</span>
+  </div>
+</div>
+<div class="catatan">
+Yang SENGAJA TIDAK MASUK Wall (pindah ke Feed): antrean verifikasi live, caption panjang, daftar kontributor kecil, metrik UMKM, ticker FPS. Elemen statis (panel QR, strip titik) akan digeser 4px tiap 20 menit untuk mencegah burn-in — tidak terlihat di mock-up statis ini, tapi wajib di implementasi.
+</div>
+
+<div class="seksi">VERSI WEB — SOERABAJA FEED</div>
+<div class="nama">Jarak baca 40cm · interaktif · memuat detail yang tidak muat di Wall</div>
+
+<div style="max-width:900px;background:var(--biru-malam);border-radius:16px;overflow:hidden;
+            box-shadow:0 10px 40px rgba(8,20,31,.3)">
+
+  <div style="padding:28px 32px;display:flex;justify-content:space-between;align-items:center;
+              border-bottom:1px solid rgba(199,210,218,.15)">
+    <div>
+      <div class="m-s" style="color:var(--mint)">SOERABAJA 1945 · FEED</div>
+      <div style="font-family:var(--disp);font-size:26px;color:var(--putih)">DUA ZAMAN, SATU LAGU</div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <span style="background:rgba(199,210,218,.1);color:var(--perak);border-radius:8px;padding:6px 14px;font-size:13px">Semua Titik ▾</span>
+      <span style="background:var(--mint);color:var(--hitam);border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600">Ikuti Rute Ini →</span>
+    </div>
+  </div>
+
+  <div style="padding:20px 32px;display:flex;gap:24px;border-bottom:1px solid rgba(199,210,218,.1)">
+    <div><span style="color:var(--mint);font-weight:700">2.840</span> <span style="color:var(--redup);font-size:13px">foto</span></div>
+    <div><span style="color:var(--mint);font-weight:700">412</span> <span style="color:var(--redup);font-size:13px">tayang</span></div>
+    <div><span style="color:var(--mint);font-weight:700">13:58:16</span> <span style="color:var(--redup);font-size:13px">live</span></div>
+  </div>
+
+  <div style="padding:24px 32px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+    <div style="background:rgba(20,69,111,.4);border-radius:12px;padding:20px;grid-column:span 2">
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <span style="background:rgba(79,230,140,.16);color:var(--mint);border-radius:16px;padding:3px 10px;font-size:11px">TINGKAT A</span>
+        <span style="color:var(--redup);font-size:12px">Titik 4 · Siola · 14:22</span>
+      </div>
+      <p style="color:var(--putih);font-size:15px;line-height:1.6">"Merinding pas nyobek birunya. Getaran haptic muncul, kayak beneran robek kain arek-arek Suroboyo tahun 1945. Sejarah dadi cetha, verifikasi museum Siola #64."</p>
+      <div style="color:var(--mint);font-size:13px;margin-top:8px">— Rekrut Baru</div>
+    </div>
+
+    <div style="background:rgba(20,69,111,.4);border-radius:12px;padding:16px">
+      <div style="height:100px;border-radius:8px;background:linear-gradient(160deg,#14456F,#0E2438);
+                  margin-bottom:10px;display:flex;align-items:center;justify-content:center">
+        <span class="m-s" style="color:var(--redup)">FOTO AR · TANPA WAJAH</span></div>
+      <span style="background:rgba(212,162,47,.16);color:var(--emas);border-radius:16px;padding:3px 10px;font-size:11px">TINGKAT B · 18+</span>
+      <p style="color:var(--perak);font-size:13px;margin-top:8px">"Bapakku cerita kakekku ikut di Jembatan Merah. Baru hari ini aku ngerti maksudnya."</p>
+    </div>
+
+    <div style="background:rgba(20,69,111,.4);border-radius:12px;padding:16px">
+      <span style="background:rgba(79,230,140,.16);color:var(--mint);border-radius:16px;padding:3px 10px;font-size:11px">TINGKAT A</span>
+      <p style="color:var(--perak);font-size:13px;margin-top:10px">"Baru sadar Siola dulu jadi saksi sejarah lewat. Kirain cuma mal biasa."</p>
+      <div style="color:var(--redup);font-size:11px;margin-top:8px">Verified 10:02 WIB</div>
+    </div>
+  </div>
+
+</div>
+<div class="catatan">
+Aturan privasi IDENTIK dengan Wall — tingkat A/B/C berlaku sama di kedua kanal. Yang membedakan hanya kepadatan
+tampilan dan interaktivitas (filter, gulir tak terbatas, tautan "Ikuti Rute Ini" ke instal aplikasi).
+Tidak ada entri yang boleh muncul di satu kanal tapi ditolak di kanal lain.
+</div>
+
+</body>
+</html>
