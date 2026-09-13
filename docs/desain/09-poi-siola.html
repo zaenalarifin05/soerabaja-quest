@@ -44,13 +44,10 @@
 <div class="board-h">POI 4 · MUSEUM SIOLA — FASE REHAT &amp; REFLEKSI</div>
 <p class="board-sub">Beda dari tiga POI sebelumnya — di sini tidak ada AR aksi baru. Siola adalah jeda naratif: rekap perjalanan, arsip fisik, dan tempat suara pemain sendiri masuk ke dinding guestbook sebelum lanjut ke Tunjungan.</p>
 <div class="fixnote">
-KETERBATASAN RESOLUSI — DUGAAN, BUKAN KEPASTIAN<br>
-Tiga kartu hijau tengah (arsip nyata, foto lama-sekarang, berita berdampingan) dibaca sebagai RANGKAIAN
-"jembatan arsip fisik ke digital" — pemain memindai benda asli di museum, aplikasi menghubungkannya ke
-momen yang baru dialami di jalan. Ini sama persis dengan storyboard S7 asli ("Arsip Mendalam")<br>
-Statistik "3j 5m · 4,1km · 3/3" diasumsikan: waktu tempuh, jarak, dan badge terkumpul — koreksi kalau beda<br>
-Kartu kertas "Menulis Ulang Kesan-Kesan Arek" dibaca sebagai input guestbook, dibuat dengan batas 140 karakter
-sesuai Dok 03, dan CATATAN MODERASI eksplisit — konsisten Dok 08 (jeda tayang, bukan langsung publik)<br><br>
+DIKONFIRMASI — DOKUMEN 11 (Q6, Q7)<br>
+Statistik "3j 5m · 4,1km · 3/3" dikonfirmasi benar (waktu tempuh, jarak, lencana) — tidak ada perubahan<br>
+Tiga kartu arsip (Arsip Nyata, Foto Dulu-Sekarang, Berita Berdampingan) dikonfirmasi sebagai TIGA FITUR
+INDEPENDEN, bukan satu sistem terpadu — setiap kartu sekarang punya tombol aksi terpisah<br><br>
 BEDA DARI EMPAT POI LAIN<br>
 Tidak ada render "gedung" dramatis — Siola sengaja tenang, ber-AC, latar lebih terang<br>
 Tidak ada SafetyNotice trafik — di dalam gedung, risiko keselamatannya beda karakter
@@ -94,33 +91,48 @@ Tidak ada SafetyNotice trafik — di dalam gedung, risiko keselamatannya beda ka
   </div>
 
   <div style="padding:0 24px 12px">
-    <div class="m-s" style="color:var(--redup);margin-bottom:10px">ARSIP FISIK · PINDAI DI DALAM MUSEUM</div>
+    <div class="m-s" style="color:var(--redup);margin-bottom:10px">TIGA ARSIP · MASING-MASING FITUR TERPISAH</div>
 
     <div style="background:rgba(79,230,140,.10);border:1px solid rgba(79,230,140,.3);border-radius:12px;
-                padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px">
-      <span style="font-size:20px">🖼️</span>
-      <div style="flex:1">
-        <div class="j-s" style="color:var(--putih)">Arsip Nyata Museum Ini</div>
-        <div class="i-s" style="color:var(--perak)">Pindai benda asli untuk membuka ceritanya</div>
+                padding:14px 16px;margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <span style="font-size:20px">🖼️</span>
+        <div style="flex:1">
+          <div class="j-s" style="color:var(--putih)">Arsip Nyata Museum Ini</div>
+          <div class="i-s" style="color:var(--perak)">Pindai benda asli untuk membuka ceritanya</div>
+        </div>
       </div>
+      <div style="height:40px;border-radius:8px;background:rgba(79,230,140,.16);display:flex;
+                  align-items:center;justify-content:center;color:var(--mint);font-size:12px;font-weight:700">
+        📷 PINDAI BENDA</div>
     </div>
 
     <div style="background:rgba(79,230,140,.10);border:1px solid rgba(79,230,140,.3);border-radius:12px;
-                padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px">
-      <span style="font-size:20px">🕰️</span>
-      <div style="flex:1">
-        <div class="j-s" style="color:var(--putih)">Foto Dulu &amp; Sekarang</div>
-        <div class="i-s" style="color:var(--perak)">Bandingkan wajah kota 1945 dan hari ini</div>
+                padding:14px 16px;margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <span style="font-size:20px">🕰️</span>
+        <div style="flex:1">
+          <div class="j-s" style="color:var(--putih)">Foto Dulu &amp; Sekarang</div>
+          <div class="i-s" style="color:var(--perak)">Geser untuk bandingkan wajah kota 1945 dan hari ini</div>
+        </div>
       </div>
+      <div style="height:40px;border-radius:8px;background:rgba(79,230,140,.16);display:flex;
+                  align-items:center;justify-content:center;color:var(--mint);font-size:12px;font-weight:700">
+        🔍 BUKA GALERI GESER</div>
     </div>
 
     <div style="background:rgba(79,230,140,.10);border:1px solid rgba(79,230,140,.3);border-radius:12px;
-                padding:14px 16px;margin-bottom:20px;display:flex;align-items:center;gap:12px">
-      <span style="font-size:20px">📰</span>
-      <div style="flex:1">
-        <div class="j-s" style="color:var(--putih)">Berita Nyata, Berdampingan</div>
-        <div class="i-s" style="color:var(--perak)">Koran asli 1945 di sebelah rekonstruksimu</div>
+                padding:14px 16px;margin-bottom:20px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <span style="font-size:20px">📰</span>
+        <div style="flex:1">
+          <div class="j-s" style="color:var(--putih)">Berita Nyata, Berdampingan</div>
+          <div class="i-s" style="color:var(--perak)">Koran asli 1945 dipajang di sebelah rekonstruksimu</div>
+        </div>
       </div>
+      <div style="height:40px;border-radius:8px;background:rgba(79,230,140,.16);display:flex;
+                  align-items:center;justify-content:center;color:var(--mint);font-size:12px;font-weight:700">
+        📖 LIHAT DI RUANG PAMER</div>
     </div>
   </div>
 
