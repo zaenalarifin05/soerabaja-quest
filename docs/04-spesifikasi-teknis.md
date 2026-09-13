@@ -268,11 +268,21 @@ Untuk POI dengan layar (jika listrik tersedia), naikkan ke **QR dinamis** yang m
 | Lokasi (**foreground only**) | Saat memilih rute | "Untuk memastikan kamu sudah sampai di titiknya. Tidak dibaca saat aplikasi tertutup." |
 | Penyimpanan | Saat unduh offline pack | "Untuk menyimpan konten rute agar bisa dipakai tanpa sinyal." |
 | Notifikasi | **Setelah** rute pertama tuntas, tidak sebelumnya | "Untuk memberitahumu saat pesanmu tayang atau rute baru dibuka." |
-| Mikrofon | Tidak diminta | — |
+| Mikrofon | **Direvisi Sept 2026.** Saat Tahap 2 di POI Yamato dibuka (misi "Katakan Merdeka"), bukan di onboarding | "Untuk mengukur kerasnya suaramu saat berteriak Merdeka. Kami tidak merekam atau menyimpan suaramu." |
 
 Tidak ada `ACCESS_BACKGROUND_LOCATION`. Titik. Ia akan memicu review tambahan di Play Store, memerlukan justifikasi video, dan produk ini tidak membutuhkannya.
 
-**Data yang disimpan server:** `player_id`, `nickname`, daftar `poi_id` yang selesai, waktu selesai, tier yang disajikan, pilihan di Jembatan Merah, entri guestbook. **Tidak ada jejak koordinat.** Koordinat kasar dikirim hanya saat verifikasi dan tidak dipersistensikan.
+**Konsekuensi teknis izin mikrofon (Dokumen 11):**
+
+| Aspek | Ketentuan |
+|---|---|
+| Yang diukur | Amplitudo/volume input mikrofon secara real-time, **bukan** transkripsi atau pengenalan kata |
+| Data yang disimpan | Hanya boolean `tahap_2_selesai: true/false`. **Tidak pernah** menyimpan rekaman audio, bahkan sementara |
+| Ambang batas | Longgar dan bertahap — UI menampilkan umpan balik "hampir cukup" sebelum berhasil penuh, bukan biner gagal/berhasil sekali coba |
+| Fallback izin ditolak | Tekan-tahan tombol 3 detik sebagai pengganti. Progres tidak pernah terblokir oleh penolakan izin |
+| Fallback lingkungan bising | Karena ambang longgar, kebisingan latar (lalu lintas, kerumunan) tidak dianggap kegagalan — sistem tetap menerima asal ada lonjakan volume dari pemain |
+
+**Data yang disimpan server:** `player_id`, `nickname`, daftar `poi_id` yang selesai, waktu selesai, tier yang disajikan, pilihan di Jembatan Merah, entri guestbook. **Tidak ada jejak koordinat, tidak ada rekaman audio.** Koordinat kasar dikirim hanya saat verifikasi dan tidak dipersistensikan.
 
 ### B.7 Skema Event Analitik
 

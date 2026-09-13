@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — POI Tunjungan (Penutup Rute)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --hitam:#08141F; --mint:#4FE68C; --mint-redup:#2FA862;
+    --kertas:#E3D6B8; --sepia:#7A6144; --merah:#9E2B22; --redup:#7A8592;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#DCE1E6;font-family:var(--ui);padding:56px 40px}
+  .board-h{font-family:var(--disp);font-size:36px;letter-spacing:-.02em;color:var(--hitam)}
+  .board-sub{font-size:14px;color:#5A6570;margin:8px 0 18px;max-width:820px;line-height:1.6}
+  .fixnote{font-family:var(--mono);font-size:12px;line-height:1.9;color:#5A6570;background:#EBEFF2;
+           border-left:3px solid var(--mint-redup);padding:14px 18px;max-width:820px;margin-bottom:40px}
+  .rak{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+  .nama{font-family:var(--mono);font-size:12px;color:#5A6570;margin-bottom:8px}
+  .catatan{font-size:12.5px;line-height:1.55;color:#5A6570;border-left:2px solid #B9C2CA;
+           padding-left:10px;max-width:390px;margin-top:10px}
+  .layar{width:390px;height:844px;overflow-y:auto;overflow-x:hidden;position:relative;border-radius:22px;
+         box-shadow:0 8px 28px rgba(8,20,31,.18);scrollbar-width:thin}
+  .disp-l{font-family:var(--disp);font-size:24px;line-height:26px;letter-spacing:-.01em}
+  .disp-xl{font-family:var(--disp);font-size:32px;line-height:34px;letter-spacing:-.01em}
+  .j-m{font-size:18px;line-height:24px;font-weight:700}
+  .j-s{font-size:15px;line-height:20px;font-weight:700}
+  .i-m{font-size:13.5px;line-height:20px}
+  .i-s{font-size:12px;line-height:17px;font-weight:500}
+  .m-s{font-family:var(--mono);font-size:10.5px;line-height:15px;letter-spacing:.03em}
+  .cta{height:54px;border-radius:14px;background:var(--mint);color:var(--hitam);
+       font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px}
+</style>
+</head>
+<body>
+
+<div class="board-h">POI 5 · TUNJUNGAN — PENUTUP RUTE</div>
+<p class="board-sub">Titik terakhir. Di sinilah rute berubah jadi transaksi UMKM sungguhan — inti loop ekonomi yang jadi tesis utama seluruh proyek. Tiga layar: ringkasan &amp; merchant, QR aktif di kasir, dan penutup rute dengan koleksi tokoh.</p>
+<div class="fixnote">
+KETERBATASAN RESOLUSI — DUGAAN, BUKAN KEPASTIAN<br>
+Kartu hijau atas dibaca sebagai ringkasan poin/reward terkumpul — angka "1.500 poin" contoh, bukan final<br>
+Daftar merchant referensi tampak 3-4 entri dengan foto; dibuat 3 sebagai representasi — jumlah asli
+dikelola dari CMS (Dok 03 §C, Mitra &amp; Voucher)<br>
+"5 dari 10 Tokoh" — konsisten storyboard S9 asli (7 tokoh awal, direvisi jadi 10 di rencana V1.5)<br><br>
+PERBAIKAN BACKLOG DITERAPKAN DI SINI<br>
+B1 · QR sungguhan (finder pattern 3 sudut), bukan kotak-kotak acak<br>
+B2 · Dipecah 2 state: SEBELUM tap (QR redup, alamat merchant terlihat) dan SESUDAH tap (QR hidup, hitung mundur)<br>
+B3 · Kode bypass darurat disembunyikan di balik tautan, tidak tampil permanen
+</div>
+
+<div class="rak">
+
+<div>
+<div class="nama">U1 · Halaman POI — ringkasan & rekomendasi merchant</div>
+<div class="layar" style="background:var(--biru-malam)">
+
+  <div style="padding:44px 24px 16px">
+    <div class="m-s" style="color:var(--mint)">SOERABAJA 1945 · TITIK 5</div>
+    <div class="disp-l" style="color:var(--putih);margin-top:4px">TUNJUNGAN</div>
+    <div class="i-s" style="color:var(--perak);margin-top:2px">Zona Kuliner &amp; Kreatif</div>
+  </div>
+
+  <div style="margin:0 24px 16px;background:linear-gradient(160deg,rgba(212,162,47,.18),rgba(20,69,111,.4));
+              border:1px solid rgba(212,162,47,.4);border-radius:16px;padding:18px 20px;text-align:center">
+    <div class="m-s" style="color:var(--emas)">RUTE TUNTAS · POIN TERKUMPUL</div>
+    <div class="disp-xl" style="color:var(--putih);margin-top:6px">1.500 POIN</div>
+    <div class="i-s" style="color:var(--perak);margin-top:4px">Dari 5 misi, 3 lencana, 1 kesimpulan arsip</div>
+  </div>
+
+  <div style="margin:0 24px 16px;background:rgba(20,69,111,.45);border-radius:16px;padding:18px 20px;text-align:center">
+    <div class="m-s" style="color:var(--mint)">VOUCHER SIAP DITUKAR · BERLAKU 7 HARI</div>
+    <div style="display:flex;justify-content:center;margin-top:14px">
+      <div style="width:160px;height:160px;border-radius:10px;overflow:hidden;opacity:.3;filter:blur(1px)">
+        <svg width="160" height="160" viewBox="0 0 21 21">
+          <rect width="21" height="21" fill="#F2F5F7"/>
+          <g fill="#08141F"><path d="M0 0h7v7H0zM14 0h7v7h-7zM0 14h7v7H0z"/></g>
+          <g fill="#F2F5F7"><path d="M1 1h5v5H1zM15 1h5v5h-5zM1 15h5v5H1z"/></g>
+          <g fill="#08141F"><path d="M2 2h3v3H2zM16 2h3v3h-3zM2 16h3v3H2z"/></g>
+        </svg>
+      </div>
+    </div>
+    <div class="i-s" style="color:var(--redup);margin-top:10px">QR aktif setelah kamu berdiri di depan kasir merchant pilihan.</div>
+  </div>
+
+  <div style="padding:0 24px 12px">
+    <div class="m-s" style="color:var(--redup);margin-bottom:10px">MERCHANT REKOMENDASI TUNJUNGAN</div>
+
+    <div style="display:flex;gap:12px;background:rgba(20,69,111,.35);border-radius:12px;padding:10px;margin-bottom:10px">
+      <div style="width:56px;height:56px;border-radius:8px;background:linear-gradient(160deg,#8A6E56,#3A2E20);flex:none"></div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--putih)">Depot Tunjungan</div>
+        <div class="i-s" style="color:var(--mint)">Rawon gratis · 180 m</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;background:rgba(20,69,111,.35);border-radius:12px;padding:10px;margin-bottom:10px">
+      <div style="width:56px;height:56px;border-radius:8px;background:linear-gradient(160deg,#4A3A2A,#1C140C);flex:none"></div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--putih)">Kopi &amp; Toast Tunjungan</div>
+        <div class="i-s" style="color:var(--mint)">Kopi susu gratis · 220 m</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;background:rgba(20,69,111,.35);border-radius:12px;padding:10px;margin-bottom:20px">
+      <div style="width:56px;height:56px;border-radius:8px;background:linear-gradient(160deg,#6E4A2E,#2A1C10);flex:none"></div>
+      <div style="flex:1">
+        <div class="j-s" style="color:var(--putih)">7 Kedai Klasik</div>
+        <div class="i-s" style="color:var(--mint)">Diskon 30% · 340 m</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:0 24px 20px">
+    <div class="cta"><span>▶</span> PILIH MERCHANT &amp; TUNJUKKAN QR</div>
+  </div>
+
+  <div style="margin:0 24px 32px;background:rgba(229,83,61,.14);border:1px solid rgba(229,83,61,.5);
+              border-radius:12px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start">
+    <span style="font-size:18px;flex:none">⚠️</span>
+    <div>
+      <div class="j-s" style="color:var(--bahaya)">Perhatian Keselamatan</div>
+      <div class="i-s" style="color:var(--putih);margin-top:2px">Jalan Tunjungan ramai kendaraan dan pejalan kaki malam hari. Simpan HP setelah menukar voucher, jangan berjalan sambil menatap layar.</div>
+    </div>
+  </div>
+
+</div>
+<div class="catatan">Angka poin dan daftar merchant murni ilustratif. Sumber kebenarannya tabel <code>Merchant</code> dan <code>Voucher</code> di Dokumen 01 — daftar tampil sesuai jarak dan status buka real-time. <code>SafetyNotice</code> ditambahkan (B26) — sempat terlewat di draft pertama, padahal Tunjungan sama ramainya dengan POI lain.</div>
+</div>
+
+<div>
+<div class="nama">U2 · QR Aktif — momen paling rapuh di seluruh sistem (Layar Aksi)</div>
+<div class="layar" style="background:var(--biru-malam)">
+
+  <div style="padding:60px 24px 0;text-align:center">
+    <div class="m-s" style="color:var(--mint)">TUNJUKKAN KE KASIR</div>
+    <div style="display:flex;justify-content:center;margin-top:20px">
+      <div style="width:220px;height:220px;border-radius:12px;overflow:hidden;background:var(--putih)">
+        <svg width="220" height="220" viewBox="0 0 21 21">
+          <rect width="21" height="21" fill="#F2F5F7"/>
+          <g fill="#08141F" shape-rendering="crispEdges">
+            <path d="M0 0h7v7H0zM14 0h7v7h-7zM0 14h7v7H0z"/></g>
+          <g fill="#F2F5F7" shape-rendering="crispEdges">
+            <path d="M1 1h5v5H1zM15 1h5v5h-5zM1 15h5v5H1z"/></g>
+          <g fill="#08141F" shape-rendering="crispEdges">
+            <path d="M2 2h3v3H2zM16 2h3v3h-3zM2 16h3v3H2z"/>
+            <path d="M9 9h1v1H9zM11 10h1v1h-1zM9 12h1v1H9zM12 12h1v1h-1zM10 14h1v1h-1z"/>
+            <path d="M9 0h1v1H9zM11 0h1v1h-1zM9 3h1v1H9zM8 8h1v1H8zM12 8h1v1h-1zM8 12h1v1H8z"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div style="margin-top:20px">
+      <div class="j-m" style="color:var(--putih)">Depot Tunjungan</div>
+      <div class="i-s" style="color:var(--perak);margin-top:4px">Rawon gratis × 1</div>
+    </div>
+
+    <div style="display:flex;justify-content:center;margin-top:20px">
+      <div style="background:rgba(212,162,47,.16);border-radius:8px;padding:10px 26px" class="m-s">
+        <span style="color:var(--emas)">Berlaku 09:52</span></div>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:60px;left:0;right:0;text-align:center">
+    <span class="i-s" style="color:var(--mint)">Sinyal kasir mati?</span>
+  </div>
+</div>
+<div class="catatan">QR hidup penuh, hitung mundur aktif, tombol "tukar" sudah hilang (sudah ditekan). Kode bypass darurat ada di balik tautan kecil, tidak tampil permanen — sesuai perbaikan B3.</div>
+</div>
+
+<div>
+<div class="nama">U3 · Penutup Rute — koleksi tokoh & bagikan pencapaian</div>
+<div class="layar" style="background:linear-gradient(180deg,#14456F 0%,#0E2438 55%,#08141F 100%)">
+
+  <div style="padding:52px 24px 0;text-align:center">
+    <div class="m-s" style="color:var(--mint)">RUTE TUNTAS · NAPAK TILAS 45</div>
+    <div class="disp-xl" style="color:var(--putih);margin-top:10px">SELAMAT,<br>PAHLAWAN SUROBOYO</div>
+  </div>
+
+  <div style="margin:24px 24px 16px;background:rgba(8,20,31,.4);border-radius:16px;padding:18px 20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span class="m-s" style="color:var(--redup)">KOLEKSI TOKOH SURABAYA</span>
+      <span class="j-s" style="color:var(--emas)">5/10</span>
+    </div>
+    <div style="height:6px;border-radius:3px;background:rgba(199,210,218,.15)">
+      <div style="width:50%;height:100%;border-radius:3px;background:var(--emas)"></div></div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px">
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(212,162,47,.16);border:1.5px solid var(--emas)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(212,162,47,.16);border:1.5px solid var(--emas)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(212,162,47,.16);border:1.5px solid var(--emas)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(212,162,47,.16);border:1.5px solid var(--emas)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(212,162,47,.16);border:1.5px solid var(--emas)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(199,210,218,.08);border:1px dashed rgba(199,210,218,.25)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(199,210,218,.08);border:1px dashed rgba(199,210,218,.25)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(199,210,218,.08);border:1px dashed rgba(199,210,218,.25)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(199,210,218,.08);border:1px dashed rgba(199,210,218,.25)"></div>
+      <div style="aspect-ratio:1;border-radius:8px;background:rgba(199,210,218,.08);border:1px dashed rgba(199,210,218,.25)"></div>
+    </div>
+  </div>
+
+  <div style="margin:0 24px 20px;display:flex;justify-content:center">
+    <div style="width:64px;height:64px;border-radius:50%;background:rgba(212,162,47,.18);border:2px solid var(--emas)"></div>
+    <div style="width:64px;height:64px;border-radius:50%;background:rgba(212,162,47,.18);border:2px solid var(--emas);margin-left:-14px"></div>
+    <div style="width:64px;height:64px;border-radius:50%;background:rgba(212,162,47,.18);border:2px solid var(--emas);margin-left:-14px"></div>
+  </div>
+
+  <div style="padding:0 24px 12px">
+    <div class="cta"><span>📤</span> BAGIKAN PENCAPAIANMU</div>
+  </div>
+
+  <div style="padding:0 24px 32px;text-align:center">
+    <div class="i-s" style="color:var(--perak)">Tujuh sisanya menunggu di Peneleh, Ampel, dan Kota Lama.<br>Rute berikutnya dibuka 31 Mei.</div>
+  </div>
+
+</div>
+<div class="catatan">Layar penutup ini yang paling menentukan angka "share_completed" di Dok 04 — kail retensi lintas-rute (V1.5) ditempatkan di sini, momen emosional tertinggi pemain.</div>
+</div>
+
+</div>
+
+</body>
+</html>

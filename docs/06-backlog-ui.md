@@ -53,6 +53,12 @@
 | B24 | Beranda | Kartu briefing/arsip permanen memakan ±30% tinggi gulir beranda | **Bukan dihapus** — diubah jadi tombol ringkas "Arsip Sepia" dengan penanda belum-dibaca; isi lengkap pindah ke overlay terpisah. Lihat Dokumen 01 entitas `ArchiveEntry` |
 | B25 | Beranda | Status "TERKUNCI" memakai ikon gembok generik, kurang menarik secara visual | Ganti jadi `LockedCard` (Dokumen 03 §5): siluet ikon asli kartu itu sendiri, diredupkan — bukan gembok. Gembok disisakan khusus untuk kunci sistem, mis. avatar terkunci syarat pangkat |
 
+## P0 — Ditemukan saat konsolidasi lintas-POI (Dokumen 11)
+
+| # | Layar | Masalah | Perbaikan |
+|---|---|---|---|
+| B26 | Tunjungan (U1) | `SafetyNotice` — komponen wajib di semua POI aksi — terlewat di draft pertama Tunjungan, padahal jalan kuliner malam sama ramainya dengan Yamato/Jembatan Merah/Tugu | **Sudah diperbaiki** di `soerabaja-poi-tunjungan.html`. Dicatat di sini sebagai pengingat: setiap POI baru wajib dicek terhadap checklist komponen tetap sebelum dianggap selesai |
+
 ## P2 — Kelengkapan konsep
 
 | # | Cakupan | Masalah | Perbaikan |

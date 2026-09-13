@@ -242,6 +242,7 @@ Diturunkan dari jarak baca 2,5 meter pada layar 55 inci resolusi 1080p. Skala mo
 | `SafetyLock` | Lapangan | Overlay `--sinyal-bahaya` 18% + pesan, aktif saat kecepatan > 7 km/j |
 | `LockedCard` | Lapangan | **Ditambahkan Sept 2026.** Kartu POI/koleksi terkunci memakai **siluet ikon aslinya sendiri**, diredupkan (grayscale + opacity 35%) — bukan ikon gembok generik. Rasional: mempertahankan rasa penasaran terhadap konten di baliknya, bukan sekadar menandai "tidak bisa diakses". Gembok hanya dipakai untuk kunci sistem (mis. avatar terkunci syarat pangkat), tidak untuk POI |
 | `ArchiveEntryCard` | Arsip | Kartu kepingan koleksi, identik pola dengan `BadgeStamp` tapi persegi bukan bundar. Status terkunci mengikuti aturan `LockedCard` di atas |
+| `SafetyNotice` | **Ditambahkan Sept 2026.** Lapangan | Kotak peringatan keselamatan, **permanen di posisi akhir halaman** setiap POI aksi (sebelum tombol navigasi), tidak bisa di-dismiss. Latar `--sinyal-bahaya` 14%, border 1px 50%, ikon ⚠️. Konten kontekstual per lokasi — komponen sama, teks beda sesuai risiko fisik setempat (lalu lintas, pembatas jembatan, area terbuka, dsb). **Wajib di seluruh POI aksi tanpa kecuali**, termasuk yang tampak "aman" — lihat Dokumen 11 §1 untuk kasus di mana ini sempat terlewat |
 
 ### Aturan gerak
 

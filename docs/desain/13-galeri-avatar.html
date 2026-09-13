@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Soerabaja Quest — Galeri Avatar & Penerapan di Beranda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Courier+Prime:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --biru-malam:#0E2438; --biru:#14456F; --perak:#C7D2DA; --putih:#F2F5F7;
+    --emas:#D4A22F; --hitam:#08141F; --mint:#4FE68C; --mint-redup:#2FA862;
+    --sepia:#7A6144; --merah:#9E2B22; --bahaya:#E5533D; --redup:#7A8592;
+    --disp:'Big Shoulders Display',sans-serif;
+    --ui:'Plus Jakarta Sans',sans-serif;
+    --mono:'Courier Prime',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#DCE1E6;font-family:var(--ui);padding:56px 40px}
+  .board-h{font-family:var(--disp);font-size:38px;letter-spacing:-.02em;color:var(--hitam)}
+  .board-sub{font-size:14px;color:#5A6570;margin:8px 0 20px;max-width:800px;line-height:1.6}
+  .fixnote{font-family:var(--mono);font-size:12px;line-height:1.9;color:#5A6570;background:#EBEFF2;
+           border-left:3px solid var(--mint-redup);padding:14px 18px;max-width:800px;margin-bottom:44px}
+  .seksi{font-family:var(--disp);font-size:26px;color:var(--hitam);margin:44px 0 18px}
+  .rak{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+  .nama{font-family:var(--mono);font-size:12px;color:#5A6570;margin-bottom:8px}
+  .layar{width:390px;overflow:hidden;position:relative;border-radius:22px;
+         box-shadow:0 8px 28px rgba(8,20,31,.18);background:var(--biru-malam)}
+  .disp-l{font-family:var(--disp);font-size:26px;line-height:28px;letter-spacing:-.01em}
+  .j-s{font-size:16px;line-height:21px;font-weight:700}
+  .i-m{font-size:14px;line-height:21px}
+  .i-s{font-size:12.5px;line-height:18px;font-weight:500}
+  .m-s{font-family:var(--mono);font-size:11px;line-height:16px;letter-spacing:.03em}
+  .cta{height:52px;border-radius:12px;background:var(--mint);color:var(--hitam);
+       font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+  /* ── generator avatar ilustrasi: SVG bergaya cap, bukan foto ── */
+  .av{width:100%;height:100%;display:block}
+</style>
+</head>
+<body>
+
+<div class="board-h">GALERI AVATAR — ILUSTRASI, BUKAN FOTO</div>
+<p class="board-sub">Delapan avatar ilustrasi bergaya cap/stempel, konsisten dengan estetika <code>BadgeStamp</code>. Tidak ada unggah foto wajah bebas — ini keputusan sadar, bukan keterbatasan teknis. Alasan lengkap di Dokumen 08 (gerbang privasi tiga tingkat).</p>
+<div class="fixnote">
+KENAPA BUKAN FOTO WAJAH BEBAS<br>
+Solo Explorer tidak punya verifikasi usia — akun anak dan dewasa tidak bisa dibedakan sistem<br>
+Fitur "unggah foto profil" berlaku untuk SEMUA akun kalau ada — tidak bisa dibatasi hanya untuk 18+<br>
+Foto asli acak merusak nuansa "dokumen 1945" yang jadi identitas visual produk<br><br>
+JALUR KE FOTO ASLI TETAP ADA — tapi lewat gerbang consent, bukan avatar default<br>
+Tingkat B/C di Dokumen 08 tetap mengizinkan foto (tanpa/dengan wajah) untuk konteks guestbook &amp; Wall,
+dengan syarat 18+ dan persetujuan eksplisit per unggahan — bukan avatar profil permanen
+</div>
+
+<!-- ═══════════ GALERI PILIHAN ═══════════ -->
+<div class="seksi">LAYAR PEMILIHAN AVATAR</div>
+<div class="rak">
+<div>
+<div class="nama">S-AV · Pilih Avatarmu</div>
+<div class="layar" style="height:844px">
+  <div style="padding:44px 24px 8px">
+    <div class="m-s" style="color:var(--mint)">PROFIL · LANGKAH 1 DARI 2</div>
+    <div class="disp-l" style="color:var(--putih);margin-top:6px">PILIH<br>LAMBANGMU</div>
+    <div class="i-s" style="color:var(--perak);margin-top:8px">Bukan fotomu — lambang yang mewakilimu selama napak tilas. Bisa diganti kapan saja.</div>
+  </div>
+
+  <div style="padding:20px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+
+    <!-- Avatar 1 — dipilih -->
+    <div style="aspect-ratio:1;border-radius:14px;background:rgba(79,230,140,.14);
+                border:2px solid var(--mint);position:relative;display:flex;align-items:center;justify-content:center">
+      <svg class="av" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#14456F"/>
+        <circle cx="32" cy="24" r="10" fill="#F2F5F7"/>
+        <path d="M14 54c2-12 10-18 18-18s16 6 18 18" fill="#F2F5F7"/></svg>
+      <div style="position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:50%;
+                  background:var(--mint);color:var(--hitam);font-size:11px;font-weight:700;
+                  display:flex;align-items:center;justify-content:center">✓</div>
+    </div>
+
+    <!-- Avatar 2 -->
+    <div style="aspect-ratio:1;border-radius:14px;background:rgba(20,69,111,.4);
+                display:flex;align-items:center;justify-content:center">
+      <svg class="av" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#7A6144"/>
+        <path d="M32 10 L44 20 L44 36 L32 46 L20 36 L20 20 Z" fill="#F2F5F7"/></svg>
+    </div>
+
+    <!-- Avatar 3 -->
+    <div style="aspect-ratio:1;border-radius:14px;background:rgba(20,69,111,.4);
+                display:flex;align-items:center;justify-content:center">
+      <svg class="av" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#9E2B22"/>
+        <rect x="20" y="18" width="24" height="28" rx="3" fill="#F2F5F7"/>
+        <rect x="26" y="24" width="12" height="3" fill="#9E2B22"/>
+        <rect x="26" y="30" width="12" height="3" fill="#9E2B22"/></svg>
+    </div>
+
+    <!-- Avatar 4 -->
+    <div style="aspect-ratio:1;border-radius:14px;background:rgba(20,69,111,.4);
+                display:flex;align-items:center;justify-content:center">
+      <svg class="av" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#D4A22F"/>
+        <path d="M32 12 L38 26 L52 26 L41 35 L45 50 L32 41 L19 50 L23 35 L12 26 L26 26 Z" fill="#08141F"/></svg>
+    </div>
+
+    <!-- Avatar 5 -->
+    <div style="aspect-ratio:1;border-radius:14px;background:rgba(20,69,111,.4);
+                display:flex;align-items:center;justify-content:center">
+      <svg class="av" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#1E8B4E"/>
+        <path d="M32 14 L32 50 M20 22 L44 22 M16 34 L48 34" stroke="#F2F5F7" stroke-width="4" stroke-linecap="round"/></svg>
+    </div>
+
+    <!-- Avatar 6 -->
+    <div style="aspect-ratio:1;border-radius:14px;background:rgba(20,69,111,.4);
+                display:flex;align-items:center;justify-content:center">
+      <svg class="av" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#0E2438"/>
+        <circle cx="32" cy="32" r="14" fill="none" stroke="#4FE68C" stroke-width="3"/>
+        <circle cx="32" cy="32" r="5" fill="#4FE68C"/></svg>
+    </div>
+
+    <!-- Avatar 7 -->
+    <div style="aspect-ratio:1;border-radius:14px;background:rgba(20,69,111,.4);
+                display:flex;align-items:center;justify-content:center">
+      <svg class="av" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#6B5B44"/>
+        <path d="M18 44 L32 16 L46 44 Z" fill="#F2F5F7"/>
+        <path d="M32 16 L32 44" stroke="#6B5B44" stroke-width="2"/></svg>
+    </div>
+
+    <!-- Avatar 8 — terkunci, dibuka setelah rute pertama -->
+    <div style="aspect-ratio:1;border-radius:14px;background:rgba(20,69,111,.2);
+                display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+      <span style="font-size:20px;opacity:.4">🔒</span>
+      <span class="m-s" style="color:var(--redup);font-size:9px">1 RUTE</span>
+    </div>
+
+  </div>
+
+  <div style="padding:0 24px 34px">
+    <div class="i-s" style="color:var(--redup);margin-bottom:14px">Avatar baru terbuka seiring pangkatmu naik. Lihat aturan pangkat di profil.</div>
+    <div class="cta">Pakai lambang ini</div>
+  </div>
+</div>
+</div>
+
+<div>
+<div class="nama">Diterapkan di Kartu Identitas Beranda</div>
+<div class="layar" style="height:200px">
+  <div style="margin:24px;background:rgba(20,69,111,.45);border-radius:16px;padding:16px 18px;
+              display:flex;align-items:center;gap:14px">
+    <div style="width:52px;height:52px;border-radius:50%;flex:none;border:2px solid var(--perak);overflow:hidden">
+      <svg class="av" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#14456F"/>
+        <circle cx="32" cy="24" r="10" fill="#F2F5F7"/>
+        <path d="M14 54c2-12 10-18 18-18s16 6 18 18" fill="#F2F5F7"/></svg>
+    </div>
+    <div style="flex:1">
+      <div class="j-s" style="color:var(--putih)">Cak Adi</div>
+      <div class="m-s" style="color:var(--perak);margin-top:2px">PANGKAT: REKRUT BARU</div>
+    </div>
+    <div style="text-align:right">
+      <div class="j-s" style="color:var(--mint)">0/5</div>
+      <div class="m-s" style="color:var(--redup)">TITIK</div>
+    </div>
+  </div>
+</div>
+<div style="max-width:390px;margin-top:10px;font-size:12.5px;color:#5A6570;line-height:1.6">
+  Lingkaran kosong di mock-up Beranda sebelumnya sekarang terisi avatar pilihan pengguna — bukan foto, tetap dalam gaya ilustrasi cap yang sama dengan lencana.
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

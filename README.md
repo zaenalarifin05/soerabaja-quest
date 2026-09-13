@@ -12,13 +12,13 @@ Ini **satu produk**, bukan dua. Satu backend, satu design system, satu kontrak A
 
 | Permukaan | Repo | Tema | Status desain |
 |---|---|---|---|
-| Aplikasi pemain (iOS + Android) | `soerabaja-mobile` | Gelap | 22 layar |
+| Aplikasi pemain (iOS + Android) | `soerabaja-mobile` | Gelap | 40 layar |
 | WebAR | `soerabaja-quest` → `apps/web` | Gelap | 9 layar |
-| Soerabaja Feed | `soerabaja-quest` → `apps/web` | Gelap | belum |
+| Soerabaja Feed | `soerabaja-quest` → `apps/web` | Gelap | 1 layar |
 | Merchant PWA (kasir) | `soerabaja-quest` → `apps/merchant` | Terang | 8 layar |
 | Admin CMS (kurator) | `soerabaja-quest` → `apps/cms` | Terang | 4 layar |
 | Dashboard guru & Pemkot | `soerabaja-quest` → `apps/cms` | Terang | 2 layar |
-| Wall Siola (kiosk) | `soerabaja-quest` → `apps/wall` | Gelap | spesifikasi |
+| Wall Siola (kiosk) | `soerabaja-quest` → `apps/wall` | Gelap | 1 layar |
 
 **Kenapa dua repositori, bukan satu.** Aplikasi mobile membawa aset Unity yang butuh Git LFS. Mencampurnya ke repo ini akan membuat `git clone` memakan puluhan menit bagi semua orang, termasuk yang tidak pernah menyentuh mobile.
 
@@ -44,7 +44,7 @@ Panduan lengkap dari mesin kosong: **[SETUP.md](./SETUP.md)**
 ```
 soerabaja-quest/
 ├── docs/                    ← 11 dokumen keputusan; di-review lewat PR seperti kode
-│   └── desain/              ← 45 layar sebagai HTML, referensi visual
+│   └── desain/              ← 65 layar sebagai HTML, referensi visual
 ├── packages/
 │   ├── tokens/              ← token 2 lapis, 3 tema → CSS, JS, Dart
 │   ├── api-contract/        ← openapi.yaml, sumber tipe untuk semua klien
@@ -74,6 +74,7 @@ soerabaja-quest/
 | 08 | [wall-siola-dan-feed](docs/08-wall-siola-dan-feed.md) | Wajib sebelum menyentuh UGC. Gerbang privasi |
 | 09 | [strategi-tema](docs/09-strategi-tema.md) | Frontend. Lapisan token semantik |
 | 10 | [rencana-fase-berikutnya](docs/10-rencana-fase-berikutnya.md) | Semua. Peta 8 minggu ke pilot |
+| 11 | [konsolidasi-poi-wall](docs/11-konsolidasi-poi-wall.md) | Desain, konten, engineering. Konsolidasi 5 POI + Wall Siola, pertanyaan terbuka Q1–Q10 |
 
 Dokumen 07, 08, dan 09 lebih baru daripada 01–05 dan **menggantikan** beberapa keputusan di dalamnya. Bagian yang digantikan sudah ditandai di dokumen aslinya.
 
