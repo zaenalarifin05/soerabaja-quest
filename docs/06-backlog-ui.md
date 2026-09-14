@@ -42,13 +42,13 @@
 
 ## P1 — Ditambahkan menyusul Dokumen 08 (Wall Siola & Feed)
 
-> **Dicek September 2026:** Wall Siola belum punya kode sama sekali di `apps/web` — ketiga butir di bawah tetap terbuka, ditutup begitu Wall dikonversi ke kode.
+> **Dikoreksi September 2026:** ketiga butir di bawah **sudah diperbaiki di mock-up** `docs/desain/11-wall-siola.html` (lihat fixnote di dalamnya) — sama seperti B26 yang sudah diperbaiki di mock-up Tunjungan sebelum dikonversi ke kode. Wall Siola sendiri **belum pernah dikonversi ke kode** di `apps/web` (bukan terhambat keputusan arsitektur — cuma belum digarap, seperti lima POI sebelum dibangun). Kontennya butuh data live (foto masuk, pesan tayang) yang belum ada backend-nya, jadi konversi kode awal akan statis dengan data contoh, sama seperti Beranda.
 
 | # | Layar | Masalah | Perbaikan |
 |---|---|---|---|
-| B21 | Wall Siola | Ticker FPS/telemetri pengembang terlihat di rancangan awal — chrome pengembang, jangan sampai ikut rilis | Hapus seluruhnya sebelum build produksi |
-| B22 | Wall Siola | Metrik "Dampak UMKM Rp 142,5M" tampil di layar publik — itu metrik Dashboard Pemkot (D2), bukan informasi pengunjung | Pindahkan ke D2, hapus dari tampilan Wall |
-| B23 | Wall Siola | Moderasi otomatis tayang 30 detik terlalu cepat untuk layar publik gedung Pemkot | Ubah jadi jeda tayang 5 menit + tombol tahan Petugas Siola |
+| B21 | Wall Siola | Ticker FPS/telemetri pengembang terlihat di rancangan awal — chrome pengembang, jangan sampai ikut rilis | **Sudah diperbaiki di mock-up.** Dihapus total, tidak ada di `11-wall-siola.html` |
+| B22 | Wall Siola | Metrik "Dampak UMKM Rp 142,5M" tampil di layar publik — itu metrik Dashboard Pemkot (D2), bukan informasi pengunjung | **Sudah diperbaiki di mock-up.** Dipindah ke D2, tidak ada di tampilan Wall versi baru |
+| B23 | Wall Siola | Moderasi otomatis tayang 30 detik terlalu cepat untuk layar publik gedung Pemkot | **Sudah diperbaiki di mock-up.** Jeda tayang 5 menit + tombol tahan Petugas Siola |
 
 ## P1 — Ditambahkan menyusul sesi Beranda & Arsip Sepia
 
