@@ -52,7 +52,8 @@ export default function Home() {
       {/* ── Header ── */}
       <header className="flex items-start justify-between px-6 pt-11 pb-5">
         <div>
-          <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-aksi">
+          {/* B18: eyebrow lokasi bukan aksi utama/status aktif — pakai perak, bukan mint */}
+          <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-teks-sekunder">
             SOERABAJA 1945
           </p>
           <h1 className="mt-0.5 font-display text-[26px] leading-[28px] tracking-[-0.01em] text-teks-utama">
@@ -96,7 +97,8 @@ export default function Home() {
           </p>
         </div>
         <div className="text-right">
-          <p className="text-[16px] leading-[21px] font-bold text-aksi">0/5</p>
+          {/* B18: statistik bukan aksi utama/status aktif — pakai teks-utama, bukan mint */}
+          <p className="text-[16px] leading-[21px] font-bold text-teks-utama">0/5</p>
           <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-teks-redup">TITIK</p>
         </div>
       </section>
@@ -221,7 +223,8 @@ export default function Home() {
           <span className="font-mono text-[11px] leading-4 tracking-[0.03em] text-teks-redup">
             KOLEKSI LENCANA SEJARAH
           </span>
-          <Link href="/lencana" className="text-[12.5px] font-medium text-aksi">
+          {/* B18: link navigasi biasa bukan aksi utama/status aktif — pakai perak, bukan mint */}
+          <Link href="/lencana" className="text-[12.5px] font-medium text-teks-sekunder">
             Lihat semua →
           </Link>
         </div>
