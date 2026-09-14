@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import { KartuArsipDokumen } from '@/components/KartuArsipDokumen';
+import { KartuLencanaPreview } from '@/components/KartuLencanaPreview';
+import { PoiHeader } from '@/components/PoiHeader';
 import { SafetyNotice } from '@/components/SafetyNotice';
 import { TahapanStepper } from '@/components/TahapanStepper';
 
@@ -13,25 +16,12 @@ const TAHAP_AKTIF = 1;
 export default function PoiHotelMajapahit() {
   return (
     <main className="min-h-screen bg-permukaan-1 font-ui">
-      <header className="flex items-start justify-between px-6 pt-[max(2.75rem,env(safe-area-inset-top))] pb-4">
-        <div>
-          <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-aksi">
-            SOERABAJA 1945 · TITIK 1
-          </p>
-          <h1 className="mt-1 font-display text-[24px] leading-[26px] tracking-[-0.01em] text-teks-utama">
-            HOTEL YAMATO
-          </h1>
-          <p className="mt-0.5 text-[12px] leading-[17px] font-medium text-teks-sekunder">
-            Jl. Tunjungan No. 65
-          </p>
-        </div>
-        <div className="flex-none text-right">
-          <div className="mb-1 rounded-lg bg-permukaan-arsip-notifikasi px-2 py-1 font-mono text-[10.5px] leading-[15px] tracking-[0.03em] text-teks-arsip-notifikasi">
-            19 SEPT &apos;45
-          </div>
-          <p className="font-mono text-[10.5px] leading-[15px] tracking-[0.03em] text-teks-redup">35 M</p>
-        </div>
-      </header>
+      <PoiHeader
+        titik={1}
+        judul="HOTEL YAMATO"
+        alamat="Jl. Tunjungan No. 65"
+        badge={{ label: "19 SEPT '45", jarak: '35 M' }}
+      />
 
       {/* Render gedung — ilustrasi stilasi diterjemahkan dari referensi foto arsip
           (menara sudut, tiang bendera, jendela tiga baris Art Deco 1930-an), BUKAN
@@ -123,30 +113,19 @@ export default function PoiHotelMajapahit() {
 
       <TahapanStepper tahapan={TAHAPAN} aktif={TAHAP_AKTIF} className="pt-5" />
 
-      <div className="mx-6 mt-5 rounded-[14px] bg-permukaan-arsip px-4.5 py-4">
-        <div className="flex justify-between font-mono text-[10.5px] leading-[15px] tracking-[0.03em]">
-          <span className="text-teks-arsip-sekunder">TELEGRAM SANDI RAHASIA</span>
-          <span className="text-teks-arsip-bahaya">NO. 19/SBY/45</span>
-        </div>
-        <div className="my-2 h-px bg-teks-arsip-sekunder/35" />
-        <p className="text-[12px] leading-[19px] text-teks-arsip">
-          Insiden 19 September 1945, 21.00. Bendera Belanda dikibarkan tanpa izin di tiang Hotel
-          Yamato. Perundingan buntu. Massa bergerak.
-        </p>
-        <p className="mt-2 text-[12px] leading-[19px] italic text-teks-arsip-bahaya">
-          &ldquo;Merdeka atau mati, tidak ada pilihan ketiga.&rdquo;
-        </p>
-      </div>
+      <KartuArsipDokumen
+        className="mt-5"
+        label="TELEGRAM SANDI RAHASIA"
+        nomor="NO. 19/SBY/45"
+        isi="Insiden 19 September 1945, 21.00. Bendera Belanda dikibarkan tanpa izin di tiang Hotel Yamato. Perundingan buntu. Massa bergerak."
+        kutipan="Merdeka atau mati, tidak ada pilihan ketiga."
+      />
 
-      <div className="mx-6 mt-5 flex items-center gap-3 rounded-xl border border-pencapaian/30 bg-pencapaian/10 px-4 py-3">
-        <div className="text-[22px]">🎖️</div>
-        <div className="flex-1">
-          <p className="text-[15px] leading-5 font-bold text-pencapaian">Lencana: Nyali Wani</p>
-          <p className="text-[12px] leading-[17px] font-medium text-teks-sekunder">
-            Selesaikan misi ini untuk meraihnya (1/3)
-          </p>
-        </div>
-      </div>
+      <KartuLencanaPreview
+        className="mt-5"
+        judul="Lencana: Nyali Wani"
+        keterangan="Selesaikan misi ini untuk meraihnya (1/3)"
+      />
 
       <SafetyNotice
         className="mt-5"

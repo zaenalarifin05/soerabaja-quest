@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { PoiHeader } from '@/components/PoiHeader';
 
 // Sumber: docs/desain/09-poi-siola.html, screen "S1 · Halaman Siola — rehat, rekap, arsip"
 // Beda dari tiga POI sebelumnya: Siola adalah jeda naratif, bukan AR aksi baru — jadi
@@ -31,25 +32,12 @@ const ARSIP = [
 export default function PoiMuseumSiola() {
   return (
     <main className="min-h-screen bg-permukaan-1 font-ui">
-      <header className="flex items-start justify-between px-6 pt-[max(2.75rem,env(safe-area-inset-top))] pb-4">
-        <div>
-          <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-aksi">
-            SOERABAJA 1945 · TITIK 4
-          </p>
-          <h1 className="mt-1 font-display text-[24px] leading-[26px] tracking-[-0.01em] text-teks-utama">
-            MUSEUM SIOLA
-          </h1>
-          <p className="mt-0.5 text-[12px] leading-[17px] font-medium text-teks-sekunder">
-            Jl. Tunjungan No. 1
-          </p>
-        </div>
-        <div className="flex-none text-right">
-          <div className="mb-1 rounded-lg bg-permukaan-2 px-2 py-1 font-mono text-[10.5px] leading-[15px] tracking-[0.03em] text-teks-utama">
-            BER-AC
-          </div>
-          <p className="font-mono text-[10.5px] leading-[15px] tracking-[0.03em] text-teks-redup">10 M</p>
-        </div>
-      </header>
+      <PoiHeader
+        titik={4}
+        judul="MUSEUM SIOLA"
+        alamat="Jl. Tunjungan No. 1"
+        badge={{ label: 'BER-AC', jarak: '10 M', varian: 'netral' }}
+      />
 
       <div className="mx-6 mb-4 rounded-2xl bg-permukaan-arsip px-5.5 py-5">
         <p className="font-display text-[24px] leading-[26px] tracking-[-0.01em] text-teks-arsip">
