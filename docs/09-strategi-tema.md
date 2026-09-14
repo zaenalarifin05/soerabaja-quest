@@ -121,22 +121,25 @@ Perhatikan juga `--aksi-utama` berubah dari `#4FE68C` ke `#1E8B4E` di tema teran
 | Desain layar | 45 layar di 5 permukaan |
 | Fondasi Figma | 20 variabel, 10 text style, papan palet, 2 spesimen rezim |
 | Keputusan arsitektur | Model hybrid gulir/terkunci · model hub · gerbang privasi tiga tingkat · strategi tema |
+| **Rekonsiliasi dokumen** *(update: selesai)* | Dokumen 01, 03, 04 diselaraskan ke adendum 07 dan 08 — model hub, batas 3× viewport, dua kelas layar, kamera-mati-penuh, timeout 90 detik, semuanya sudah masuk. Item ini sebelumnya nomor 1 di §7 (item blokir), sudah dipindah ke sini |
+| **Lapisan token semantik** *(update: selesai)* | `packages/tokens` dibangun dengan lapisan primitif + semantik penuh (tiga peta: gelap/terang/silau), dan aturan lint penolak nilai heksadesimal sudah ditegakkan di CI (Dokumen 06 B27/B28) — persis yang disyaratkan §8 di bawah sebagai wajib sebelum Sprint 0 |
+| **Prototipe klik — sebagian** *(update: sebagian selesai)* | Beranda + lima halaman POI (layar "sebelum-aksi") sudah berupa kode React/Next.js sungguhan di `apps/web`, bukan tautan Figma — lihat Dokumen 11 §7. Ini melampaui prototipe klik biasa, tapi **belum diuji ke pengguna nyata** — bagian itu di §7 item 4 di bawah tetap terbuka |
 
 ## 7. Belum Selesai — Memblokir
 
+> **Update:** item lama #1 (rekonsiliasi Dokumen 01/03) sudah selesai — lihat §6 di atas. Nomor di bawah dirapikan ulang.
+
 | # | Belum ada | Akibat |
 |---|---|---|
-| 1 | **Dokumen 01 dan 03 belum diselaraskan ke adendum 07 dan 08** | Ada versi kebenaran yang saling bertentangan. Developer akan membaca batas 140 kata yang sudah dicabut, dan state machine jalur terkunci yang sudah diganti |
-| 2 | **31 dari 45 layar hanya ada di HTML** | Figma bukan sumber kebenaran; tim akan bertanya "yang mana yang benar" |
-| 3 | **Backlog P0 belum dieksekusi di 14 layar Figma** | Dua versi berbeda beredar untuk layar yang sama |
-| 4 | **Belum ada komponen bervarian** | Setiap layar baru dibuat dari nol; biaya perubahan naik terus |
-| 5 | **Belum ada prototipe klik dan belum diuji ke siapa pun** | Seluruh asumsi UX masih asumsi |
+| 1 | **31 dari 45 layar hanya ada di HTML** | Figma bukan sumber kebenaran; tim akan bertanya "yang mana yang benar" |
+| 2 | **Backlog P0 belum dieksekusi di 14 layar Figma** | Dua versi berbeda beredar untuk layar yang sama |
+| 3 | **Belum ada komponen bervarian** | Setiap layar baru dibuat dari nol; biaya perubahan naik terus |
+| 4 | **Prototipe kode belum diuji ke siapa pun** | Enam halaman sudah berupa kode nyata (lihat §6), tapi seluruh asumsi UX yang mendasarinya masih asumsi — belum ada sesi uji dengan pengguna sungguhan di lapangan (Dokumen 10 D3) |
 
 ## 8. Belum Selesai — Tidak Memblokir
 
 | Artefak | Catatan |
 |---|---|
-| `tokens.json` W3C + lapisan semantik | Wajib sebelum Sprint 0 dimulai |
 | Set ikon SVG grid 24 | Masih pakai glyph dan SVG inline |
 | Tata letak Wall versi 28 px | Spesifikasi ada, visual belum |
 | Desain Feed web | Belum ada sama sekali |
@@ -160,8 +163,8 @@ Tiga hal yang bukan pekerjaan desain tapi akan memblokir rilis kalau tidak dimul
 
 ## 10. Jawaban Ringkas
 
-**Apakah fase desain sudah lengkap?** Sekitar 75%. Yang tersisa bukan menambah layar — melainkan konsolidasi, komponen, dan pengujian.
+**Apakah fase desain sudah lengkap?** Sekitar 75% pada saat ditulis; rekonsiliasi dokumen dan lapisan token semantik (dua dari lima item blokir) sudah selesai sejak itu — lihat §6. Yang tersisa bukan menambah layar — melainkan impor Figma, eksekusi backlog P0, komponen bervarian, dan pengujian ke pengguna nyata.
 
-**Bisakah mode gelap dan terang ditangani saat development?** Bisa, dan sebagian sudah harus ada karena Merchant PWA dan CMS memang terang. Tapi biayanya ditentukan sekarang: kalau lapisan token semantik dibangun di Sprint 0, menambah mode apa pun setelahnya murah. Kalau tidak, mahal selamanya.
+**Bisakah mode gelap dan terang ditangani saat development?** Bisa, dan sebagian sudah harus ada karena Merchant PWA dan CMS memang terang. Lapisan token semantik yang disyaratkan **sudah dibangun** (§6) — jadi menambah mode apa pun setelahnya sudah murah, sesuai skenario "kalau" di paragraf ini yang sekarang terpenuhi.
 
 **Apa yang saya sarankan untuk pemain?** Bukan mode terang, melainkan Mode Silau — penguat kontras otomatis untuk siang hari Surabaya. Ia menyelesaikan masalah yang sebenarnya, dan biayanya sepersepuluh.
