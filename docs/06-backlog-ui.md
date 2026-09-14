@@ -13,8 +13,8 @@
 | B1 | S8.3 | Mock QR terbaca sebagai tiga baris kotak — pengguna akan mengira gagal muat | Ganti dengan pola QR sungguhan (modul 7×7 acak semu + finder pattern di 3 sudut) |
 | B2 | S8.3 | Dua state tercampur: hitung mundur sudah jalan tapi tombol `Tukar sekarang` masih ada | Pecah jadi S8.3a (sebelum tap: QR redup, tombol menonjol) dan S8.3b (sesudah tap: QR hidup, hitung mundur, tombol hilang) |
 | B3 | S8.3 | Kode bypass `4K7–Q29` tampil permanen — mengundang penyalahgunaan | Sembunyikan di balik tautan "Sinyal kasir mati?" |
-| B4 | Semua | Safe area belum ada; CTA di y=730–786 bertabrakan dengan home indicator | Padding atas 47pt, bawah 34pt di seluruh layar |
-| B5 | Semua | Target sentuh gagal: `Tidak bisa scan?`, `Simpan kartu`, `Lanjut tanpa earphone` teks telanjang tanpa wadah 48dp | Bungkus semua kontrol teks dalam wadah min 48dp |
+| B4 | Semua | Safe area belum ada; CTA di y=730–786 bertabrakan dengan home indicator | **Ditutup untuk 6 halaman `apps/web` yang ada** — collision literal S8.3 belum relevan di sana (Halaman Baca, bukan full-bleed), tapi infrastrukturnya sudah disiapkan: `viewportFit: "cover"` di `layout.tsx` + `env(safe-area-inset-top/bottom)` pada padding header dan elemen penutup setiap halaman (termasuk komponen `SafetyNotice`). Cek ulang saat layar kamera/AR full-bleed (Y2/Y3/M2/T2/T3/U2/U3) dibangun — di sanalah risiko collision sungguhan muncul |
+| B5 | Semua | Target sentuh gagal: `Tidak bisa scan?`, `Simpan kartu`, `Lanjut tanpa earphone` teks telanjang tanpa wadah 48dp | **Diperbaiki di 6 halaman `apps/web` yang ada.** Ditemukan 5 pelanggaran serupa (bukan layar S8.3 yang sama, tapi masalah yang sama): tombol 🔔/⚙ Beranda (36px→48px), link "Lihat semua →" Beranda (tanpa wadah→48px), dua tombol sekunder Hotel Majapahit (44px→48px), tiga tombol arsip Museum Siola (40px→48px). Semua CTA utama sudah ≥48px sejak awal |
 
 ## P1 — Merusak kualitas, perbaiki sebelum handoff
 

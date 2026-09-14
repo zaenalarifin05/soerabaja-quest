@@ -50,7 +50,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-permukaan-1 font-ui">
       {/* ── Header ── */}
-      <header className="flex items-start justify-between px-6 pt-11 pb-5">
+      <header className="flex items-start justify-between px-6 pt-[max(2.75rem,env(safe-area-inset-top))] pb-5">
         <div>
           {/* B18: eyebrow lokasi bukan aksi utama/status aktif — pakai perak, bukan mint */}
           <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-teks-sekunder">
@@ -66,14 +66,16 @@ export default function Home() {
           <button
             type="button"
             aria-label="Notifikasi"
-            className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-teks-redup/12 text-[15px] text-teks-sekunder"
+            // B5: wadah minimal 48dp untuk target sentuh, ikonnya sendiri tetap 15px
+            className="flex h-12 w-12 items-center justify-center rounded-xl bg-teks-redup/12 text-[15px] text-teks-sekunder"
           >
             🔔
           </button>
           <button
             type="button"
             aria-label="Pengaturan"
-            className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-teks-redup/12 text-[15px] text-teks-sekunder"
+            // B5: wadah minimal 48dp untuk target sentuh, ikonnya sendiri tetap 15px
+            className="flex h-12 w-12 items-center justify-center rounded-xl bg-teks-redup/12 text-[15px] text-teks-sekunder"
           >
             ⚙
           </button>
@@ -218,13 +220,14 @@ export default function Home() {
       </section>
 
       {/* ── Koleksi Lencana — pratinjau 3 slot ── */}
-      <section className="px-6 pt-1 pb-8">
+      <section className="px-6 pt-1 pb-[max(2rem,env(safe-area-inset-bottom))]">
         <div className="mb-3 flex items-center justify-between">
           <span className="font-mono text-[11px] leading-4 tracking-[0.03em] text-teks-redup">
             KOLEKSI LENCANA SEJARAH
           </span>
-          {/* B18: link navigasi biasa bukan aksi utama/status aktif — pakai perak, bukan mint */}
-          <Link href="/lencana" className="text-[12.5px] font-medium text-teks-sekunder">
+          {/* B18: link navigasi biasa bukan aksi utama/status aktif — pakai perak, bukan mint.
+              B5: wadah minimal 48dp — sebelumnya cuma teks telanjang tanpa wadah. */}
+          <Link href="/lencana" className="flex h-12 items-center text-[12.5px] font-medium text-teks-sekunder">
             Lihat semua →
           </Link>
         </div>

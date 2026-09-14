@@ -31,7 +31,7 @@ const ARSIP = [
 export default function PoiMuseumSiola() {
   return (
     <main className="min-h-screen bg-permukaan-1 font-ui">
-      <header className="flex items-start justify-between px-6 pt-11 pb-4">
+      <header className="flex items-start justify-between px-6 pt-[max(2.75rem,env(safe-area-inset-top))] pb-4">
         <div>
           <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-aksi">
             SOERABAJA 1945 · TITIK 4
@@ -109,7 +109,7 @@ export default function PoiMuseumSiola() {
               // TODO: masing-masing arsip adalah fitur independen (pindai AR, galeri
               // geser, ruang pamer) — belum satu pun dibangun, menunggu prioritas
               // terpisah per fitur
-              className="flex h-10 w-full items-center justify-center rounded-lg bg-aksi/16 text-[12px] font-bold text-aksi"
+              className="flex h-12 w-full items-center justify-center rounded-lg bg-aksi/16 text-[12px] font-bold text-aksi"
             >
               {item.aksi}
             </button>
@@ -154,7 +154,7 @@ export default function PoiMuseumSiola() {
         </button>
       </div>
 
-      <div className="mx-6 mb-8 rounded-2xl border border-aksi/40 bg-gradient-to-br from-aksi/16 to-permukaan-2/40 px-5 py-4.5">
+      <div className="mx-6 mb-[max(2rem,env(safe-area-inset-bottom))] rounded-2xl border border-aksi/40 bg-gradient-to-br from-aksi/16 to-permukaan-2/40 px-5 py-4.5">
         {/* Gradien mock-up 160deg didekati dengan to-br, sama seperti Radar Rute di Beranda */}
         <p className="font-mono text-[10.5px] leading-[15px] tracking-[0.03em] text-aksi">
           LANGKAH TERAKHIR

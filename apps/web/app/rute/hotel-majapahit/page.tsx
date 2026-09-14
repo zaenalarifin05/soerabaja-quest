@@ -13,7 +13,7 @@ const TAHAP_AKTIF = 1;
 export default function PoiHotelMajapahit() {
   return (
     <main className="min-h-screen bg-permukaan-1 font-ui">
-      <header className="flex items-start justify-between px-6 pt-11 pb-4">
+      <header className="flex items-start justify-between px-6 pt-[max(2.75rem,env(safe-area-inset-top))] pb-4">
         <div>
           <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-aksi">
             SOERABAJA 1945 · TITIK 1
@@ -107,14 +107,14 @@ export default function PoiHotelMajapahit() {
             type="button"
             // TODO: buka pemindai QR standee begitu mekanisme AR tersedia — bukan
             // navigasi halaman, jadi sengaja bukan <Link>
-            className="flex h-11 flex-1 items-center justify-center gap-1.5 rounded-xl border border-teks-sekunder/30 text-[12px] font-medium text-teks-sekunder"
+            className="flex h-12 flex-1 items-center justify-center gap-1.5 rounded-xl border border-teks-sekunder/30 text-[12px] font-medium text-teks-sekunder"
           >
             📷 Scan Standee QR
           </button>
           <button
             type="button"
             // TODO: buka input kode 4 digit begitu mekanisme fallback tersedia
-            className="flex h-11 flex-1 items-center justify-center gap-1.5 rounded-xl border border-teks-sekunder/30 text-[12px] font-medium text-teks-sekunder"
+            className="flex h-12 flex-1 items-center justify-center gap-1.5 rounded-xl border border-teks-sekunder/30 text-[12px] font-medium text-teks-sekunder"
           >
             ⌨ Input Kode (4 digit)
           </button>

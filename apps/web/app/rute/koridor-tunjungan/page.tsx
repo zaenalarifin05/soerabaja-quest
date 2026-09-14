@@ -22,7 +22,7 @@ const MERCHANT = [
 export default function PoiKoridorTunjungan() {
   return (
     <main className="min-h-screen bg-permukaan-1 font-ui">
-      <header className="px-6 pt-11 pb-4">
+      <header className="px-6 pt-[max(2.75rem,env(safe-area-inset-top))] pb-4">
         <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-aksi">
           SOERABAJA 1945 · TITIK 5
         </p>

@@ -2,6 +2,9 @@
 // akhir setiap POI aksi (sebelum tombol navigasi), tidak bisa di-dismiss. Konten
 // kontekstual per lokasi, komponennya sama. Wajib di seluruh POI aksi tanpa kecuali
 // (Dokumen 11 §1, Dokumen 06 B26).
+//
+// Margin bawah menghormati safe-area-inset-bottom (B4/Dokumen 06) — komponen ini
+// selalu jadi elemen terakhir di halaman, jadi ini juga "safe area penutup halaman".
 
 interface SafetyNoticeProps {
   pesan: string;
@@ -11,7 +14,10 @@ interface SafetyNoticeProps {
 export function SafetyNotice({ pesan, className }: SafetyNoticeProps) {
   return (
     <div
-      className={['mx-6 mb-8 flex items-start gap-2.5 rounded-xl border border-bahaya/50 bg-bahaya/14 px-4 py-3.5', className]
+      className={[
+        'mx-6 mb-[max(2rem,env(safe-area-inset-bottom))] flex items-start gap-2.5 rounded-xl border border-bahaya/50 bg-bahaya/14 px-4 py-3.5',
+        className,
+      ]
         .filter(Boolean)
         .join(' ')}
     >
