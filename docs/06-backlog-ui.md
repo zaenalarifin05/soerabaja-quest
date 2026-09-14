@@ -18,13 +18,15 @@
 
 ## P1 — Merusak kualitas, perbaiki sebelum handoff
 
+> **Dicek September 2026** terhadap kode yang sudah ada di `apps/web` (Beranda + 5 POI, lihat Dokumen 11 §7). B6, B7, B8, B9, B11 tetap terbuka — masing-masing berada di layar Layar Aksi kamera/audio (S2.2, S2.5, S6.1) yang belum dikonversi ke kode sama sekali (lihat catatan di halaman POI: Y2/Y3/M2/T2/T3/U2/U3 sengaja ditunda). B10 sudah dicek dan **patuh** di kode yang ada (lihat catatan barisnya).
+
 | # | Layar | Masalah | Perbaikan |
 |---|---|---|---|
 | B6 | S6.1 | Ikon `◖◗` adalah retasan tipografi, bukan ikon | Ganti vektor earphone sungguhan, grid 24, stroke 1,75 |
 | B7 | S2.5 | Badge masih medali aplikasi generik | Bangun ulang sebagai `BadgeStamp`: tepi tidak rata, tinta tidak merata, kesan ditekan ke dokumen |
 | B8 | S6.1 | `Menunggu earphone…` dan `Lanjut tanpa earphone` warna identik `#7A8592`; kontras ~4:1 tidak terbaca di bawah matahari | Bedakan: status pasif tetap redup, kontrol aktif naik ke `--inti/perak` dengan wadah |
 | B9 | S2.5, S6.1 | Ruang mati 90–150px; komposisi berat di atas | Naikkan blok teks atau turunkan badge; rapatkan ke ritme 8pt |
-| B10 | Semua | Casing Display tidak konsisten (`NAPAK TILAS 45` vs `Pasang earphone`) | Kunci satu aturan: Display selalu huruf besar |
+| B10 | Semua | Casing Display tidak konsisten (`NAPAK TILAS 45` vs `Pasang earphone`) | **Sudah patuh di kode yang ada** — seluruh teks `font-display` di Beranda dan 5 POI sudah huruf besar. Ditutup untuk cakupan saat ini; cek ulang kalau ada layar Display baru |
 | B11 | S2.2 | Label `QR STANDEE` di atas gradien tanpa scrim gelap | Tambah lapisan `--inti/hitam` 62% di belakang semua teks mode kamera |
 | B17 | S4.1 | Benang merah investigasi tidak semua terhubung ke pin; satu garis lolos ke tepi kanan | Perbaiki koordinat SVG agar tiap garis benar-benar berakhir di pin |
 
@@ -34,11 +36,13 @@
 
 | # | Layar | Masalah | Perbaikan |
 |---|---|---|---|
-| B18 | Beranda | Mint terlalu banyak dipakai — muncul di tombol, chip status, ikon, garis, dan aksen kartu sekaligus. Ketika semuanya menyala, tidak ada yang menonjol | Kembalikan ke aturan Dokumen 03: mint hanya untuk aksi utama dan status POI aktif; sisanya perak |
-| B19 | Beranda, S10 | Emas belum dipakai untuk pencapaian. Lencana yang sudah diraih harus emas — kalau tidak, sinyal terkuat sistem hilang dan lencana terlihat sama saja dengan chip biasa | Terapkan `--sby-emas` khusus pada lencana/kepingan berstatus diraih |
+| B18 | Beranda | Mint terlalu banyak dipakai — muncul di tombol, chip status, ikon, garis, dan aksen kartu sekaligus. Ketika semuanya menyala, tidak ada yang menonjol | **Sudah diperbaiki.** Eyebrow "SOERABAJA 1945", statistik "0/5", dan link "Lihat semua →" dipindah ke perak (`text-teks-sekunder`/`text-teks-utama`) — mint kini hanya di kartu Radar Rute (aksi utama) dan kartu POI aktif (status POI aktif), sesuai aturan Dokumen 03 |
+| B19 | Beranda, S10 | Emas belum dipakai untuk pencapaian. Lencana yang sudah diraih harus emas — kalau tidak, sinyal terkuat sistem hilang dan lencana terlihat sama saja dengan chip biasa | **Sudah terpenuhi di kode POI** (`semantik.pencapaian` dipakai di kartu lencana Hotel Majapahit/Jembatan Merah/Tugu Pahlawan). Di Beranda sendiri belum ada lencana yang diraih (masih 0/5) — tidak ada target untuk diwarnai emas sampai ada progres sungguhan |
 | B20 | Beranda | ~~Koleksi Lencana dan kartu briefing perlu dipisah dari beranda~~ *Digantikan B24–B25 setelah klarifikasi pengguna* | — |
 
 ## P1 — Ditambahkan menyusul Dokumen 08 (Wall Siola & Feed)
+
+> **Dicek September 2026:** Wall Siola belum punya kode sama sekali di `apps/web` — ketiga butir di bawah tetap terbuka, ditutup begitu Wall dikonversi ke kode.
 
 | # | Layar | Masalah | Perbaikan |
 |---|---|---|---|
