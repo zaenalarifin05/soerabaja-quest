@@ -14,3 +14,4 @@ jobs:
       - run: pnpm api:lint
       - run: pnpm api:types
       - run: pnpm lint:css
+      - run: pnpm lint:tailwind

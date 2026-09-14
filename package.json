@@ -8,6 +8,7 @@
     "api:lint": "redocly lint packages/api-contract/openapi.yaml",
     "api:types": "pnpm --filter @soerabaja/api-contract generate",
     "lint:css": "stylelint \"apps/**/*.css\" \"packages/ui/**/*.css\"",
+    "lint:tailwind": "pnpm --filter @soerabaja/web lint",
     "dev": "pnpm --filter @soerabaja/web dev"
   },
   "devDependencies": {
