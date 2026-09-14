@@ -18,6 +18,7 @@
   --color-teks-arsip: var(--semantik-teks-arsip);
   --color-teks-arsip-sekunder: var(--semantik-teks-arsip-sekunder);
   --color-teks-arsip-notifikasi: var(--semantik-teks-arsip-notifikasi);
+  --color-teks-arsip-bahaya: var(--semantik-teks-arsip-bahaya);
 
   --color-aksi: var(--semantik-aksi-utama);
   --color-aksi-teks: var(--semantik-aksi-teks);

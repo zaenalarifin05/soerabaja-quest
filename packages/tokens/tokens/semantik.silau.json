@@ -59,6 +59,11 @@
         "$type": "color",
         "$value": "{primitif.arsip.kertas}",
         "$description": "SAMA di semua tema. Teks di atas badge notifikasi arsip."
+      },
+      "arsip-bahaya": {
+        "$type": "color",
+        "$value": "{primitif.arsip.merah}",
+        "$description": "SAMA di semua tema. Aksen sandi/bahaya sebagai teks di atas kertas arsip (bukan di atas latar merah)."
       }
     },
     "aksi": {
