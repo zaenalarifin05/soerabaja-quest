@@ -20,6 +20,11 @@
         "$type": "color",
         "$value": "{primitif.arsip.kertas}",
         "$description": "SAMA di semua tema. Kertas selalu kertas."
+      },
+      "arsip-2": {
+        "$type": "color",
+        "$value": "{primitif.arsip.kertas-tua}",
+        "$description": "SAMA di semua tema. Aksen permukaan arsip yang lebih gelap."
       }
     },
     "teks": {
@@ -39,6 +44,11 @@
         "$type": "color",
         "$value": "{primitif.arsip.tinta}",
         "$description": "SAMA di semua tema"
+      },
+      "arsip-sekunder": {
+        "$type": "color",
+        "$value": "{primitif.arsip.sepia}",
+        "$description": "SAMA di semua tema. Teks sekunder di atas kertas arsip."
       }
     },
     "aksi": {
