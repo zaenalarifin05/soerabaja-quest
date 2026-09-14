@@ -101,3 +101,24 @@ Riwayat penyelesaian:
 5. Render menara Tugu Pahlawan dikoreksi dari 7 jadi 10 rusuk — selesai.
 
 **Berikutnya:** masuk ke Claude Code untuk menyalin ke `page.tsx` — urutan yang disarankan: Beranda dulu (fondasi navigasi model hub), baru kelima POI menyusul satu-satu, mengikuti pola commit-branch-PR yang sudah terbukti jalan sejak sesi S1 Briefing.
+
+---
+
+## 7. Status Konversi ke Kode — Selesai (September 2026)
+
+Urutan di atas sudah dijalankan penuh lewat Claude Code, satu branch dan PR per unit, seperti disarankan.
+
+| Unit | Rute `apps/web` | PR | Layar yang dibangun | Layar yang ditunda |
+|---|---|---|---|---|
+| Beranda | `/` | [#4](https://github.com/zaenalarifin05/soerabaja-quest/pull/4) | Hub penuh + kartu Arsip Sepia | — |
+| Hotel Majapahit (Yamato) | `/rute/hotel-majapahit` | [#7](https://github.com/zaenalarifin05/soerabaja-quest/pull/7) | Y1 (info sebelum AR) | Y2/Y3 — kamera & mikrofon live |
+| Jembatan Merah | `/rute/jembatan-merah` | [#8](https://github.com/zaenalarifin05/soerabaja-quest/pull/8) | M1 (info sebelum investigasi) | M2 — kamera live |
+| Tugu Pahlawan | `/rute/tugu-pahlawan` | [#9](https://github.com/zaenalarifin05/soerabaja-quest/pull/9) | T1 (info sebelum gerbang earphone) | T2/T3 — audio & kamera live |
+| Museum Siola | `/rute/museum-siola` | [#10](https://github.com/zaenalarifin05/soerabaja-quest/pull/10) | S1 — **utuh**, tidak ada layar AR yang ditunda | — |
+| Koridor Tunjungan | `/rute/koridor-tunjungan` | [#11](https://github.com/zaenalarifin05/soerabaja-quest/pull/11) | U1 (ringkasan & merchant) | U2 (QR aktif + hitung mundur) — butuh state klien; U3 (penutup rute) — butuh data game state yang belum ada model/backend-nya |
+
+**Batas cakupan yang konsisten dipakai di semua PR:** setiap POI hanya membangun layar "sebelum aksi" (statis, tanpa kamera/mikrofon/state klien). Layar yang butuh sesi kamera/audio live (Y2/Y3, M2, T2/T3) atau state klien + data game nyata (U2/U3) sengaja ditunda sebagai backlog terpisah, menunggu keputusan arsitektur AR/WebAR dan model data game state yang belum ada di manapun di codebase ini.
+
+**Token semantik baru yang lahir dari proses ini** (lihat juga Dokumen 06 B27): `semantik.permukaan.arsip-2`, `semantik.teks.arsip-sekunder` (PR #5/B27), `semantik.permukaan.arsip-notifikasi`, `semantik.teks.arsip-notifikasi` (PR #6/B28), `semantik.teks.arsip-bahaya` (PR #7). Semua mengikuti pola "SAMA di semua tema" yang sudah ditetapkan untuk rezim Arsip.
+
+**Belum ada di backlog manapun, perlu keputusan Anda sebelum dikerjakan:** arsitektur AR/WebAR untuk Y2/Y3/M2/T2/T3, dan model data game state (progres tokoh, riwayat lencana, sesi voucher) untuk U2/U3.
