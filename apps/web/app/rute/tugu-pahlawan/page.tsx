@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import { KartuArsipDokumen } from '@/components/KartuArsipDokumen';
+import { KartuLencanaPreview } from '@/components/KartuLencanaPreview';
+import { PoiHeader } from '@/components/PoiHeader';
 import { SafetyNotice } from '@/components/SafetyNotice';
 import { TahapanStepper } from '@/components/TahapanStepper';
 
@@ -13,25 +16,12 @@ const TAHAP_AKTIF = 1;
 export default function PoiTuguPahlawan() {
   return (
     <main className="min-h-screen bg-permukaan-1 font-ui">
-      <header className="flex items-start justify-between px-6 pt-[max(2.75rem,env(safe-area-inset-top))] pb-4">
-        <div>
-          <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-aksi">
-            SOERABAJA 1945 · TITIK 3
-          </p>
-          <h1 className="mt-1 font-display text-[24px] leading-[26px] tracking-[-0.01em] text-teks-utama">
-            TUGU PAHLAWAN
-          </h1>
-          <p className="mt-0.5 text-[12px] leading-[17px] font-medium text-teks-sekunder">
-            Jl. Pahlawan, Alun-Alun Contong
-          </p>
-        </div>
-        <div className="flex-none text-right">
-          <div className="mb-1 rounded-lg bg-permukaan-arsip-notifikasi px-2 py-1 font-mono text-[10.5px] leading-[15px] tracking-[0.03em] text-teks-arsip-notifikasi">
-            10 NOV &apos;45
-          </div>
-          <p className="font-mono text-[10.5px] leading-[15px] tracking-[0.03em] text-teks-redup">50 M</p>
-        </div>
-      </header>
+      <PoiHeader
+        titik={3}
+        judul="TUGU PAHLAWAN"
+        alamat="Jl. Pahlawan, Alun-Alun Contong"
+        badge={{ label: "10 NOV '45", jarak: '50 M' }}
+      />
 
       {/* Render menara — ilustrasi stilasi, 10 rusuk beralur meruncing ke atas
           melambangkan 10 November (dikonfirmasi final, Dokumen 11 Q3). Palet di bawah
@@ -95,37 +85,20 @@ export default function PoiTuguPahlawan() {
 
       <TahapanStepper tahapan={TAHAPAN} aktif={TAHAP_AKTIF} />
 
-      <div className="mx-6 mt-5 rounded-[14px] bg-permukaan-arsip px-4.5 py-4">
-        <div className="flex justify-between font-mono text-[10.5px] leading-[15px] tracking-[0.03em]">
-          <span className="text-teks-arsip-sekunder">TRANSKRIP SIARAN RADIO</span>
-          <span className="text-teks-arsip-bahaya">10 NOV &apos;45</span>
-        </div>
-        <div className="my-2 h-px bg-teks-arsip-sekunder/35" />
-        <p className="text-[12px] leading-[19px] text-teks-arsip">
-          Ultimatum Mayjen Mansergh ditolak rakyat. Bung Tomo naik mimbar radio bawah tanah,
-          membakar semangat seluruh kota lewat gelombang RRI.
-        </p>
-        <p className="mt-2 text-[12px] leading-[19px] italic text-teks-arsip-bahaya">
-          &ldquo;Selama banteng-banteng Indonesia masih punya darah merah...&rdquo;
-        </p>
-      </div>
+      <KartuArsipDokumen
+        className="mt-5"
+        label="TRANSKRIP SIARAN RADIO"
+        nomor="10 NOV '45"
+        isi="Ultimatum Mayjen Mansergh ditolak rakyat. Bung Tomo naik mimbar radio bawah tanah, membakar semangat seluruh kota lewat gelombang RRI."
+        kutipan="Selama banteng-banteng Indonesia masih punya darah merah..."
+      />
 
-      <div className="mx-6 mt-5 rounded-xl border border-pencapaian/30 bg-pencapaian/10 px-4 py-3">
-        <div className="mb-2.5 flex items-center gap-3">
-          <div className="text-[22px]">🎖️</div>
-          <div className="flex-1">
-            <p className="text-[15px] leading-5 font-bold text-pencapaian">Lencana: Pahlawan Suroboyo</p>
-            <p className="text-[12px] leading-[17px] font-medium text-teks-sekunder">
-              Lencana penutup trilogi — selesaikan orasi (3/3)
-            </p>
-          </div>
-        </div>
-        <div className="flex gap-2">
-          <div className="h-1 flex-1 rounded-full bg-pencapaian" />
-          <div className="h-1 flex-1 rounded-full bg-pencapaian" />
-          <div className="h-1 flex-1 rounded-full bg-teks-sekunder/20" />
-        </div>
-      </div>
+      <KartuLencanaPreview
+        className="mt-5"
+        judul="Lencana: Pahlawan Suroboyo"
+        keterangan="Lencana penutup trilogi — selesaikan orasi (3/3)"
+        progres={{ terisi: 2, total: 3 }}
+      />
 
       <SafetyNotice
         className="mt-5"

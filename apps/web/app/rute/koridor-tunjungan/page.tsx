@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { PoiHeader } from '@/components/PoiHeader';
 import { SafetyNotice } from '@/components/SafetyNotice';
 
 // Sumber: docs/desain/10-poi-tunjungan.html, screen "U1 · Halaman POI — ringkasan &
@@ -22,17 +23,7 @@ const MERCHANT = [
 export default function PoiKoridorTunjungan() {
   return (
     <main className="min-h-screen bg-permukaan-1 font-ui">
-      <header className="px-6 pt-[max(2.75rem,env(safe-area-inset-top))] pb-4">
-        <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-aksi">
-          SOERABAJA 1945 · TITIK 5
-        </p>
-        <h1 className="mt-1 font-display text-[24px] leading-[26px] tracking-[-0.01em] text-teks-utama">
-          TUNJUNGAN
-        </h1>
-        <p className="mt-0.5 text-[12px] leading-[17px] font-medium text-teks-sekunder">
-          Zona Kuliner &amp; Kreatif
-        </p>
-      </header>
+      <PoiHeader titik={5} judul="TUNJUNGAN" alamat="Zona Kuliner & Kreatif" />
 
       <div className="mx-6 mb-4 rounded-2xl border border-pencapaian/40 bg-gradient-to-br from-pencapaian/18 to-permukaan-2/40 px-5 py-4.5 text-center">
         {/* Gradien mock-up 160deg didekati dengan to-br, sama seperti kartu-kartu lain */}
