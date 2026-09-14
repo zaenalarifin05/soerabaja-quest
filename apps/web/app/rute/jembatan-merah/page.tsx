@@ -20,7 +20,7 @@ const TAHAP_AKTIF = 1;
 export default function PoiJembatanMerah() {
   return (
     <main className="min-h-screen bg-permukaan-1 font-ui">
-      <header className="flex items-start justify-between px-6 pt-11 pb-4">
+      <header className="flex items-start justify-between px-6 pt-[max(2.75rem,env(safe-area-inset-top))] pb-4">
         <div>
           <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-aksi">
             SOERABAJA 1945 · TITIK 2
