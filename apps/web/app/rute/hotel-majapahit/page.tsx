@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { SafetyNotice } from '@/components/SafetyNotice';
+import { TahapanStepper } from '@/components/TahapanStepper';
 
 // Sumber: docs/desain/06-poi-yamato.html, screen "Y1 · Halaman POI — sebelum masuk AR"
 // Y2 (deteksi suara AR) dan Y3 (fallback izin mikrofon) sengaja belum dibangun di sini —
@@ -119,40 +121,7 @@ export default function PoiHotelMajapahit() {
         </div>
       </div>
 
-      <div className="px-6 pt-5">
-        <p className="mb-2.5 font-mono text-[10.5px] leading-[15px] tracking-[0.03em] text-teks-redup">
-          TAHAPAN YANG DIHADAPI ({TAHAP_AKTIF} DARI {TAHAPAN.length})
-        </p>
-        <div className="flex items-center">
-          {TAHAPAN.map((_, index) => {
-            const nomor = index + 1;
-            const aktif = nomor === TAHAP_AKTIF;
-            return (
-              <div key={nomor} className="flex flex-1 items-center last:flex-none">
-                <div
-                  className={
-                    aktif
-                      ? 'flex h-[30px] w-[30px] flex-none items-center justify-center rounded-full bg-aksi text-[12px] font-bold text-aksi-teks'
-                      : 'flex h-[30px] w-[30px] flex-none items-center justify-center rounded-full bg-teks-sekunder/20 text-[12px] text-teks-redup'
-                  }
-                >
-                  {nomor}
-                </div>
-                {nomor < TAHAPAN.length && (
-                  <div className={aktif ? 'h-0.5 flex-1 bg-aksi' : 'h-0.5 flex-1 bg-teks-sekunder/20'} />
-                )}
-              </div>
-            );
-          })}
-        </div>
-        <div className="mt-1.5 flex justify-between font-mono text-[10.5px] leading-[15px] tracking-[0.03em]">
-          {TAHAPAN.map((label, index) => (
-            <span key={label} className={index + 1 === TAHAP_AKTIF ? 'text-aksi' : 'text-teks-redup'}>
-              {label}
-            </span>
-          ))}
-        </div>
-      </div>
+      <TahapanStepper tahapan={TAHAPAN} aktif={TAHAP_AKTIF} className="pt-5" />
 
       <div className="mx-6 mt-5 rounded-[14px] bg-permukaan-arsip px-4.5 py-4">
         <div className="flex justify-between font-mono text-[10.5px] leading-[15px] tracking-[0.03em]">
@@ -179,18 +148,10 @@ export default function PoiHotelMajapahit() {
         </div>
       </div>
 
-      <div className="mx-6 mt-5 mb-8 flex items-start gap-2.5 rounded-xl border border-bahaya/50 bg-bahaya/14 px-4 py-3.5">
-        <span aria-hidden="true" className="flex-none text-[18px]">
-          ⚠️
-        </span>
-        <div>
-          <p className="text-[15px] leading-5 font-bold text-bahaya">Perhatian Keselamatan</p>
-          <p className="mt-0.5 text-[12px] leading-[17px] font-medium text-teks-utama">
-            Waspada lalu lintas. Jalan Tunjungan ramai. Berdiri di trotoar, jangan di badan jalan
-            saat memindai atau bermain AR.
-          </p>
-        </div>
-      </div>
+      <SafetyNotice
+        className="mt-5"
+        pesan="Waspada lalu lintas. Jalan Tunjungan ramai. Berdiri di trotoar, jangan di badan jalan saat memindai atau bermain AR."
+      />
     </main>
   );
 }

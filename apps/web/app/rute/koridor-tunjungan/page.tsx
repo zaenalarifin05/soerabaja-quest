@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SafetyNotice } from '@/components/SafetyNotice';
 
 // Sumber: docs/desain/10-poi-tunjungan.html, screen "U1 · Halaman POI — ringkasan &
 // rekomendasi merchant". Titik terakhir dari lima — di sinilah rute berubah jadi
@@ -106,20 +107,9 @@ export default function PoiKoridorTunjungan() {
         </Link>
       </div>
 
-      <div className="mx-6 mb-8 flex items-start gap-2.5 rounded-xl border border-bahaya/50 bg-bahaya/14 px-4 py-3.5">
-        {/* SafetyNotice — sempat terlewat di draft pertama Tunjungan, diperbaiki
-            sebagai B26 (Dokumen 11 §1, Dokumen 06 B26) */}
-        <span aria-hidden="true" className="flex-none text-[18px]">
-          ⚠️
-        </span>
-        <div>
-          <p className="text-[15px] leading-5 font-bold text-bahaya">Perhatian Keselamatan</p>
-          <p className="mt-0.5 text-[12px] leading-[17px] font-medium text-teks-utama">
-            Jalan Tunjungan ramai kendaraan dan pejalan kaki malam hari. Simpan HP setelah
-            menukar voucher, jangan berjalan sambil menatap layar.
-          </p>
-        </div>
-      </div>
+      {/* SafetyNotice — sempat terlewat di draft pertama Tunjungan, diperbaiki
+          sebagai B26 (Dokumen 11 §1, Dokumen 06 B26) */}
+      <SafetyNotice pesan="Jalan Tunjungan ramai kendaraan dan pejalan kaki malam hari. Simpan HP setelah menukar voucher, jangan berjalan sambil menatap layar." />
     </main>
   );
 }
