@@ -59,6 +59,13 @@
 |---|---|---|---|
 | B26 | Tunjungan (U1) | `SafetyNotice` — komponen wajib di semua POI aksi — terlewat di draft pertama Tunjungan, padahal jalan kuliner malam sama ramainya dengan Yamato/Jembatan Merah/Tugu | **Sudah diperbaiki** di `soerabaja-poi-tunjungan.html`. Dicatat di sini sebagai pengingat: setiap POI baru wajib dicek terhadap checklist komponen tetap sebelum dianggap selesai |
 
+## P0 — Ditemukan saat implementasi Claude Code (backlog teknis)
+
+| # | Layar | Masalah | Perbaikan |
+|---|---|---|---|
+| B27 | Beranda (kartu Arsip Sepia) | `packages/tokens` cuma punya satu varian warna permukaan arsip dan satu teks arsip — mock-up butuh varian kedua: permukaan aksen lebih gelap (`#CDBB95`) dan teks sekunder sepia (`#7A6144`) | **Sudah diperbaiki** ([PR #5](https://github.com/zaenalarifin05/soerabaja-quest/pull/5)). Tambah `semantik.permukaan.arsip-2` dan `semantik.teks.arsip-sekunder` di ketiga tema. Menyusul saat lima POI dibangun: `semantik.permukaan.arsip-notifikasi`, `semantik.teks.arsip-notifikasi` ([PR #6](https://github.com/zaenalarifin05/soerabaja-quest/pull/6)), dan `semantik.teks.arsip-bahaya` ([PR #7](https://github.com/zaenalarifin05/soerabaja-quest/pull/7)) |
+| B28 | Seluruh `apps/web` | `stylelint` cuma men-scan file `.css` lewat glob `apps/**/*.css` — nilai heksadesimal mentah di kelas Tailwind arbitrary-value (`bg-[#hex]`) pada komponen React (`.tsx`) lolos tanpa terdeteksi CI | **Sudah diperbaiki** ([PR #6](https://github.com/zaenalarifin05/soerabaja-quest/pull/6)). Pasang `eslint-plugin-better-tailwindcss` (bukan `eslint-plugin-tailwindcss` klasik — dukungan Tailwind v4-nya masih beta/parsial saat dicek), aktifkan rule `no-restricted-classes` dengan pola regex khusus nilai hex. Dijalankan di CI lewat script baru `lint:tailwind` |
+
 ## P2 — Kelengkapan konsep
 
 | # | Cakupan | Masalah | Perbaikan |
