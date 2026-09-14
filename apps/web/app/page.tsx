@@ -145,10 +145,7 @@ export default function Home() {
             KEPINGAN SEJARAH · PELENGKAP PUZZLE
           </p>
         </div>
-        <span className="rounded-full bg-[#9E2B22] px-2.25 py-0.75 font-mono text-[11px] leading-4 tracking-[0.03em] text-[#E3D6B8]">
-          {/* TODO: warna merah/kertas badge notifikasi arsip TIDAK ada di peta token yang
-              diberikan (beda dari kertas-tua & sepia) dan BUKAN cakupan B27 — gap terpisah,
-              dipakai apa adanya di sini sambil menunggu keputusan token semantiknya */}
+        <span className="rounded-full bg-permukaan-arsip-notifikasi px-2.25 py-0.75 font-mono text-[11px] leading-4 tracking-[0.03em] text-teks-arsip-notifikasi">
           0 BARU
         </span>
         <span aria-hidden="true" className="text-teks-arsip-sekunder">

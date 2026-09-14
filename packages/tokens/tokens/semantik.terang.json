@@ -25,6 +25,11 @@
         "$type": "color",
         "$value": "{primitif.arsip.kertas-tua}",
         "$description": "SAMA di semua tema. Aksen permukaan arsip yang lebih gelap."
+      },
+      "arsip-notifikasi": {
+        "$type": "color",
+        "$value": "{primitif.arsip.merah}",
+        "$description": "SAMA di semua tema. Latar badge notifikasi pada kartu Arsip Sepia."
       }
     },
     "teks": {
@@ -49,6 +54,11 @@
         "$type": "color",
         "$value": "{primitif.arsip.sepia}",
         "$description": "SAMA di semua tema. Teks sekunder di atas kertas arsip."
+      },
+      "arsip-notifikasi": {
+        "$type": "color",
+        "$value": "{primitif.arsip.kertas}",
+        "$description": "SAMA di semua tema. Teks di atas badge notifikasi arsip."
       }
     },
     "aksi": {

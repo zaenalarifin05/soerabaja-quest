@@ -10,12 +10,14 @@
   --color-permukaan-2: var(--semantik-permukaan-2);
   --color-permukaan-arsip: var(--semantik-permukaan-arsip);
   --color-permukaan-arsip-2: var(--semantik-permukaan-arsip-2);
+  --color-permukaan-arsip-notifikasi: var(--semantik-permukaan-arsip-notifikasi);
 
   --color-teks-utama: var(--semantik-teks-utama);
   --color-teks-sekunder: var(--semantik-teks-sekunder);
   --color-teks-redup: var(--semantik-teks-redup);
   --color-teks-arsip: var(--semantik-teks-arsip);
   --color-teks-arsip-sekunder: var(--semantik-teks-arsip-sekunder);
+  --color-teks-arsip-notifikasi: var(--semantik-teks-arsip-notifikasi);
 
   --color-aksi: var(--semantik-aksi-utama);
   --color-aksi-teks: var(--semantik-aksi-teks);
