@@ -134,17 +134,14 @@ export default function Home() {
         id="btn-arsip"
         // TODO: arahkan ke overlay Arsip Sepia begitu layar itu dibangun (Dokumen 06 B24)
         href="/arsip"
-        className="mx-6 mb-6 flex items-center gap-3 rounded-[14px] border border-[#7A6144]/30 bg-permukaan-arsip px-4 py-3.5"
-        // TODO B27: border sepia pakai warna mentah, belum ada token semantik untuk sepia
+        className="mx-6 mb-6 flex items-center gap-3 rounded-[14px] border border-teks-arsip-sekunder/30 bg-permukaan-arsip px-4 py-3.5"
       >
-        <div className="flex h-9.5 w-9.5 flex-none items-center justify-center rounded-[9px] bg-[#CDBB95] text-[17px]">
-          {/* TODO B27: belum ada token semantik untuk kertas-tua */}
+        <div className="flex h-9.5 w-9.5 flex-none items-center justify-center rounded-[9px] bg-permukaan-arsip-2 text-[17px]">
           📜
         </div>
         <div className="flex-1">
           <p className="text-[16px] leading-[21px] font-bold text-teks-arsip">Arsip Sepia</p>
-          <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-[#7A6144]">
-            {/* TODO B27: belum ada token semantik untuk sepia */}
+          <p className="font-mono text-[11px] leading-4 tracking-[0.03em] text-teks-arsip-sekunder">
             KEPINGAN SEJARAH · PELENGKAP PUZZLE
           </p>
         </div>
@@ -154,8 +151,7 @@ export default function Home() {
               dipakai apa adanya di sini sambil menunggu keputusan token semantiknya */}
           0 BARU
         </span>
-        <span aria-hidden="true" className="text-[#7A6144]">
-          {/* TODO B27: belum ada token semantik untuk sepia */}
+        <span aria-hidden="true" className="text-teks-arsip-sekunder">
           ›
         </span>
       </Link>
