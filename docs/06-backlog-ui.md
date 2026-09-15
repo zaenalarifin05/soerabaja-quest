@@ -42,7 +42,7 @@
 
 ## P1 — Ditambahkan menyusul Dokumen 08 (Wall Siola & Feed)
 
-> **Dikoreksi September 2026:** ketiga butir di bawah **sudah diperbaiki di mock-up** `docs/desain/11-wall-siola.html` (lihat fixnote di dalamnya) — sama seperti B26 yang sudah diperbaiki di mock-up Tunjungan sebelum dikonversi ke kode. Wall Siola sendiri **belum pernah dikonversi ke kode** di `apps/web` (bukan terhambat keputusan arsitektur — cuma belum digarap, seperti lima POI sebelum dibangun). Kontennya butuh data live (foto masuk, pesan tayang) yang belum ada backend-nya, jadi konversi kode awal akan statis dengan data contoh, sama seperti Beranda.
+> **Update September 2026:** ketiga butir di bawah sudah diperbaiki di mock-up `docs/desain/11-wall-siola.html` sejak awal — sama seperti B26 di mock-up Tunjungan. **Konversi ke kode sudah selesai**: `apps/web/app/wall-siola` (versi TV Kiosk, 1080×1920) dan `apps/web/app/feed` (Soerabaja Feed, web responsif). Keduanya statis dengan data contoh, sama seperti Beranda — rotasi kartu tiap 12 detik, jam berjalan, hitungan live, dan anti burn-in (Dokumen 08 §6) belum diimplementasikan karena butuh backend UGC nyata dan state klien yang belum ada.
 
 | # | Layar | Masalah | Perbaikan |
 |---|---|---|---|
