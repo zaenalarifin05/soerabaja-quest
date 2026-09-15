@@ -14,6 +14,9 @@ const eslintConfig = defineConfig([
       "better-tailwindcss": betterTailwindcss,
     },
     rules: {
+      // Konvensi umum: parameter/variabel tak terpakai yang diberi awalan _ sengaja
+      // dibiarkan (biasanya method skeleton/interface yang belum diimplementasikan).
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
       "better-tailwindcss/no-restricted-classes": [
         "error",
         {

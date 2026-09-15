@@ -358,7 +358,7 @@ Perhatikan bahwa **kartu share punya skor tertinggi** — usaha kecil, jangkauan
 - Izin memasang beacon BLE di kawasan cagar budaya bisa diperoleh.
 
 **Pertanyaan arsitektural terbuka:**
-1. Unity as a Library atau Flutter murni dengan plugin AR? Butuh spike 2 minggu dengan kriteria keluar yang jelas.
+1. ~~Unity as a Library atau Flutter murni dengan plugin AR?~~ **Dikonfirmasi September 2026:** Opsi A (WebAR) untuk pilot, Opsi B (Flutter + Unity as a Library) untuk produk utama v1.0 — sesuai rekomendasi §4.1 Dokumen 00. Spike UaaL 2 minggu (Dokumen 10 E0 Minggu 5-6) tetap perlu dijalankan sebelum build produk utama — butuh AR engineer sungguhan dan perangkat fisik, belum dikerjakan.
 2. Backend NestJS atau Laravel? Tentukan berdasarkan komposisi tim yang tersedia, bukan preferensi.
-3. WebAR: lisensi 8th Wall (mahal, matang) atau Niantic Studio / MindAR (murah, risiko lebih tinggi)? Hitung berdasarkan proyeksi trafik pilot.
+3. ~~WebAR: lisensi 8th Wall (mahal, matang) atau Niantic Studio / MindAR (murah, risiko lebih tinggi)?~~ **Dikonfirmasi September 2026: MindAR** (open-source, tanpa lisensi berbayar). Lihat skeleton `apps/web/lib/ar/adapters/MindARAdapter.ts` — belum diinstal/diuji, masih kerangka menunggu spike teknis dengan perangkat fisik. `EightWallAdapter.ts` disiapkan sebagai cadangan kalau tracking MindAR ternyata tidak cukup.
 4. Apakah rekaman orasi Bung Tomo sudah pasti bisa dilisensikan? Jika tidak, siapkan rencana B: rekonstruksi naskah dengan pengisi suara + disclaimer eksplisit. Ini mengubah scope audio secara signifikan.
